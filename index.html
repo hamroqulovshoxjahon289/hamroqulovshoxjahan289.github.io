@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temurshox Mebel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .cat-btn {
+            background: #ecf0f1;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: #e67e22;
+            color: white;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            background: #bdc3c7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: #e67e22;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .product-desc {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .order-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .order-btn:hover {
+            background: #e67e22;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛋️ Temurshox Mebel</h1>
+    <p>Yuqori sifat | Qulay narx | Tez yetkazib berish</p>
+</header>
+
+<div class="container">
+    <div class="categories">
+        <button class="cat-btn active" data-cat="all">Barchasi</button>
+        <button class="cat-btn" data-cat="divan">Divanlar</button>
+        <button class="cat-btn" data-cat="stol">Stollar</button>
+        <button class="cat-btn" data-cat="shkaf">Shkaflar</button>
+        <button class="cat-btn" data-cat="kreslo">Kreslolar</button>
+    </div>
+
+    <div class="products" id="products-container"></div>
+</div>
+
+<footer>
+    <p>© 2025 Temurshox Mebel. Barcha huquqlar himoyalangan.</p>
+    <p>📞 +998 97 935 13 15 | Samarqand sh.</p>
+</footer>
+
+<a href="https://wa.me/998901234567?text=Assalomu%20alaykum!%20Mebel%20haqida%20ma'lumot%20olmoqchiman" class="whatsapp-btn" target="_blank">
+    💬
+</a>
+
+<script>
+    const products = [
+        { name: "Angliya divani", price: "3 200 000 so'm", desc: "Velvet qoplamali, 3 o'rinli", category: "divan", emoji: "🛋️" },
+        { name: "Luks divan", price: "4 500 000 so'm", desc: "Haqiqiy charm, 2 o'rinli", category: "divan", emoji: "🪑" },
+        { name: "Burchak divan", price: "5 800 000 so'm", desc: "Burchakli, keng, qulay", category: "divan", emoji: "📐" },
+        { name: "Kompyuter stoli", price: "850 000 so'm", desc: "Zamonaviy dizayn", category: "stol", emoji: "💻" },
+        { name: "Ovqatlanish stoli", price: "1 200 000 so'm", desc: "6 kishilik, to'plam", category: "stol", emoji: "🍽️" },
+        { name: "Kofe stoli", price: "450 000 so'm", desc: "Shishali, zamonaviy", category: "stol", emoji: "☕" },
+        { name: "Garderob shkafi", price: "2 800 000 so'm", desc: "3 eshikli, katta", category: "shkaf", emoji: "🚪" },
+        { name: "Kitob shkafi", price: "1 500 000 so'm", desc: "Shishali eshik", category: "shkaf", emoji: "📚" },
+        { name: "Oyoq kiyim shkafi", price: "650 000 so'm", desc: "Yopiq, 4 bo'limli", category: "shkaf", emoji: "👞" },
+        { name: "Kompyuter kreslosi", price: "1 100 000 so'm", desc: "Orqa suyanchi, aylanuvchi", category: "kreslo", emoji: "🪑" },
+        { name: "Tebranma kreslo", price: "950 000 so'm", desc: "Yumshoq, qulay", category: "kreslo", emoji: "🌊" },
+        { name: "Ziyofat kreslosi", price: "550 000 so'm", desc: "Velvet, hashamli", category: "kreslo", emoji: "👑" }
+    ];
+
+    function displayProducts(category) {
+        const container = document.getElementById('products-container');
+        container.innerHTML = '';
+        
+        let filtered = products;
+        if (category !== 'all') {
+            filtered = products.filter(p => p.category === category);
+        }
+        
+        for (let i = 0; i < filtered.length; i++) {
+            const product = filtered[i];
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <div class="product-img">${product.emoji}</div>
+                <div class="product-info">
+                    <div class="product-title">${product.name}</div>
+                    <div class="product-price">${product.price}</div>
+                    <div class="product-desc">${product.desc}</div>
+                    <button class="order-btn" onclick="orderProduct('${product.name}')">Buyurtma berish</button>
+                </div>
+            `;
+            container.appendChild(card);
+        }
+    }
+
+    function orderProduct(productName) {
+        const phone = "998901234567";
+        const message = "Assalomu alaykum! Men " + productName + " mahsulotiga buyurtma bermoqchiman.";
+        window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message), '_blank');
+    }
+
+    const buttons = document.querySelectorAll('.cat-btn');
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            for (let j = 0; j < buttons.length; j++) {
+                buttons[j].classList.remove('active');
+            }
+            this.classList.add('active');
+            const category = this.getAttribute('data-cat');
+            displayProducts(category);
+        });
+    }
+
+    displayProducts('all');
+</script>
+
+</body>
+</html>
