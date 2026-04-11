@@ -38,7 +38,7 @@
             padding: 0 15px;
         }
 
-        /* Navigatsiya tugmalari */
+        /* Navigatsiya */
         .nav-buttons {
             display: flex;
             justify-content: center;
@@ -85,7 +85,7 @@
             outline: none;
         }
 
-        /* Kategoriya tugmalari */
+        /* Kategoriyalar */
         .categories {
             display: flex;
             justify-content: center;
@@ -110,7 +110,7 @@
             color: white;
         }
 
-        /* Mahsulotlar grid */
+        /* Mahsulotlar */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -138,6 +138,7 @@
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
+            font-weight: bold;
         }
 
         .product-img {
@@ -167,6 +168,11 @@
             font-weight: bold;
         }
 
+        .rating {
+            color: #ffc107;
+            margin: 5px 0;
+        }
+
         .product-price {
             font-size: 1.1rem;
             font-weight: bold;
@@ -185,17 +191,17 @@
             background: linear-gradient(135deg, #28a745, #20c997);
             color: white;
             border: none;
-            padding: 8px;
+            padding: 10px;
             width: 100%;
             border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
         }
 
-        /* Do'konlar grid */
+        /* Do'konlar */
         .shops {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
         }
 
@@ -237,17 +243,25 @@
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 8px;
+            color: #2c3e50;
         }
 
         .shop-address {
             color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
         }
 
         .shop-phone {
             color: #28a745;
             font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .shop-location {
+            color: #667eea;
+            font-size: 0.8rem;
+            margin-top: 5px;
         }
 
         .view-shop-btn {
@@ -490,7 +504,6 @@
 </header>
 
 <div class="container">
-    <!-- Navigatsiya -->
     <div class="nav-buttons">
         <button class="nav-btn active" onclick="showSection('products')">🛍️ Mahsulotlar</button>
         <button class="nav-btn" onclick="showSection('shops')">🏪 Do'konlar</button>
@@ -499,18 +512,16 @@
     <!-- Mahsulotlar bo'limi -->
     <div id="productsSection">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Mahsulot qidirish...">
+            <input type="text" id="searchInput" placeholder="🔍 Mahsulot qidirish..." onkeyup="displayProducts()">
         </div>
-
         <div class="categories" id="categories"></div>
-
         <div class="products" id="products"></div>
     </div>
 
     <!-- Do'konlar bo'limi -->
     <div id="shopsSection" class="hidden">
         <div class="search-box">
-            <input type="text" id="shopSearchInput" placeholder="🔍 Do'kon qidirish...">
+            <input type="text" id="shopSearchInput" placeholder="🔍 Do'kon qidirish..." onkeyup="displayShops()">
         </div>
         <div class="shops" id="shops"></div>
     </div>
@@ -521,53 +532,48 @@
         
         <!-- Kategoriya qo'shish -->
         <div class="admin-section">
-            <h4>📂 Yangi kategoriya qo'shish</h4>
-            <input type="text" id="newCategoryName" placeholder="Kategoriya nomi (masalan: Oshxona)">
-            <input type="text" id="newCategoryEmoji" placeholder="Emoji (masalan: 🍽️)">
+            <h4>📂 Yangi kategoriya</h4>
+            <input type="text" id="newCategoryName" placeholder="Kategoriya nomi">
+            <input type="text" id="newCategoryEmoji" placeholder="Emoji (🛋️)">
             <button onclick="addCategory()">➕ Kategoriya qo'shish</button>
         </div>
 
         <!-- Mahsulot qo'shish -->
         <div class="admin-section">
-            <h4>🛍️ Yangi mahsulot qo'shish</h4>
+            <h4>🛍️ Yangi mahsulot</h4>
             <input type="text" id="productName" placeholder="Mahsulot nomi">
             <input type="number" id="productPrice" placeholder="Narxi (so'm)">
-            <input type="number" id="productOldPrice" placeholder="Eski narxi (ixtiyoriy)">
+            <input type="number" id="productOldPrice" placeholder="Eski narxi">
             <select id="productCategory"></select>
             <input type="number" id="productRating" placeholder="Reyting (1-5)" value="5">
             <input type="text" id="productEmoji" placeholder="Emoji">
-            <div style="margin: 10px 0;">
-                <label>🖼️ Rasm:</label>
-                <input type="file" id="productImageFile" accept="image/*" onchange="previewProductImage(this)">
-                <div class="image-preview" id="productImagePreview"></div>
-            </div>
+            <input type="file" id="productImageFile" accept="image/*" onchange="previewProductImage(this)">
+            <div class="image-preview" id="productImagePreview"></div>
             <button onclick="addProduct()">➕ Mahsulot qo'shish</button>
         </div>
 
         <!-- Do'kon qo'shish -->
         <div class="admin-section">
-            <h4>🏪 Yangi do'kon qo'shish</h4>
+            <h4>🏪 Yangi do'kon</h4>
             <input type="text" id="shopName" placeholder="Do'kon nomi">
             <input type="text" id="shopAddress" placeholder="Manzili">
             <input type="text" id="shopPhone" placeholder="Telefon raqami">
+            <input type="text" id="shopLocation" placeholder="Lokatsiya (Google Maps link)">
             <textarea id="shopDesc" rows="2" placeholder="Tavsifi"></textarea>
-            <div style="margin: 10px 0;">
-                <label>🖼️ Do'kon rasmi:</label>
-                <input type="file" id="shopImageFile" accept="image/*" onchange="previewShopImage(this)">
-                <div class="image-preview" id="shopImagePreview"></div>
-            </div>
+            <input type="file" id="shopImageFile" accept="image/*" onchange="previewShopImage(this)">
+            <div class="image-preview" id="shopImagePreview"></div>
             <button onclick="addShop()">🏪 Do'kon qo'shish</button>
         </div>
 
         <!-- Mahsulotlar ro'yxati -->
         <div class="admin-section">
-            <h4>📋 Mahsulotlar ro'yxati</h4>
+            <h4>📋 Mahsulotlar</h4>
             <div id="productListAdmin"></div>
         </div>
 
         <!-- Do'konlar ro'yxati -->
         <div class="admin-section">
-            <h4>🏪 Do'konlar ro'yxati</h4>
+            <h4>🏪 Do'konlar</h4>
             <div id="shopListAdmin"></div>
         </div>
     </div>
@@ -591,12 +597,12 @@
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-total" id="cartTotal">Jami: 0 so'm</div>
     <div class="order-form">
-        <h4>📝 Buyurtma ma'lumotlari</h4>
-        <input type="text" id="fullName" placeholder="Ism va Familiyangiz *">
-        <textarea id="address" rows="2" placeholder="To'liq manzilingiz *"></textarea>
-        <input type="tel" id="phone1" placeholder="Telefon raqam 1 *">
-        <input type="tel" id="phone2" placeholder="Telefon raqam 2">
-        <textarea id="notes" rows="2" placeholder="Qo'shimcha ma'lumot"></textarea>
+        <h4>📝 Buyurtma</h4>
+        <input type="text" id="fullName" placeholder="Ism va Familiya *">
+        <textarea id="address" rows="2" placeholder="Manzil *"></textarea>
+        <input type="tel" id="phone1" placeholder="Telefon 1 *">
+        <input type="tel" id="phone2" placeholder="Telefon 2">
+        <textarea id="notes" rows="2" placeholder="Izoh"></textarea>
         <button class="submit-order" onclick="submitOrder()">✅ Buyurtma berish</button>
     </div>
 </div>
@@ -609,20 +615,34 @@
         { id: "divan", name: "Divanlar", emoji: "🛋️" },
         { id: "stol", name: "Stollar", emoji: "💻" },
         { id: "shkaf", name: "Shkaflar", emoji: "🚪" },
-        { id: "kreslo", name: "Kreslolar", emoji: "🪑" }
+        { id: "kreslo", name: "Kreslolar", emoji: "🪑" },
+        { id: "yotoq", name: "Yotoqxona", emoji: "🛏️" },
+        { id: "oshxona", name: "Oshxona", emoji: "🍽️" }
     ];
 
     let products = [
         { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", rating: 5, emoji: "🛋️", image: null },
         { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", rating: 4, emoji: "🪑", image: null },
-        { id: 3, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", rating: 5, emoji: "💻", image: null },
-        { id: 4, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", rating: 4, emoji: "🚪", image: null },
-        { id: 5, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🪑", image: null }
+        { id: 3, name: "Burchak divan", price: 5800000, oldPrice: 6500000, category: "divan", rating: 5, emoji: "📐", image: null },
+        { id: 4, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", rating: 5, emoji: "💻", image: null },
+        { id: 5, name: "Ovqatlanish stoli", price: 1200000, oldPrice: 1500000, category: "stol", rating: 4, emoji: "🍽️", image: null },
+        { id: 6, name: "Kofe stoli", price: 450000, oldPrice: null, category: "stol", rating: 4, emoji: "☕", image: null },
+        { id: 7, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", rating: 4, emoji: "🚪", image: null },
+        { id: 8, name: "Kitob shkafi", price: 1500000, oldPrice: null, category: "shkaf", rating: 5, emoji: "📚", image: null },
+        { id: 9, name: "Oyoq kiyim shkafi", price: 650000, oldPrice: null, category: "shkaf", rating: 4, emoji: "👞", image: null },
+        { id: 10, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🪑", image: null },
+        { id: 11, name: "Tebranma kreslo", price: 950000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🌊", image: null },
+        { id: 12, name: "Ziyofat kreslosi", price: 550000, oldPrice: null, category: "kreslo", rating: 4, emoji: "👑", image: null },
+        { id: 13, name: "Ispan yotoq", price: 4200000, oldPrice: 4800000, category: "yotoq", rating: 5, emoji: "🛏️", image: null },
+        { id: 14, name: "Oshxona to'plami", price: 3500000, oldPrice: null, category: "oshxona", rating: 5, emoji: "🍳", image: null }
     ];
 
     let shops = [
-        { id: 1, name: "Temurshox Mebel - Chilonzor", address: "Toshkent sh., Chilonzor tumani, 3-kvartal", phone: "+998 97 935 13 15", desc: "Eng katta filialimiz", image: null },
-        { id: 2, name: "Temurshox Mebel - Sergeli", address: "Toshkent sh., Sergeli tumani, Yangi hayot", phone: "+998 93 346 86 32", desc: "Yangi filial", image: null }
+        { id: 1, name: "Temurshox Mebel - Chilonzor", address: "Toshkent sh., Chilonzor tumani, 3-kvartal, 12-uy", phone: "+998 97 935 13 15", location: "https://maps.google.com/?q=41.285,69.205", desc: "Markaziy filial, eng katta salon", image: null },
+        { id: 2, name: "Temurshox Mebel - Sergeli", address: "Toshkent sh., Sergeli tumani, Yangi hayot MFY, 5-uy", phone: "+998 93 346 86 32", location: "https://maps.google.com/?q=41.234,69.189", desc: "Yangi filial, bepul yetkazib berish", image: null },
+        { id: 3, name: "Temurshox Mebel - Yunusobod", address: "Toshkent sh., Yunusobod tumani, 17-mahalla, 8-uy", phone: "+998 90 123 45 67", location: "https://maps.google.com/?q=41.300,69.215", desc: "Elite mebellar", image: null },
+        { id: 4, name: "Temurshox Mebel - Samarqand", address: "Samarqand sh., Registon ko'chasi, 45-uy", phone: "+998 66 123 45 67", location: "https://maps.google.com/?q=39.654,66.975", desc: "Samarqand filiali", image: null },
+        { id: 5, name: "Temurshox Mebel - Buxoro", address: "Buxoro sh., Nodir Devonbegi ko'chasi, 23-uy", phone: "+998 65 123 45 67", location: "https://maps.google.com/?q=39.774,64.428", desc: "Buxoro filiali", image: null }
     ];
 
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
@@ -655,7 +675,7 @@
         updateCartUI();
     }
 
-    // ============ BO'LIMLARNI KO'RSATISH ============
+    // ============ BO'LIMLAR ============
     function showSection(section) {
         currentSection = section;
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -677,9 +697,7 @@
         const container = document.getElementById('categories');
         container.innerHTML = `
             <button class="cat-btn active" data-cat="all" onclick="filterProducts('all')">🏠 Barchasi</button>
-            ${categories.map(cat => `
-                <button class="cat-btn" data-cat="${cat.id}" onclick="filterProducts('${cat.id}')">${cat.emoji} ${cat.name}</button>
-            `).join('')}
+            ${categories.map(cat => `<button class="cat-btn" data-cat="${cat.id}" onclick="filterProducts('${cat.id}')">${cat.emoji} ${cat.name}</button>`).join('')}
             <button class="cat-btn" data-cat="discount" onclick="filterProducts('discount')">🔥 Chegirmali</button>
         `;
     }
@@ -692,14 +710,10 @@
     function addCategory() {
         const name = document.getElementById('newCategoryName').value.trim();
         const emoji = document.getElementById('newCategoryEmoji').value.trim() || "📁";
-        
-        if (!name) {
-            showToast("❌ Kategoriya nomini yozing!", true);
-            return;
-        }
+        if (!name) { showToast("❌ Kategoriya nomini yozing!", true); return; }
         
         const id = name.toLowerCase().replace(/ /g, '_');
-        categories.push({ id: id, name: name, emoji: emoji });
+        categories.push({ id, name, emoji });
         saveAll();
         displayCategories();
         updateCategorySelect();
@@ -710,36 +724,29 @@
 
     // ============ MAHSULOTLAR ============
     function displayProducts() {
-        let filtered = products.filter(product => {
+        let filtered = products.filter(p => {
             if (currentCategory === "all") return true;
-            if (currentCategory === "discount") return product.oldPrice && product.oldPrice > product.price;
-            return product.category === currentCategory;
+            if (currentCategory === "discount") return p.oldPrice && p.oldPrice > p.price;
+            return p.category === currentCategory;
         });
         
         const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
-        if (searchTerm) {
-            filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
-        }
+        if (searchTerm) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
         
         const container = document.getElementById('products');
-        if (filtered.length === 0) {
-            container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px;">🔍 Hech narsa topilmadi</div>';
-            return;
-        }
+        if (filtered.length === 0) { container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px;">🔍 Hech narsa topilmadi</div>'; return; }
         
-        container.innerHTML = filtered.map(product => `
+        container.innerHTML = filtered.map(p => `
             <div class="product-card">
                 <div class="product-img">
-                    ${product.oldPrice && product.oldPrice > product.price ? `<div class="discount-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
-                    ${product.image ? `<img src="${product.image}">` : `<span style="font-size:3rem;">${product.emoji}</span>`}
+                    ${p.oldPrice && p.oldPrice > p.price ? `<div class="discount-badge">-${Math.round((1 - p.price/p.oldPrice)*100)}%</div>` : ''}
+                    ${p.image ? `<img src="${p.image}">` : `<span style="font-size:3rem;">${p.emoji}</span>`}
                 </div>
                 <div class="product-info">
-                    <div class="product-title">${product.name}</div>
-                    <div class="product-price">
-                        ${formatPrice(product.price)} so'm
-                        ${product.oldPrice ? `<span class="old-price">${formatPrice(product.oldPrice)} so'm</span>` : ''}
-                    </div>
-                    <button class="add-to-cart" onclick="addToCart(${product.id})">🛒 Savatga qo'shish</button>
+                    <div class="product-title">${p.name}</div>
+                    <div class="rating">${'⭐'.repeat(p.rating)}</div>
+                    <div class="product-price">${formatPrice(p.price)} so'm${p.oldPrice ? `<span class="old-price">${formatPrice(p.oldPrice)} so'm</span>` : ''}</div>
+                    <button class="add-to-cart" onclick="addToCart(${p.id})">🛒 Savatga qo'shish</button>
                 </div>
             </div>
         `).join('');
@@ -748,7 +755,8 @@
     function filterProducts(category) {
         currentCategory = category;
         document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.cat-btn[data-cat="${category}"]`)?.classList.add('active');
+        const activeBtn = document.querySelector(`.cat-btn[data-cat="${category}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
         displayProducts();
     }
 
@@ -760,17 +768,10 @@
         const rating = parseInt(document.getElementById('productRating').value) || 5;
         const emoji = document.getElementById('productEmoji').value.trim() || "📦";
         
-        if (!name || !price) {
-            showToast("❌ Nom va narxni to'ldiring!", true);
-            return;
-        }
+        if (!name || !price) { showToast("❌ Nom va narxni to'ldiring!", true); return; }
         
         const newId = Math.max(...products.map(p => p.id), 0) + 1;
-        products.push({
-            id: newId, name, price, oldPrice, category, rating, emoji,
-            image: selectedProductImage
-        });
-        
+        products.push({ id: newId, name, price, oldPrice, category, rating, emoji, image: selectedProductImage });
         saveAll();
         displayProducts();
         updateAdminLists();
@@ -788,30 +789,46 @@
         }
     }
 
+    function clearProductForm() {
+        document.getElementById('productName').value = '';
+        document.getElementById('productPrice').value = '';
+        document.getElementById('productOldPrice').value = '';
+        document.getElementById('productEmoji').value = '';
+        document.getElementById('productRating').value = '5';
+        document.getElementById('productImageFile').value = '';
+        document.getElementById('productImagePreview').innerHTML = '';
+        selectedProductImage = null;
+    }
+
+    function previewProductImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                selectedProductImage = e.target.result;
+                document.getElementById('productImagePreview').innerHTML = `<img src="${selectedProductImage}">`;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     // ============ DO'KONLAR ============
     function displayShops() {
         let filtered = [...shops];
         const searchTerm = document.getElementById('shopSearchInput')?.value.toLowerCase() || '';
-        if (searchTerm) {
-            filtered = filtered.filter(s => s.name.toLowerCase().includes(searchTerm) || s.address.toLowerCase().includes(searchTerm));
-        }
+        if (searchTerm) filtered = filtered.filter(s => s.name.toLowerCase().includes(searchTerm) || s.address.toLowerCase().includes(searchTerm));
         
         const container = document.getElementById('shops');
-        if (filtered.length === 0) {
-            container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px;">🏪 Hech qanday do\'kon topilmadi</div>';
-            return;
-        }
+        if (filtered.length === 0) { container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px;">🏪 Hech qanday do\'kon topilmadi</div>'; return; }
         
         container.innerHTML = filtered.map(shop => `
-            <div class="shop-card" onclick="openShopDetails(${shop.id})">
-                <div class="shop-img">
-                    ${shop.image ? `<img src="${shop.image}">` : '<span style="font-size:3rem;">🏪</span>'}
-                </div>
+            <div class="shop-card">
+                <div class="shop-img">${shop.image ? `<img src="${shop.image}">` : '<span style="font-size:3rem;">🏪</span>'}</div>
                 <div class="shop-info">
                     <div class="shop-name">${shop.name}</div>
                     <div class="shop-address">📍 ${shop.address}</div>
                     <div class="shop-phone">📞 ${shop.phone}</div>
-                    <button class="view-shop-btn" onclick="event.stopPropagation(); openShopDetails(${shop.id})">🔍 Batafsil</button>
+                    <div class="shop-location">🗺️ Lokatsiya: ${shop.location ? 'Google Maps' : 'Mavjud emas'}</div>
+                    <button class="view-shop-btn" onclick="openShopDetails(${shop.id})">🔍 Batafsil</button>
                 </div>
             </div>
         `).join('');
@@ -820,28 +837,23 @@
     function openShopDetails(shopId) {
         const shop = shops.find(s => s.id === shopId);
         if (!shop) return;
-        
-        const message = `🏪 *${shop.name}*\n\n📍 *Manzil:* ${shop.address}\n📞 *Telefon:* ${shop.phone}\n📝 *Tavsif:* ${shop.desc || 'Yo\'q'}`;
-        alert(message);
+        let msg = `🏪 ${shop.name}\n\n📍 ${shop.address}\n📞 ${shop.phone}\n📝 ${shop.desc || 'Ma\'lumot yo\'q'}`;
+        if (shop.location) msg += `\n🗺️ Xarita: ${shop.location}`;
+        alert(msg);
+        if (shop.location) window.open(shop.location, '_blank');
     }
 
     function addShop() {
         const name = document.getElementById('shopName').value.trim();
         const address = document.getElementById('shopAddress').value.trim();
         const phone = document.getElementById('shopPhone').value.trim();
+        const location = document.getElementById('shopLocation').value.trim();
         const desc = document.getElementById('shopDesc').value.trim();
         
-        if (!name || !address || !phone) {
-            showToast("❌ Do'kon nomi, manzil va telefonni to'ldiring!", true);
-            return;
-        }
+        if (!name || !address || !phone) { showToast("❌ Do'kon nomi, manzil va telefonni to'ldiring!", true); return; }
         
         const newId = Math.max(...shops.map(s => s.id), 0) + 1;
-        shops.push({
-            id: newId, name, address, phone, desc,
-            image: selectedShopImage
-        });
-        
+        shops.push({ id: newId, name, address, phone, location, desc, image: selectedShopImage });
         saveAll();
         displayShops();
         updateAdminLists();
@@ -859,108 +871,8 @@
         }
     }
 
-    // ============ SAVAT ============
-    function addToCart(productId) {
-        cart[productId] = (cart[productId] || 0) + 1;
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartUI();
-        showToast("✅ Savatga qo'shildi!");
-    }
-
-    function updateCartUI() {
-        let total = 0;
-        let itemCount = 0;
-        const cartItems = document.getElementById('cartItems');
-        
-        if (Object.keys(cart).length === 0) {
-            cartItems.innerHTML = '<div style="text-align:center; padding:30px;">🛒 Bo\'sh</div>';
-        } else {
-            cartItems.innerHTML = '';
-            for (let [id, qty] of Object.entries(cart)) {
-                const product = products.find(p => p.id == id);
-                if (product) {
-                    const subtotal = product.price * qty;
-                    total += subtotal;
-                    itemCount += qty;
-                    cartItems.innerHTML += `
-                        <div class="cart-item">
-                            <div><strong>${product.name}</strong><br>${formatPrice(product.price)} so'm</div>
-                            <div class="cart-item-qty">
-                                <button onclick="changeQty(${id}, -1)">-</button>
-                                <span>${qty}</span>
-                                <button onclick="changeQty(${id}, 1)">+</button>
-                                <button onclick="removeFromCart(${id})" style="background:#dc3545; color:white; border:none; width:25px; border-radius:50%;">🗑</button>
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-        }
-        
-        document.getElementById('cartTotal').innerHTML = `Jami: ${formatPrice(total)} so'm`;
-        document.getElementById('cartCount').innerHTML = itemCount;
-    }
-
-    function changeQty(id, delta) {
-        const newQty = (cart[id] || 0) + delta;
-        if (newQty <= 0) delete cart[id];
-        else cart[id] = newQty;
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartUI();
-    }
-
-    function removeFromCart(id) {
-        delete cart[id];
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartUI();
-        showToast("🗑 Olib tashlandi");
-    }
-
-    // ============ BUYURTMA ============
-    function submitOrder() {
-        const fullName = document.getElementById('fullName').value.trim();
-        const address = document.getElementById('address').value.trim();
-        const phone1 = document.getElementById('phone1').value.trim();
-        
-        if (!fullName || !address || !phone1) {
-            showToast("❌ Maydonlarni to'ldiring!", true);
-            return;
-        }
-        
-        if (Object.keys(cart).length === 0) {
-            showToast("❌ Savat bo'sh!", true);
-            return;
-        }
-        
-        let total = 0;
-        let itemsList = [];
-        for (let [id, qty] of Object.entries(cart)) {
-            const p = products.find(p => p.id == id);
-            if (p) {
-                total += p.price * qty;
-                itemsList.push(`${p.name} x${qty} = ${formatPrice(p.price * qty)} so'm`);
-            }
-        }
-        
-        const orderText = `🆕 *YANGI BUYURTMA!*\n\n👤 ${fullName}\n📍 ${address}\n📞 ${phone1}\n📦 ${itemsList.join(', ')}\n💰 Jami: ${formatPrice(total)} so'm`;
-        window.open(`https://t.me/shoxi0020?text=${encodeURIComponent(orderText)}`, '_blank');
-        showToast("✅ Yuborildi!");
-        
-        cart = {};
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartUI();
-        document.getElementById('fullName').value = '';
-        document.getElementById('address').value = '';
-        document.getElementById('phone1').value = '';
-        document.getElementById('phone2').value = '';
-        document.getElementById('notes').value = '';
-        toggleCart();
-    }
-
-    // ============ ADMIN ============
-    function updateAdminLists() {
-        const productContainer = document.getElementById('productListAdmin');
-        productContainer.innerHTML = products.map(p => `
-            <div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;">
-                <span>${p.emoji} ${p.name} - ${formatPrice(p.price)} so'm</span>
-                <button onclick="deleteProduct(${p.id})" style="background:#dc3545; color:white; border:none; padding:5px 10px; border-radius:8px;">🗑
+    function clearShopForm() {
+        document.getElementById('shopName').value = '';
+        document.getElementById('shopAddress').value = '';
+        document.getElementById('shopPhone').value = '';
+        document.getElementById('shopLocation').value
