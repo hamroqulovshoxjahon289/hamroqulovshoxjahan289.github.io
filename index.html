@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Temurshox Mebel | Premium mebel</title>
+    <meta name="description" content="Temurshox Mebel - sifatli mebellar, tez yetkazib berish, qulay narxlar">
+    <title>Temurshox Mebel | Premium sifatli mebellar</title>
     <style>
         * {
             margin: 0;
@@ -13,147 +14,253 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding-bottom: 80px;
         }
 
         /* Header */
         header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shine 10s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translate(-30%, -30%); }
+            100% { transform: translate(30%, 30%); }
         }
 
         header h1 {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
+            position: relative;
+            z-index: 1;
         }
 
         header h1 span {
             color: #ffd700;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
         }
 
         /* Container */
         .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Qidiruv */
+        .search-section {
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .search-input {
+            flex: 1;
+            max-width: 400px;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            transform: scale(1.02);
         }
 
         /* Kategoriya tugmalari */
         .categories {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .cat-btn {
             background: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 0.9rem;
+            padding: 12px 28px;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             border-radius: 50px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            color: #333;
         }
 
-        .cat-btn.active, .cat-btn:hover {
-            background: #2a5298;
+        .cat-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .cat-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            transform: translateY(-2px);
         }
 
         /* Mahsulotlar grid */
         .products {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .product-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            position: relative;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff4757, #ff6b81);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         .product-img {
             width: 100%;
-            height: 200px;
-            background: #e0e0e0;
+            height: 250px;
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 5rem;
+            transition: all 0.3s;
+            overflow: hidden;
         }
 
         .product-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
         }
 
         .product-info {
-            padding: 15px;
+            padding: 20px;
         }
 
         .product-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
         .product-price {
-            color: #2a5298;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: bold;
+            color: #2a5298;
+            margin: 10px 0;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+            margin-left: 10px;
         }
 
         .add-to-cart {
-            background: #28a745;
+            background: linear-gradient(135deg, #28a745, #20c997);
             color: white;
             border: none;
-            padding: 10px;
+            padding: 12px;
             width: 100%;
-            border-radius: 10px;
-            margin-top: 10px;
-            cursor: pointer;
+            border-radius: 12px;
             font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
         }
 
-        /* Savat toggli */
+        .add-to-cart:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(40,167,69,0.3);
+        }
+
+        /* Savat */
         .cart-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #2a5298;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 2rem;
             cursor: pointer;
             z-index: 200;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .cart-toggle:hover {
+            transform: scale(1.1);
         }
 
         .cart-count {
@@ -163,25 +270,25 @@
             background: #ff4757;
             color: white;
             border-radius: 50%;
-            width: 25px;
-            height: 25px;
+            width: 28px;
+            height: 28px;
             font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
         }
 
-        /* Savat sidebar */
         .cart-sidebar {
             position: fixed;
             top: 0;
             right: -100%;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             height: 100%;
             background: white;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
-            transition: 0.3s;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+            transition: 0.3s ease-out;
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -193,9 +300,9 @@
         }
 
         .cart-header {
-            background: #2a5298;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
-            padding: 15px;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -203,16 +310,24 @@
             top: 0;
         }
 
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
         .cart-items {
             flex: 1;
-            padding: 15px;
+            padding: 20px;
         }
 
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #eee;
         }
 
@@ -222,129 +337,200 @@
 
         .cart-item-title {
             font-weight: bold;
+            font-size: 1rem;
         }
 
         .cart-item-price {
             color: #2a5298;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .cart-item-qty {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .cart-item-qty button {
-            background: #ddd;
+            background: #f0f0f0;
             border: none;
             width: 30px;
             height: 30px;
             border-radius: 50%;
             cursor: pointer;
             font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .cart-item-qty button:hover {
+            background: #ddd;
+        }
+
+        .remove-item {
+            background: #dc3545;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-left: 8px;
         }
 
         .cart-total {
-            padding: 15px;
+            padding: 20px;
             border-top: 2px solid #eee;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             text-align: center;
-        }
-
-        .checkout-btn {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 15px;
-            margin: 15px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        /* Buyurtma formasi */
-        .order-form {
-            padding: 15px;
             background: #f8f9fa;
-            border-radius: 10px;
+        }
+
+        .order-form {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
             margin: 15px;
         }
 
-        .order-form input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
+        .order-form h4 {
+            margin-bottom: 15px;
+            color: #1e3c72;
         }
 
-        .order-form textarea {
+        .order-form input, .order-form textarea {
             width: 100%;
             padding: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            resize: vertical;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .order-form input:focus, .order-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
         }
 
         .submit-order {
-            background: #2a5298;
+            background: linear-gradient(135deg, #28a745, #20c997);
             color: white;
             border: none;
-            padding: 15px;
+            padding: 14px;
             width: 100%;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
             font-size: 1rem;
+            transition: all 0.3s;
         }
 
-        .close-cart {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .submit-order:hover {
+            transform: scale(1.02);
         }
 
+        /* Footer */
         footer {
             background: #1e3c72;
             color: white;
             text-align: center;
-            padding: 15px;
-            margin-top: 30px;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .call-btn {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .call-btn:hover {
+            transform: scale(1.05);
+            background: #128C7E;
         }
 
         .admin-toggle {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
+            bottom: 25px;
+            left: 25px;
             background: #2a5298;
             color: white;
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             z-index: 200;
+            border: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
         .admin-panel {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.4rem; }
-            .cart-sidebar { max-width: 100%; }
+        .admin-panel h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .admin-panel input, .admin-panel select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .admin-panel button {
+            background: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 0.5s ease forwards;
         }
     </style>
 </head>
@@ -352,39 +538,63 @@
 
 <header>
     <h1>🛋️ Temurshox <span>Mebel</span></h1>
-    <p>Yuqori sifat | Qulay narx | Tez yetkazib berish</p>
+    <p>✨ Yuqori sifat | Qulay narx | Tez yetkazib berish ✨</p>
 </header>
 
 <div class="container">
+    <div class="search-section">
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Mahsulot qidirish...">
+        </div>
+    </div>
+
     <div class="categories" id="categories">
         <button class="cat-btn active" data-cat="all">🏠 Barchasi</button>
         <button class="cat-btn" data-cat="divan">🛋️ Divanlar</button>
         <button class="cat-btn" data-cat="stol">💻 Stollar</button>
         <button class="cat-btn" data-cat="shkaf">🚪 Shkaflar</button>
         <button class="cat-btn" data-cat="kreslo">🪑 Kreslolar</button>
+        <button class="cat-btn" data-cat="discount">🔥 Chegirmali</button>
     </div>
 
     <div class="products" id="products"></div>
 
     <!-- Admin panel -->
     <div class="admin-panel" id="adminPanel" style="display: none;">
-        <h3>🔧 Admin Panel</h3>
-        <input type="text" id="productName" placeholder="Mahsulot nomi" style="width:100%; padding:10px; margin:5px 0;">
-        <input type="number" id="productPrice" placeholder="Narxi" style="width:100%; padding:10px; margin:5px 0;">
-        <select id="productCategory" style="width:100%; padding:10px; margin:5px 0;">
+        <h3>🔧 Admin Panel - Mahsulot boshqaruvi</h3>
+        <input type="text" id="productName" placeholder="Mahsulot nomi">
+        <input type="number" id="productPrice" placeholder="Narxi (so'm)">
+        <input type="number" id="productOldPrice" placeholder="Eski narxi (chegirma uchun)">
+        <select id="productCategory">
             <option value="divan">Divan</option>
             <option value="stol">Stol</option>
             <option value="shkaf">Shkaf</option>
             <option value="kreslo">Kreslo</option>
         </select>
-        <input type="file" id="productImage" accept="image/*" style="width:100%; padding:10px; margin:5px 0;">
-        <button onclick="addProduct()" style="background:#28a745; color:white; padding:10px; border:none; border-radius:8px; width:100%;">➕ Qo'shish</button>
-        <div id="productListAdmin" style="margin-top:15px;"></div>
+        <input type="file" id="productImage" accept="image/*">
+        <button onclick="addProduct()">➕ Mahsulot qo'shish</button>
+        <div id="productListAdmin" style="margin-top: 20px;"></div>
     </div>
 </div>
 
 <footer>
-    <p>© 2025 Temurshox Mebel</p>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>🛋️ Temurshox Mebel</h4>
+            <p>Sifatli mebellar, tez yetkazib berish</p>
+        </div>
+        <div class="footer-section">
+            <h4>📞 Bog'lanish</h4>
+            <p>Ofis: Toshkent sh.</p>
+            <a href="tel:+998941281315" class="call-btn">📞 +998 94 128 13 15</a>
+        </div>
+        <div class="footer-section">
+            <h4>🕐 Ish vaqti</h4>
+            <p>Dushanba - Shanba: 09:00 - 18:00</p>
+            <p>Yakshanba: Dam olish</p>
+        </div>
+    </div>
+    <p style="margin-top: 30px;">© 2025 Temurshox Mebel. Barcha huquqlar himoyalangan.</p>
 </footer>
 
 <!-- Savat tugmasi -->
@@ -396,20 +606,19 @@
 <!-- Savat sidebar -->
 <div class="cart-sidebar" id="cartSidebar">
     <div class="cart-header">
-        <h3>🛒 Savat</h3>
+        <h3>🛒 Savatcha</h3>
         <button class="close-cart" onclick="toggleCart()">✕</button>
     </div>
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-total" id="cartTotal">Jami: 0 so'm</div>
     
-    <!-- Buyurtma formasi -->
     <div class="order-form">
         <h4>📝 Buyurtma ma'lumotlari</h4>
-        <input type="text" id="fullName" placeholder="Ism va Familiyangiz *" required>
-        <textarea id="address" rows="2" placeholder="To'liq manzilingiz (viloyat, tuman, ko'cha, uy) *" required></textarea>
-        <input type="tel" id="phone1" placeholder="Telefon raqam 1 * (masalan: 97 123 45 67)" required>
+        <input type="text" id="fullName" placeholder="Ism va Familiyangiz *">
+        <textarea id="address" rows="2" placeholder="To'liq manzilingiz *"></textarea>
+        <input type="tel" id="phone1" placeholder="Telefon raqam 1 *">
         <input type="tel" id="phone2" placeholder="Telefon raqam 2 (qo'shimcha)">
-        <textarea id="notes" rows="2" placeholder="Qo'shimcha ma'lumot (ixtiyoriy)"></textarea>
+        <textarea id="notes" rows="2" placeholder="Qo'shimcha ma'lumot"></textarea>
         <button class="submit-order" onclick="submitOrder()">✅ Buyurtma berish</button>
     </div>
 </div>
@@ -417,22 +626,29 @@
 <button class="admin-toggle" onclick="toggleAdmin()">🔧</button>
 
 <script>
-    // Mahsulotlar
     let products = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
 
-    // Boshlang'ich mahsulotlar
+    // Mahsulot rasmlari uchun placeholder URL (o'zingizning rasmlaringiz bilan almashtiring)
+    const imagePlaceholders = {
+        divan: "https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=400",
+        stol: "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=400",
+        shkaf: "https://images.pexels.com/photos/2904026/pexels-photo-2904026.jpeg?auto=compress&cs=tinysrgb&w=400",
+        kreslo: "https://images.pexels.com/photos/1580242/pexels-photo-1580242.jpeg?auto=compress&cs=tinysrgb&w=400"
+    };
+
     function initProducts() {
         const saved = localStorage.getItem('products');
         if (saved) {
             products = JSON.parse(saved);
         } else {
             products = [
-                { id: 1, name: "Angliya divani", price: 3200000, category: "divan", emoji: "🛋️", image: null },
-                { id: 2, name: "Luks divan", price: 4500000, category: "divan", emoji: "🪑", image: null },
-                { id: 3, name: "Kompyuter stoli", price: 850000, category: "stol", emoji: "💻", image: null },
-                { id: 4, name: "Garderob shkafi", price: 2800000, category: "shkaf", emoji: "🚪", image: null },
-                { id: 5, name: "Kompyuter kreslosi", price: 1100000, category: "kreslo", emoji: "🪑", image: null }
+                { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", rating: 5, image: imagePlaceholders.divan, sales: 15 },
+                { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", rating: 4, image: imagePlaceholders.divan, sales: 12 },
+                { id: 3, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", rating: 5, image: imagePlaceholders.stol, sales: 25 },
+                { id: 4, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", rating: 4, image: imagePlaceholders.shkaf, sales: 8 },
+                { id: 5, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", rating: 5, image: imagePlaceholders.kreslo, sales: 30 },
+                { id: 6, name: "Burchak divan", price: 5800000, oldPrice: 6500000, category: "divan", rating: 5, image: imagePlaceholders.divan, sales: 7 }
             ];
             saveProducts();
         }
@@ -446,17 +662,29 @@
 
     function displayProducts() {
         const activeCat = document.querySelector('.cat-btn.active').dataset.cat;
-        let filtered = activeCat === 'all' ? products : products.filter(p => p.category === activeCat);
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        
+        let filtered = products.filter(p => {
+            const matchCat = activeCat === 'all' || p.category === activeCat;
+            const matchDiscount = activeCat !== 'discount' || (p.oldPrice && p.oldPrice > p.price);
+            const matchSearch = p.name.toLowerCase().includes(searchTerm);
+            return matchCat && matchDiscount && matchSearch;
+        });
         
         const container = document.getElementById('products');
         container.innerHTML = filtered.map(product => `
             <div class="product-card">
+                ${product.oldPrice && product.oldPrice > product.price ? `<div class="discount-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
                 <div class="product-img">
-                    ${product.image ? `<img src="${product.image}">` : product.emoji}
+                    ${product.image ? `<img src="${product.image}" alt="${product.name}">` : product.emoji || '🛋️'}
                 </div>
                 <div class="product-info">
                     <div class="product-title">${product.name}</div>
-                    <div class="product-price">${formatPrice(product.price)} so'm</div>
+                    <div class="rating">${'⭐'.repeat(product.rating)}</div>
+                    <div class="product-price">
+                        ${formatPrice(product.price)} so'm
+                        ${product.oldPrice && product.oldPrice > product.price ? `<span class="old-price">${formatPrice(product.oldPrice)} so'm</span>` : ''}
+                    </div>
                     <button class="add-to-cart" onclick="addToCart(${product.id})">🛒 Savatga qo'shish</button>
                 </div>
             </div>
@@ -492,7 +720,7 @@
                             <button onclick="changeQty(${id}, -1)">-</button>
                             <span>${qty}</span>
                             <button onclick="changeQty(${id}, 1)">+</button>
-                            <button onclick="removeFromCart(${id})" style="background:#dc3545; color:white;">🗑</button>
+                            <button class="remove-item" onclick="removeFromCart(${id})">🗑</button>
                         </div>
                     </div>
                 `;
@@ -522,21 +750,12 @@
     }
 
     function submitOrder() {
-        // Formani tekshirish
         const fullName = document.getElementById('fullName').value.trim();
         const address = document.getElementById('address').value.trim();
         const phone1 = document.getElementById('phone1').value.trim();
         
-        if (!fullName) {
-            showToast("❌ Iltimos, ismingizni yozing!", true);
-            return;
-        }
-        if (!address) {
-            showToast("❌ Iltimos, manzilingizni yozing!", true);
-            return;
-        }
-        if (!phone1) {
-            showToast("❌ Iltimos, telefon raqamingizni yozing!", true);
+        if (!fullName || !address || !phone1) {
+            showToast("❌ Iltimos, barcha maydonlarni to'ldiring!", true);
             return;
         }
         
@@ -545,7 +764,6 @@
             return;
         }
         
-        // Buyurtma matnini tayyorlash
         let total = 0;
         let itemsList = [];
         for (let [id, qty] of Object.entries(cart)) {
@@ -575,26 +793,19 @@ ${itemsList.join('\n')}
 
 ⏰ *Vaqt:* ${new Date().toLocaleString('uz-UZ')}`;
         
-        // Telegram orqali @shoxi0020 ga yuborish
-        const encodedText = encodeURIComponent(orderText);
-        window.open(`https://t.me/shoxi0020?text=${encodedText}`, '_blank');
+        window.open(`https://t.me/shoxi0020?text=${encodeURIComponent(orderText)}`, '_blank');
+        showToast("✅ Buyurtmangiz yuborildi!");
         
-        // Mijozga tasdiq
-        showToast("✅ Buyurtmangiz yuborildi! Admin tez orada bog'lanadi.");
-        
-        // Savatni tozalash
         cart = {};
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartUI();
         
-        // Formani tozalash
         document.getElementById('fullName').value = '';
         document.getElementById('address').value = '';
         document.getElementById('phone1').value = '';
         document.getElementById('phone2').value = '';
         document.getElementById('notes').value = '';
         
-        // Savatni yopish
         setTimeout(() => toggleCart(), 2000);
     }
 
@@ -614,21 +825,18 @@ ${itemsList.join('\n')}
                 transform: translateX(-50%);
                 background: ${isError ? '#dc3545' : '#28a745'};
                 color: white;
-                padding: 12px 24px;
+                padding: 12px 25px;
                 border-radius: 50px;
                 z-index: 2000;
                 font-weight: bold;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-                transition: 0.3s;
+                box-shadow: 0 3px 15px rgba(0,0,0,0.2);
             `;
             document.body.appendChild(toast);
         }
         toast.style.background = isError ? '#dc3545' : '#28a745';
         toast.innerHTML = message;
         toast.style.opacity = '1';
-        setTimeout(() => {
-            toast.style.opacity = '0';
-        }, 3000);
+        setTimeout(() => toast.style.opacity = '0', 3000);
     }
 
     function toggleCart() {
@@ -656,9 +864,9 @@ ${itemsList.join('\n')}
     function updateAdminList() {
         const container = document.getElementById('productListAdmin');
         container.innerHTML = products.map(p => `
-            <div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #ddd;">
-                <span>${p.emoji} ${p.name} - ${formatPrice(p.price)} so'm</span>
-                <button onclick="deleteProduct(${p.id})" style="background:#dc3545; color:white; border:none; padding:5px 15px; border-radius:8px;">🗑</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
+                <span><strong>${p.name}</strong> - ${formatPrice(p.price)} so'm</span>
+                <button onclick="deleteProduct(${p.id})" style="background:#dc3545; color:white; border:none; padding:6px 15px; border-radius:8px; cursor:pointer;">🗑 O'chirish</button>
             </div>
         `).join('');
     }
@@ -666,6 +874,7 @@ ${itemsList.join('\n')}
     function addProduct() {
         const name = document.getElementById('productName').value;
         const price = parseInt(document.getElementById('productPrice').value);
+        const oldPrice = document.getElementById('productOldPrice').value ? parseInt(document.getElementById('productOldPrice').value) : null;
         const category = document.getElementById('productCategory').value;
         const imageFile = document.getElementById('productImage').files[0];
         
@@ -675,15 +884,16 @@ ${itemsList.join('\n')}
         }
         
         const newId = Math.max(...products.map(p => p.id), 0) + 1;
-        const emojis = { divan: "🛋️", stol: "💻", shkaf: "🚪", kreslo: "🪑" };
         
         const newProduct = {
             id: newId,
             name: name,
             price: price,
+            oldPrice: oldPrice,
             category: category,
-            emoji: emojis[category],
-            image: null
+            rating: 5,
+            image: imagePlaceholders[category],
+            sales: 0
         };
         
         if (imageFile) {
@@ -721,10 +931,11 @@ ${itemsList.join('\n')}
     function clearForm() {
         document.getElementById('productName').value = '';
         document.getElementById('productPrice').value = '';
+        document.getElementById('productOldPrice').value = '';
         document.getElementById('productImage').value = '';
     }
 
-    // Kategoriya tugmalari
+    // Event listeners
     document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -733,7 +944,8 @@ ${itemsList.join('\n')}
         });
     });
 
-    // Boshlash
+    document.getElementById('searchInput').addEventListener('input', displayProducts);
+    
     initProducts();
 </script>
 
