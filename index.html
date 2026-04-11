@@ -38,7 +38,6 @@
             padding: 0 15px;
         }
 
-        /* Navigatsiya */
         .nav-buttons {
             display: flex;
             justify-content: center;
@@ -67,7 +66,6 @@
             transform: translateY(-2px);
         }
 
-        /* Qidiruv */
         .search-box {
             background: white;
             border-radius: 60px;
@@ -85,7 +83,6 @@
             outline: none;
         }
 
-        /* Kategoriyalar */
         .categories {
             display: flex;
             justify-content: center;
@@ -110,7 +107,6 @@
             color: white;
         }
 
-        /* Mahsulotlar */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -198,7 +194,6 @@
             cursor: pointer;
         }
 
-        /* Do'konlar */
         .shops {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -275,7 +270,6 @@
             cursor: pointer;
         }
 
-        /* Savat */
         .cart-toggle {
             position: fixed;
             bottom: 20px;
@@ -509,7 +503,6 @@
         <button class="nav-btn" onclick="showSection('shops')">🏪 Do'konlar</button>
     </div>
 
-    <!-- Mahsulotlar bo'limi -->
     <div id="productsSection">
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="🔍 Mahsulot qidirish..." onkeyup="displayProducts()">
@@ -518,7 +511,6 @@
         <div class="products" id="products"></div>
     </div>
 
-    <!-- Do'konlar bo'limi -->
     <div id="shopsSection" class="hidden">
         <div class="search-box">
             <input type="text" id="shopSearchInput" placeholder="🔍 Do'kon qidirish..." onkeyup="displayShops()">
@@ -526,11 +518,9 @@
         <div class="shops" id="shops"></div>
     </div>
 
-    <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel" style="display: none;">
         <h3>🔧 Admin Panel</h3>
         
-        <!-- Kategoriya qo'shish -->
         <div class="admin-section">
             <h4>📂 Yangi kategoriya</h4>
             <input type="text" id="newCategoryName" placeholder="Kategoriya nomi">
@@ -538,7 +528,6 @@
             <button onclick="addCategory()">➕ Kategoriya qo'shish</button>
         </div>
 
-        <!-- Mahsulot qo'shish -->
         <div class="admin-section">
             <h4>🛍️ Yangi mahsulot</h4>
             <input type="text" id="productName" placeholder="Mahsulot nomi">
@@ -552,7 +541,6 @@
             <button onclick="addProduct()">➕ Mahsulot qo'shish</button>
         </div>
 
-        <!-- Do'kon qo'shish -->
         <div class="admin-section">
             <h4>🏪 Yangi do'kon</h4>
             <input type="text" id="shopName" placeholder="Do'kon nomi">
@@ -565,13 +553,11 @@
             <button onclick="addShop()">🏪 Do'kon qo'shish</button>
         </div>
 
-        <!-- Mahsulotlar ro'yxati -->
         <div class="admin-section">
             <h4>📋 Mahsulotlar</h4>
             <div id="productListAdmin"></div>
         </div>
 
-        <!-- Do'konlar ro'yxati -->
         <div class="admin-section">
             <h4>🏪 Do'konlar</h4>
             <div id="shopListAdmin"></div>
@@ -638,35 +624,31 @@
     ];
 
     let shops = [
-        { id: 1, name: "Temurshox Mebel - Chilonzor", address: "Toshkent sh., Chilonzor tumani, 3-kvartal, 12-uy", phone: "+998 97 935 13 15", location: "https://maps.google.com/?q=41.285,69.205", desc: "Markaziy filial, eng katta salon", image: null },
-        { id: 2, name: "Temurshox Mebel - Sergeli", address: "Toshkent sh., Sergeli tumani, Yangi hayot MFY, 5-uy", phone: "+998 93 346 86 32", location: "https://maps.google.com/?q=41.234,69.189", desc: "Yangi filial, bepul yetkazib berish", image: null },
+        { id: 1, name: "Temurshox Mebel - Chilonzor", address: "Toshkent sh., Chilonzor tumani, 3-kvartal, 12-uy", phone: "+998 97 935 13 15", location: "https://maps.google.com/?q=41.285,69.205", desc: "Markaziy filial", image: null },
+        { id: 2, name: "Temurshox Mebel - Sergeli", address: "Toshkent sh., Sergeli tumani, Yangi hayot MFY, 5-uy", phone: "+998 93 346 86 32", location: "https://maps.google.com/?q=41.234,69.189", desc: "Yangi filial", image: null },
         { id: 3, name: "Temurshox Mebel - Yunusobod", address: "Toshkent sh., Yunusobod tumani, 17-mahalla, 8-uy", phone: "+998 90 123 45 67", location: "https://maps.google.com/?q=41.300,69.215", desc: "Elite mebellar", image: null },
         { id: 4, name: "Temurshox Mebel - Samarqand", address: "Samarqand sh., Registon ko'chasi, 45-uy", phone: "+998 66 123 45 67", location: "https://maps.google.com/?q=39.654,66.975", desc: "Samarqand filiali", image: null },
         { id: 5, name: "Temurshox Mebel - Buxoro", address: "Buxoro sh., Nodir Devonbegi ko'chasi, 23-uy", phone: "+998 65 123 45 67", location: "https://maps.google.com/?q=39.774,64.428", desc: "Buxoro filiali", image: null }
     ];
 
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
-    let currentSection = "products";
     let currentCategory = "all";
     let selectedProductImage = null;
     let selectedShopImage = null;
 
-    // ============ SAQLASH ============
     function saveAll() {
-        localStorage.setItem('categories', JSON.stringify(categories));
         localStorage.setItem('products', JSON.stringify(products));
         localStorage.setItem('shops', JSON.stringify(shops));
+        localStorage.setItem('categories', JSON.stringify(categories));
     }
 
     function loadAll() {
-        const savedCats = localStorage.getItem('categories');
         const savedProds = localStorage.getItem('products');
         const savedShops = localStorage.getItem('shops');
-        
-        if (savedCats) categories = JSON.parse(savedCats);
+        const savedCats = localStorage.getItem('categories');
         if (savedProds) products = JSON.parse(savedProds);
         if (savedShops) shops = JSON.parse(savedShops);
-        
+        if (savedCats) categories = JSON.parse(savedCats);
         updateCategorySelect();
         displayCategories();
         displayProducts();
@@ -675,9 +657,7 @@
         updateCartUI();
     }
 
-    // ============ BO'LIMLAR ============
     function showSection(section) {
-        currentSection = section;
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
         if (section === 'products') {
             document.querySelector('.nav-btn:first-child').classList.add('active');
@@ -692,14 +672,11 @@
         }
     }
 
-    // ============ KATEGORIYALAR ============
     function displayCategories() {
         const container = document.getElementById('categories');
-        container.innerHTML = `
-            <button class="cat-btn active" data-cat="all" onclick="filterProducts('all')">🏠 Barchasi</button>
-            ${categories.map(cat => `<button class="cat-btn" data-cat="${cat.id}" onclick="filterProducts('${cat.id}')">${cat.emoji} ${cat.name}</button>`).join('')}
-            <button class="cat-btn" data-cat="discount" onclick="filterProducts('discount')">🔥 Chegirmali</button>
-        `;
+        container.innerHTML = `<button class="cat-btn active" data-cat="all" onclick="filterProducts('all')">🏠 Barchasi</button>` +
+            categories.map(cat => `<button class="cat-btn" data-cat="${cat.id}" onclick="filterProducts('${cat.id}')">${cat.emoji} ${cat.name}</button>`).join('') +
+            `<button class="cat-btn" data-cat="discount" onclick="filterProducts('discount')">🔥 Chegirmali</button>`;
     }
 
     function updateCategorySelect() {
@@ -711,7 +688,6 @@
         const name = document.getElementById('newCategoryName').value.trim();
         const emoji = document.getElementById('newCategoryEmoji').value.trim() || "📁";
         if (!name) { showToast("❌ Kategoriya nomini yozing!", true); return; }
-        
         const id = name.toLowerCase().replace(/ /g, '_');
         categories.push({ id, name, emoji });
         saveAll();
@@ -722,14 +698,12 @@
         showToast("✅ Kategoriya qo'shildi!");
     }
 
-    // ============ MAHSULOTLAR ============
     function displayProducts() {
         let filtered = products.filter(p => {
             if (currentCategory === "all") return true;
             if (currentCategory === "discount") return p.oldPrice && p.oldPrice > p.price;
             return p.category === currentCategory;
         });
-        
         const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
         if (searchTerm) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
         
@@ -760,78 +734,76 @@
         displayProducts();
     }
 
-    function addProduct() {
-        const name = document.getElementById('productName').value.trim();
-        const price = parseInt(document.getElementById('productPrice').value);
-        const oldPrice = document.getElementById('productOldPrice').value ? parseInt(document.getElementById('productOldPrice').value) : null;
-        const category = document.getElementById('productCategory').value;
-        const rating = parseInt(document.getElementById('productRating').value) || 5;
-        const emoji = document.getElementById('productEmoji').value.trim() || "📦";
-        
-        if (!name || !price) { showToast("❌ Nom va narxni to'ldiring!", true); return; }
-        
-        const newId = Math.max(...products.map(p => p.id), 0) + 1;
-        products.push({ id: newId, name, price, oldPrice, category, rating, emoji, image: selectedProductImage });
-        saveAll();
-        displayProducts();
-        updateAdminLists();
-        clearProductForm();
-        showToast("✅ Mahsulot qo'shildi!");
+    function addToCart(productId) {
+        cart[productId] = (cart[productId] || 0) + 1;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartUI();
+        showToast("✅ Savatga qo'shildi!");
     }
 
-    function deleteProduct(id) {
-        if (confirm("O'chirilsinmi?")) {
-            products = products.filter(p => p.id !== id);
-            saveAll();
-            displayProducts();
-            updateAdminLists();
-            showToast("🗑 O'chirildi!");
+    function updateCartUI() {
+        let total = 0;
+        let itemCount = 0;
+        const cartItems = document.getElementById('cartItems');
+        if (Object.keys(cart).length === 0) {
+            cartItems.innerHTML = '<div style="text-align:center; padding:30px;">🛒 Bo\'sh</div>';
+        } else {
+            cartItems.innerHTML = '';
+            for (let [id, qty] of Object.entries(cart)) {
+                const p = products.find(p => p.id == id);
+                if (p) {
+                    total += p.price * qty;
+                    itemCount += qty;
+                    cartItems.innerHTML += `<div class="cart-item"><div><strong>${p.name}</strong><br>${formatPrice(p.price)} so'm</div><div class="cart-item-qty"><button onclick="changeQty(${id}, -1)">-</button><span>${qty}</span><button onclick="changeQty(${id}, 1)">+</button><button onclick="removeFromCart(${id})" style="background:#dc3545;color:white;border:none;width:25px;border-radius:50%;">🗑</button></div></div>`;
+                }
+            }
         }
+        document.getElementById('cartTotal').innerHTML = `Jami: ${formatPrice(total)} so'm`;
+        document.getElementById('cartCount').innerHTML = itemCount;
     }
 
-    function clearProductForm() {
-        document.getElementById('productName').value = '';
-        document.getElementById('productPrice').value = '';
-        document.getElementById('productOldPrice').value = '';
-        document.getElementById('productEmoji').value = '';
-        document.getElementById('productRating').value = '5';
-        document.getElementById('productImageFile').value = '';
-        document.getElementById('productImagePreview').innerHTML = '';
-        selectedProductImage = null;
+    function changeQty(id, delta) {
+        const newQty = (cart[id] || 0) + delta;
+        if (newQty <= 0) delete cart[id];
+        else cart[id] = newQty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartUI();
     }
 
-    function previewProductImage(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                selectedProductImage = e.target.result;
-                document.getElementById('productImagePreview').innerHTML = `<img src="${selectedProductImage}">`;
-            };
-            reader.readAsDataURL(input.files[0]);
+    function removeFromCart(id) {
+        delete cart[id];
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartUI();
+        showToast("🗑 Olib tashlandi");
+    }
+
+    function submitOrder() {
+        const fullName = document.getElementById('fullName').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const phone1 = document.getElementById('phone1').value.trim();
+        if (!fullName || !address || !phone1) { showToast("❌ Maydonlarni to'ldiring!", true); return; }
+        if (Object.keys(cart).length === 0) { showToast("❌ Savat bo'sh!", true); return; }
+        
+        let total = 0, itemsList = [];
+        for (let [id, qty] of Object.entries(cart)) {
+            const p = products.find(p => p.id == id);
+            if (p) { total += p.price * qty; itemsList.push(`${p.name} x${qty} = ${formatPrice(p.price * qty)} so'm`); }
         }
+        const orderText = `🆕 YANGI BUYURTMA!\n\n👤 ${fullName}\n📍 ${address}\n📞 ${phone1}\n📦 ${itemsList.join(', ')}\n💰 Jami: ${formatPrice(total)} so'm`;
+        window.open(`https://t.me/shoxi0020?text=${encodeURIComponent(orderText)}`, '_blank');
+        showToast("✅ Yuborildi!");
+        cart = {}; localStorage.setItem('cart', JSON.stringify(cart)); updateCartUI();
+        document.getElementById('fullName').value = ''; document.getElementById('address').value = ''; document.getElementById('phone1').value = ''; document.getElementById('phone2').value = ''; document.getElementById('notes').value = '';
+        toggleCart();
     }
 
-    // ============ DO'KONLAR ============
     function displayShops() {
         let filtered = [...shops];
         const searchTerm = document.getElementById('shopSearchInput')?.value.toLowerCase() || '';
         if (searchTerm) filtered = filtered.filter(s => s.name.toLowerCase().includes(searchTerm) || s.address.toLowerCase().includes(searchTerm));
-        
         const container = document.getElementById('shops');
         if (filtered.length === 0) { container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px;">🏪 Hech qanday do\'kon topilmadi</div>'; return; }
-        
-        container.innerHTML = filtered.map(shop => `
-            <div class="shop-card">
-                <div class="shop-img">${shop.image ? `<img src="${shop.image}">` : '<span style="font-size:3rem;">🏪</span>'}</div>
-                <div class="shop-info">
-                    <div class="shop-name">${shop.name}</div>
-                    <div class="shop-address">📍 ${shop.address}</div>
-                    <div class="shop-phone">📞 ${shop.phone}</div>
-                    <div class="shop-location">🗺️ Lokatsiya: ${shop.location ? 'Google Maps' : 'Mavjud emas'}</div>
-                    <button class="view-shop-btn" onclick="openShopDetails(${shop.id})">🔍 Batafsil</button>
-                </div>
-            </div>
-        `).join('');
+        container.innerHTML = filtered.map(shop => `<div class="shop-card"><div class="shop-img">${shop.image ? `<img src="${shop.image}">` : '<span style="font-size:3rem;">🏪</span>'}</div><div class="shop-info"><div class="shop-name">${shop.name}</div><div class="shop-address">📍 ${shop.address}</div><div class="shop-phone">📞 ${shop.phone}</div><button class="view-shop-btn" onclick="openShopDetails(${shop.id})">🔍 Batafsil</button></div></div>`).join('');
     }
 
     function openShopDetails(shopId) {
@@ -843,36 +815,9 @@
         if (shop.location) window.open(shop.location, '_blank');
     }
 
-    function addShop() {
-        const name = document.getElementById('shopName').value.trim();
-        const address = document.getElementById('shopAddress').value.trim();
-        const phone = document.getElementById('shopPhone').value.trim();
-        const location = document.getElementById('shopLocation').value.trim();
-        const desc = document.getElementById('shopDesc').value.trim();
-        
-        if (!name || !address || !phone) { showToast("❌ Do'kon nomi, manzil va telefonni to'ldiring!", true); return; }
-        
-        const newId = Math.max(...shops.map(s => s.id), 0) + 1;
-        shops.push({ id: newId, name, address, phone, location, desc, image: selectedShopImage });
-        saveAll();
-        displayShops();
-        updateAdminLists();
-        clearShopForm();
-        showToast("✅ Do'kon qo'shildi!");
-    }
-
-    function deleteShop(id) {
-        if (confirm("Do'konni o'chirilsinmi?")) {
-            shops = shops.filter(s => s.id !== id);
-            saveAll();
-            displayShops();
-            updateAdminLists();
-            showToast("🗑 Do'kon o'chirildi!");
-        }
-    }
-
-    function clearShopForm() {
-        document.getElementById('shopName').value = '';
-        document.getElementById('shopAddress').value = '';
-        document.getElementById('shopPhone').value = '';
-        document.getElementById('shopLocation').value
+    function addProduct() {
+        const name = document.getElementById('productName').value.trim();
+        const price = parseInt(document.getElementById('productPrice').value);
+        if (!name || !price) { showToast("❌ Nom va narxni to'ldiring!", true); return; }
+        const newId = Math.max(...products.map(p => p.id), 0) + 1;
+        products.push({ id: newId, name, price, oldPrice: document.getElementById('productOldPrice').value ? parseInt(document.getElementById('productOldPrice').value) : null, category: document.getElementById('productCategory').value, rating: parseInt(document.getElementById('productRating').value) || 5, emoji: document.getElementById('productEmoji').value.trim() || "
