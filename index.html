@@ -17,7 +17,6 @@
             min-height: 100vh;
         }
 
-        /* Header */
         header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
@@ -40,14 +39,12 @@
             opacity: 0.9;
         }
 
-        /* Container */
         .container {
             max-width: 1300px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* Kategoriya tugmalari */
         .categories {
             display: flex;
             justify-content: center;
@@ -78,14 +75,12 @@
             color: white;
         }
 
-        /* Mahsulotlar grid */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        /* Mahsulot kartasi */
         .product-card {
             background: white;
             border-radius: 20px;
@@ -169,7 +164,6 @@
             transform: scale(1.02);
         }
 
-        /* Admin panel */
         .admin-panel {
             margin-top: 60px;
             background: white;
@@ -245,11 +239,11 @@
             margin-top: 50px;
         }
 
-        .whatsapp-float {
+        .telegram-float {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #25D366;
+            background: #0088cc;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -264,7 +258,7 @@
             z-index: 100;
         }
 
-        .whatsapp-float:hover {
+        .telegram-float:hover {
             transform: scale(1.1);
         }
 
@@ -308,7 +302,6 @@
 
     <div class="products" id="products"></div>
 
-    <!-- Admin panel (faqat admin kiritganda ko'rinadi) -->
     <div class="admin-panel" id="adminPanel" style="display: none;">
         <h3>🔧 Admin Panel - Mahsulot boshqaruvi</h3>
         <div class="admin-form">
@@ -333,21 +326,19 @@
     <p>📞 +998 97 935 13 15 | Toshkent sh.</p>
 </footer>
 
-<a href="https://wa.me/998979351315?text=Assalomu%20alaykum!%20Mebel%20haqida%20ma'lumot%20olmoqchiman" class="whatsapp-float" target="_blank">💬</a>
+<!-- Telegram tugmasi -->
+<a href="https://t.me/shoxi0020" class="telegram-float" target="_blank">📨</a>
 
 <button class="admin-toggle" onclick="toggleAdmin()">🔧</button>
 
 <script>
-    // Mahsulotlar (localStorage da saqlanadi)
     let products = [];
 
-    // Yuklash
     function loadProducts() {
         const saved = localStorage.getItem('mebel_products');
         if (saved) {
             products = JSON.parse(saved);
         } else {
-            // Boshlang'ich mahsulotlar
             products = [
                 { id: 1, name: "Angliya divani", price: 3200000, category: "divan", emoji: "🛋️", image: null, desc: "Velvet qoplamali, 3 o'rinli" },
                 { id: 2, name: "Luks divan", price: 4500000, category: "divan", emoji: "🪑", image: null, desc: "Haqiqiy charm, 2 o'rinli" },
@@ -365,7 +356,6 @@
         localStorage.setItem('mebel_products', JSON.stringify(products));
     }
 
-    // Mahsulotlarni ko'rsatish
     function displayProducts() {
         const activeCat = document.querySelector('.cat-btn.active').dataset.cat;
         let filtered = activeCat === 'all' ? products : products.filter(p => p.category === activeCat);
@@ -387,7 +377,13 @@
         `).join('');
     }
 
-    // Admin panelda mahsulotlar ro'yxati
+    // 🔥 BU YERDA O'ZGARTIRILGAN QISM 🔥
+    // WhatsApp emas, TELEGRAM (@shoxi0020) ga yuboradi
+    function orderProduct(name) {
+        const message = `Assalomu alaykum! Men "${name}" mahsulotiga buyurtma bermoqchiman.`;
+        window.open(`https://t.me/shoxi0020?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
     function updateAdminList() {
         const container = document.getElementById('productListAdmin');
         container.innerHTML = products.map(product => `
@@ -398,7 +394,6 @@
         `).join('');
     }
 
-    // Yangi mahsulot qo'shish
     function addProduct() {
         const name = document.getElementById('productName').value;
         const price = parseInt(document.getElementById('productPrice').value);
@@ -460,12 +455,6 @@
         document.getElementById('productImage').value = '';
     }
 
-    function orderProduct(name) {
-        const phone = "998979351315";
-        const message = `Assalomu alaykum! Men "${name}" mahsulotiga buyurtma bermoqchiman.`;
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-    }
-
     function getCategoryName(cat) {
         const names = { divan: "🛋️ Divan", stol: "💻 Stol", shkaf: "🚪 Shkaf", kreslo: "🪑 Kreslo" };
         return names[cat] || cat;
@@ -475,8 +464,7 @@
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
-    // Admin panelni ko'rsatish/yashirish
-    let adminPassword = "admin123"; // Parolni o'zgartiring!
+    let adminPassword = "admin123";
     
     function toggleAdmin() {
         const panel = document.getElementById('adminPanel');
@@ -492,7 +480,6 @@
         }
     }
 
-    // Kategoriya tugmalari
     document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -501,7 +488,6 @@
         });
     });
 
-    // Yuklash
     loadProducts();
 </script>
 
