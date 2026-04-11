@@ -2,8 +2,8 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temurshox Mebel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Temurshox Mebel | Premium mebel</title>
     <style>
         * {
             margin: 0;
@@ -12,16 +12,20 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
 
         header {
-            background: linear-gradient(135deg, #0f2027, #203a43);
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: white;
             padding: 20px;
             text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
         }
 
         header h1 span {
@@ -29,12 +33,11 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 20px auto;
             padding: 0 15px;
         }
 
-        /* Tugmalar */
         .nav-buttons {
             display: flex;
             justify-content: center;
@@ -50,33 +53,40 @@
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .nav-btn.active {
-            background: #764ba2;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
 
-        /* Qidiruv */
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+
         .search-box {
-            text-align: center;
-            margin-bottom: 30px;
+            background: white;
+            border-radius: 60px;
+            padding: 5px;
+            max-width: 500px;
+            margin: 0 auto 30px;
         }
 
         .search-box input {
             width: 100%;
-            max-width: 400px;
-            padding: 12px 20px;
+            padding: 15px 25px;
             border: none;
-            border-radius: 50px;
+            border-radius: 60px;
             font-size: 1rem;
+            outline: none;
         }
 
-        /* Kategoriyalar */
         .categories {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
             margin-bottom: 30px;
         }
@@ -85,78 +95,116 @@
             background: white;
             border: none;
             padding: 8px 20px;
-            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s;
         }
 
         .cat-btn.active {
-            background: #764ba2;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
 
-        /* Mahsulotlar */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
 
         .product-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            padding: 15px;
-            text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
         }
 
         .product-img {
-            font-size: 4rem;
-            margin-bottom: 10px;
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
         }
 
         .product-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
         }
 
+        .rating {
+            color: #ffc107;
+            margin: 5px 0;
+        }
+
         .product-price {
-            color: #764ba2;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
-            margin: 10px 0;
+            color: #667eea;
+            margin: 8px 0;
         }
 
         .old-price {
             text-decoration: line-through;
             color: #999;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             margin-left: 8px;
         }
 
         .add-to-cart {
-            background: #28a745;
+            background: linear-gradient(135deg, #28a745, #20c997);
             color: white;
             border: none;
             padding: 10px;
             width: 100%;
-            border-radius: 10px;
-            cursor: pointer;
+            border-radius: 12px;
             font-weight: bold;
+            cursor: pointer;
         }
 
-        /* Do'konlar */
         .shops {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .shop-card {
             background: white;
-            border-radius: 15px;
-            padding: 15px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: 0.3s;
         }
@@ -165,28 +213,70 @@
             transform: translateY(-5px);
         }
 
+        .shop-img {
+            width: 100%;
+            height: 150px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            overflow: hidden;
+        }
+
+        .shop-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .shop-info {
+            padding: 15px;
+        }
+
         .shop-name {
             font-size: 1.2rem;
             font-weight: bold;
-            color: #203a43;
+            margin-bottom: 8px;
+            color: #2c3e50;
         }
 
         .shop-address {
             color: #666;
-            margin: 8px 0;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
         }
 
         .shop-phone {
             color: #28a745;
             font-weight: bold;
+            font-size: 0.9rem;
         }
 
-        /* Savat */
+        .shop-location {
+            color: #667eea;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .view-shop-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 8px;
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
         .cart-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #764ba2;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             width: 60px;
             height: 60px;
@@ -196,18 +286,20 @@
             justify-content: center;
             font-size: 1.5rem;
             cursor: pointer;
-            z-index: 100;
+            z-index: 200;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
         .cart-count {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: red;
+            background: #ff4757;
+            color: white;
             border-radius: 50%;
             width: 22px;
             height: 22px;
-            font-size: 12px;
+            font-size: 11px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -218,11 +310,13 @@
             top: 0;
             right: -100%;
             width: 100%;
-            max-width: 350px;
+            max-width: 380px;
             height: 100%;
             background: white;
             transition: 0.3s;
             z-index: 1000;
+            display: flex;
+            flex-direction: column;
             overflow-y: auto;
         }
 
@@ -231,7 +325,7 @@
         }
 
         .cart-header {
-            background: #203a43;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
             padding: 15px;
             display: flex;
@@ -247,6 +341,7 @@
         }
 
         .cart-items {
+            flex: 1;
             padding: 15px;
         }
 
@@ -257,14 +352,33 @@
             border-bottom: 1px solid #eee;
         }
 
+        .cart-item-qty {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .cart-item-qty button {
+            background: #f0f0f0;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
         .cart-total {
             padding: 15px;
+            border-top: 2px solid #eee;
             font-weight: bold;
             text-align: center;
         }
 
         .order-form {
             padding: 15px;
+            background: #f8f9fa;
+            margin: 15px;
+            border-radius: 15px;
         }
 
         .order-form input, .order-form textarea {
@@ -280,8 +394,8 @@
             color: white;
             padding: 12px;
             width: 100%;
+            border-radius: 12px;
             border: none;
-            border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
         }
@@ -295,12 +409,12 @@
         }
 
         .call-btn {
+            display: inline-block;
             background: #25D366;
             color: white;
             padding: 8px 20px;
             border-radius: 50px;
             text-decoration: none;
-            display: inline-block;
             margin-top: 10px;
         }
 
@@ -308,15 +422,15 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            background: #203a43;
+            background: #2c3e50;
             color: white;
             width: 50px;
             height: 50px;
             border-radius: 50%;
             font-size: 1.2rem;
             cursor: pointer;
+            z-index: 200;
             border: none;
-            z-index: 100;
         }
 
         .admin-panel {
@@ -326,7 +440,7 @@
             margin-top: 30px;
         }
 
-        .admin-panel input, .admin-panel select {
+        .admin-panel input, .admin-panel select, .admin-panel textarea {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
@@ -352,8 +466,29 @@
             padding-top: 20px;
         }
 
+        .admin-section h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .image-preview {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100px;
+            border-radius: 10px;
+        }
+
         .hidden {
             display: none;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.3rem; }
+            .nav-btn { padding: 8px 20px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -370,24 +505,21 @@
         <button class="nav-btn" onclick="showSection('shops')">🏪 Do'konlar</button>
     </div>
 
-    <!-- Mahsulotlar -->
     <div id="productsSection">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Mahsulot qidirish...">
+            <input type="text" id="searchInput" placeholder="🔍 Mahsulot qidirish..." onkeyup="showProducts()">
         </div>
         <div class="categories" id="categories"></div>
         <div class="products" id="products"></div>
     </div>
 
-    <!-- Do'konlar -->
     <div id="shopsSection" class="hidden">
         <div class="search-box">
-            <input type="text" id="shopSearchInput" placeholder="🔍 Do'kon qidirish...">
+            <input type="text" id="shopSearchInput" placeholder="🔍 Do'kon qidirish..." onkeyup="showShops()">
         </div>
         <div class="shops" id="shops"></div>
     </div>
 
-    <!-- Admin panel -->
     <div class="admin-panel" id="adminPanel" style="display: none;">
         <h3>🔧 Admin Panel</h3>
         
@@ -399,21 +531,26 @@
         </div>
 
         <div class="admin-section">
-            <h4>🛍️ Yangi mahsulot</h4>
+            <h4>🛍️ Yangi mahsulot (RASM bilan)</h4>
             <input type="text" id="prodName" placeholder="Mahsulot nomi">
-            <input type="number" id="prodPrice" placeholder="Narxi">
+            <input type="number" id="prodPrice" placeholder="Narxi (so'm)">
             <input type="number" id="prodOldPrice" placeholder="Eski narxi">
             <select id="prodCategory"></select>
-            <input type="text" id="prodEmoji" placeholder="Emoji">
+            <input type="text" id="prodEmoji" placeholder="Emoji (agar rasm bo'lmasa)">
+            <input type="file" id="prodImage" accept="image/*" onchange="previewProductImage(this)">
+            <div class="image-preview" id="prodImagePreview"></div>
             <button onclick="addProduct()">➕ Mahsulot qo'shish</button>
         </div>
 
         <div class="admin-section">
-            <h4>🏪 Yangi do'kon</h4>
+            <h4>🏪 Yangi do'kon (JOYLASHUV bilan)</h4>
             <input type="text" id="shopName" placeholder="Do'kon nomi">
             <input type="text" id="shopAddress" placeholder="Manzil">
             <input type="text" id="shopPhone" placeholder="Telefon">
+            <input type="text" id="shopLocation" placeholder="Google Maps linki (ixtiyoriy)">
             <textarea id="shopDesc" rows="2" placeholder="Tavsif"></textarea>
+            <input type="file" id="shopImage" accept="image/*" onchange="previewShopImage(this)">
+            <div class="image-preview" id="shopImagePreview"></div>
             <button onclick="addShop()">🏪 Do'kon qo'shish</button>
         </div>
 
@@ -447,9 +584,10 @@
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-total" id="cartTotal">Jami: 0 so'm</div>
     <div class="order-form">
-        <input type="text" id="fullName" placeholder="Ism Familiya">
-        <textarea id="address" rows="2" placeholder="Manzil"></textarea>
-        <input type="tel" id="phone" placeholder="Telefon">
+        <input type="text" id="fullName" placeholder="Ism Familiya *">
+        <textarea id="address" rows="2" placeholder="Manzil *"></textarea>
+        <input type="tel" id="phone" placeholder="Telefon *">
+        <textarea id="notes" rows="2" placeholder="Izoh"></textarea>
         <button class="submit-order" onclick="submitOrder()">✅ Buyurtma berish</button>
     </div>
 </div>
@@ -457,7 +595,7 @@
 <button class="admin-toggle" onclick="toggleAdmin()">🔧</button>
 
 <script>
-    // MA'LUMOTLAR
+    // ============ MA'LUMOTLAR ============
     let categories = [
         { id: "divan", name: "Divanlar", emoji: "🛋️" },
         { id: "stol", name: "Stollar", emoji: "💻" },
@@ -466,29 +604,30 @@
     ];
 
     let products = [
-        { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", emoji: "🛋️" },
-        { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", emoji: "🪑" },
-        { id: 3, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", emoji: "💻" },
-        { id: 4, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", emoji: "🚪" },
-        { id: 5, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", emoji: "🪑" }
+        { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", emoji: "🛋️", image: null },
+        { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", emoji: "🪑", image: null },
+        { id: 3, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", emoji: "💻", image: null },
+        { id: 4, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", emoji: "🚪", image: null },
+        { id: 5, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", emoji: "🪑", image: null }
     ];
 
     let shops = [
-        { id: 1, name: "Chilonzor filiali", address: "Chilonzor tumani, 3-kvartal", phone: "+998 97 935 13 15", desc: "Markaziy filial" },
-        { id: 2, name: "Sergeli filiali", address: "Sergeli tumani, Yangi hayot", phone: "+998 93 346 86 32", desc: "Yangi filial" }
+        { id: 1, name: "Temurshox Mebel - Chilonzor", address: "Chilonzor tumani, 3-kvartal", phone: "+998 97 935 13 15", location: "https://maps.google.com/?q=41.285,69.205", desc: "Markaziy filial", image: null },
+        { id: 2, name: "Temurshox Mebel - Sergeli", address: "Sergeli tumani, Yangi hayot", phone: "+998 93 346 86 32", location: "https://maps.google.com/?q=41.234,69.189", desc: "Yangi filial", image: null }
     ];
 
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
     let currentCat = "all";
+    let selectedProductImage = null;
+    let selectedShopImage = null;
 
-    // Saqlash
+    // ============ SAQLASH ============
     function saveData() {
         localStorage.setItem('products', JSON.stringify(products));
         localStorage.setItem('shops', JSON.stringify(shops));
         localStorage.setItem('categories', JSON.stringify(categories));
     }
 
-    // Yuklash
     function loadData() {
         let p = localStorage.getItem('products');
         let s = localStorage.getItem('shops');
@@ -504,7 +643,7 @@
         updateCart();
     }
 
-    // Kategoriyalarni ko'rsatish
+    // ============ KATEGORIYALAR ============
     function showCategories() {
         let html = `<button class="cat-btn active" onclick="filterProducts('all')">🏠 Barchasi</button>`;
         categories.forEach(c => {
@@ -520,7 +659,32 @@
         document.getElementById('prodCategory').innerHTML = html;
     }
 
-    // Mahsulotlarni ko'rsatish
+    function addCategory() {
+        let name = document.getElementById('newCatName').value.trim();
+        let emoji = document.getElementById('newCatEmoji').value.trim() || "📁";
+        if (!name) { alert("❌ Kategoriya nomini yozing!"); return; }
+        let id = name.toLowerCase().replace(/ /g, '_');
+        categories.push({ id, name, emoji });
+        saveData();
+        showCategories();
+        updateCatSelect();
+        document.getElementById('newCatName').value = '';
+        document.getElementById('newCatEmoji').value = '';
+        alert("✅ Kategoriya qo'shildi!");
+    }
+
+    // ============ MAHSULOTLAR (RASM BILAN) ============
+    function previewProductImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                selectedProductImage = e.target.result;
+                document.getElementById('prodImagePreview').innerHTML = `<img src="${selectedProductImage}">`;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     function showProducts() {
         let filtered = products.filter(p => {
             if (currentCat === "all") return true;
@@ -536,36 +700,87 @@
             let discount = '';
             if (p.oldPrice && p.oldPrice > p.price) {
                 let percent = Math.round((1 - p.price/p.oldPrice)*100);
-                discount = `<div style="background:red;color:white;display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;">-${percent}%</div>`;
+                discount = `<div style="position:absolute;top:10px;right:10px;background:#ff4757;color:white;padding:4px 12px;border-radius:20px;font-size:12px;">-${percent}%</div>`;
             }
             html += `
                 <div class="product-card">
-                    <div class="product-img">${p.emoji}</div>
-                    <div class="product-title">${p.name}</div>
-                    <div class="product-price">
-                        ${formatPrice(p.price)} so'm
-                        ${p.oldPrice ? `<span class="old-price">${formatPrice(p.oldPrice)} so'm</span>` : ''}
+                    <div class="product-img" style="position:relative;">
                         ${discount}
+                        ${p.image ? `<img src="${p.image}">` : `<span style="font-size:3rem;">${p.emoji}</span>`}
                     </div>
-                    <button class="add-to-cart" onclick="addToCart(${p.id})">🛒 Savatga qo'shish</button>
+                    <div class="product-info">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-price">
+                            ${formatPrice(p.price)} so'm
+                            ${p.oldPrice ? `<span class="old-price">${formatPrice(p.oldPrice)} so'm</span>` : ''}
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(${p.id})">🛒 Savatga qo'shish</button>
+                    </div>
                 </div>
             `;
         });
-        document.getElementById('products').innerHTML = html || '<p style="text-align:center">Hech narsa topilmadi</p>';
+        document.getElementById('products').innerHTML = html || '<p style="text-align:center;padding:50px;">🔍 Hech narsa topilmadi</p>';
     }
 
     function filterProducts(cat) {
         currentCat = cat;
         document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
+        if (event && event.target) event.target.classList.add('active');
         showProducts();
     }
 
-    // Qidiruv
-    document.getElementById('searchInput').addEventListener('keyup', showProducts);
-    document.getElementById('shopSearchInput').addEventListener('keyup', showShops);
+    function addProduct() {
+        let name = document.getElementById('prodName').value.trim();
+        let price = parseInt(document.getElementById('prodPrice').value);
+        if (!name || !price) { alert("❌ Nom va narxni yozing!"); return; }
+        let newId = Math.max(...products.map(p => p.id), 0) + 1;
+        products.push({
+            id: newId,
+            name: name,
+            price: price,
+            oldPrice: document.getElementById('prodOldPrice').value ? parseInt(document.getElementById('prodOldPrice').value) : null,
+            category: document.getElementById('prodCategory').value,
+            emoji: document.getElementById('prodEmoji').value.trim() || "📦",
+            image: selectedProductImage
+        });
+        saveData();
+        showProducts();
+        updateAdminLists();
+        clearProductForm();
+        alert("✅ Mahsulot qo'shildi!");
+    }
 
-    // Do'konlarni ko'rsatish
+    function clearProductForm() {
+        document.getElementById('prodName').value = '';
+        document.getElementById('prodPrice').value = '';
+        document.getElementById('prodOldPrice').value = '';
+        document.getElementById('prodEmoji').value = '';
+        document.getElementById('prodImage').value = '';
+        document.getElementById('prodImagePreview').innerHTML = '';
+        selectedProductImage = null;
+    }
+
+    function deleteProduct(id) {
+        if (confirm("O'chirilsinmi?")) {
+            products = products.filter(p => p.id !== id);
+            saveData();
+            showProducts();
+            updateAdminLists();
+        }
+    }
+
+    // ============ DO'KONLAR (JOYLASHUV BILAN) ============
+    function previewShopImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                selectedShopImage = e.target.result;
+                document.getElementById('shopImagePreview').innerHTML = `<img src="${selectedShopImage}">`;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     function showShops() {
         let filtered = [...shops];
         let search = document.getElementById('shopSearchInput').value.toLowerCase();
@@ -575,21 +790,78 @@
         filtered.forEach(s => {
             html += `
                 <div class="shop-card" onclick="viewShop(${s.id})">
-                    <div class="shop-name">🏪 ${s.name}</div>
-                    <div class="shop-address">📍 ${s.address}</div>
-                    <div class="shop-phone">📞 ${s.phone}</div>
+                    <div class="shop-img">
+                        ${s.image ? `<img src="${s.image}">` : '<span style="font-size:3rem;">🏪</span>'}
+                    </div>
+                    <div class="shop-info">
+                        <div class="shop-name">${s.name}</div>
+                        <div class="shop-address">📍 ${s.address}</div>
+                        <div class="shop-phone">📞 ${s.phone}</div>
+                        ${s.location ? `<div class="shop-location" onclick="event.stopPropagation(); openLocation('${s.location}')">🗺️ Xaritada ko'rish</div>` : ''}
+                        <button class="view-shop-btn" onclick="event.stopPropagation(); viewShop(${s.id})">🔍 Batafsil</button>
+                    </div>
                 </div>
             `;
         });
-        document.getElementById('shops').innerHTML = html || '<p style="text-align:center">Hech qanday do\'kon topilmadi</p>';
+        document.getElementById('shops').innerHTML = html || '<p style="text-align:center">🏪 Hech qanday do\'kon topilmadi</p>';
     }
 
     function viewShop(id) {
         let s = shops.find(x => x.id === id);
-        if (s) alert(`🏪 ${s.name}\n📍 ${s.address}\n📞 ${s.phone}\n📝 ${s.desc || 'Ma\'lumot yo\'q'}`);
+        if (s) {
+            let msg = `🏪 ${s.name}\n\n📍 ${s.address}\n📞 ${s.phone}\n📝 ${s.desc || 'Ma\'lumot yo\'q'}`;
+            alert(msg);
+            if (s.location) openLocation(s.location);
+        }
     }
 
-    // Savat
+    function openLocation(location) {
+        window.open(location, '_blank');
+    }
+
+    function addShop() {
+        let name = document.getElementById('shopName').value.trim();
+        let address = document.getElementById('shopAddress').value.trim();
+        let phone = document.getElementById('shopPhone').value.trim();
+        if (!name || !address || !phone) { alert("❌ Do'kon nomi, manzil va telefonni to'ldiring!"); return; }
+        let newId = Math.max(...shops.map(s => s.id), 0) + 1;
+        shops.push({
+            id: newId,
+            name: name,
+            address: address,
+            phone: phone,
+            location: document.getElementById('shopLocation').value.trim(),
+            desc: document.getElementById('shopDesc').value.trim(),
+            image: selectedShopImage
+        });
+        saveData();
+        showShops();
+        updateAdminLists();
+        clearShopForm();
+        alert("✅ Do'kon qo'shildi!");
+    }
+
+    function clearShopForm() {
+        document.getElementById('shopName').value = '';
+        document.getElementById('shopAddress').value = '';
+        document.getElementById('shopPhone').value = '';
+        document.getElementById('shopLocation').value = '';
+        document.getElementById('shopDesc').value = '';
+        document.getElementById('shopImage').value = '';
+        document.getElementById('shopImagePreview').innerHTML = '';
+        selectedShopImage = null;
+    }
+
+    function deleteShop(id) {
+        if (confirm("Do'kon o'chirilsinmi?")) {
+            shops = shops.filter(s => s.id !== id);
+            saveData();
+            showShops();
+            updateAdminLists();
+        }
+    }
+
+    // ============ SAVAT ============
     function addToCart(id) {
         cart[id] = (cart[id] || 0) + 1;
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -607,12 +879,12 @@
                 total += p.price * qty;
                 count += qty;
                 html += `<div class="cart-item">
-                    <div>${p.name} x${qty}</div>
+                    <div><strong>${p.name}</strong> x${qty}</div>
                     <div>${formatPrice(p.price * qty)} so'm</div>
                 </div>`;
             }
         }
-        document.getElementById('cartItems').innerHTML = html || '<div>Savat bo\'sh</div>';
+        document.getElementById('cartItems').innerHTML = html || '<div style="text-align:center;padding:30px;">🛒 Savat bo\'sh</div>';
         document.getElementById('cartTotal').innerHTML = `Jami: ${formatPrice(total)} so'm`;
         document.getElementById('cartCount').innerHTML = count;
     }
@@ -621,114 +893,56 @@
         document.getElementById('cartSidebar').classList.toggle('open');
     }
 
-    // Buyurtma
+    // ============ BUYURTMA ============
     function submitOrder() {
         let name = document.getElementById('fullName').value.trim();
         let address = document.getElementById('address').value.trim();
         let phone = document.getElementById('phone').value.trim();
-        if (!name || !address || !phone) { alert("❌ Ma'lumotlarni to'ldiring!"); return; }
+        if (!name || !address || !phone) { alert("❌ Barcha maydonlarni to'ldiring!"); return; }
         if (Object.keys(cart).length === 0) { alert("❌ Savat bo'sh!"); return; }
         
         let items = [];
         for (let [id, qty] of Object.entries(cart)) {
             let p = products.find(x => x.id == id);
-            if (p) items.push(`${p.name} x${qty}`);
+            if (p) items.push(`${p.name} x${qty} = ${formatPrice(p.price * qty)} so'm`);
         }
-        let msg = `🆕 YANGI BUYURTMA!\n\n👤 ${name}\n📍 ${address}\n📞 ${phone}\n📦 ${items.join(', ')}`;
+        let total = 0;
+        for (let [id, qty] of Object.entries(cart)) {
+            let p = products.find(x => x.id == id);
+            if (p) total += p.price * qty;
+        }
+        let notes = document.getElementById('notes').value.trim();
+        let msg = `🆕 *YANGI BUYURTMA!*\n\n👤 *Mijoz:* ${name}\n📍 *Manzil:* ${address}\n📞 *Telefon:* ${phone}\n${notes ? `📝 *Izoh:* ${notes}\n` : ''}\n📦 *Mahsulotlar:*\n${items.join('\n')}\n\n💰 *Jami: ${formatPrice(total)} so'm*`;
+        
         window.open(`https://t.me/shoxi0020?text=${encodeURIComponent(msg)}`, '_blank');
         alert("✅ Buyurtma yuborildi!");
+        
         cart = {};
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCart();
+        document.getElementById('fullName').value = '';
+        document.getElementById('address').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('notes').value = '';
         toggleCart();
     }
 
-    // Admin
-    function addCategory() {
-        let name = document.getElementById('newCatName').value.trim();
-        let emoji = document.getElementById('newCatEmoji').value.trim() || "📁";
-        if (!name) { alert("❌ Kategoriya nomini yozing!"); return; }
-        let id = name.toLowerCase().replace(/ /g, '_');
-        categories.push({ id, name, emoji });
-        saveData();
-        showCategories();
-        updateCatSelect();
-        document.getElementById('newCatName').value = '';
-        document.getElementById('newCatEmoji').value = '';
-        alert("✅ Kategoriya qo'shildi!");
-    }
-
-    function addProduct() {
-        let name = document.getElementById('prodName').value.trim();
-        let price = parseInt(document.getElementById('prodPrice').value);
-        if (!name || !price) { alert("❌ Nom va narxni yozing!"); return; }
-        let newId = Math.max(...products.map(p => p.id), 0) + 1;
-        products.push({
-            id: newId,
-            name: name,
-            price: price,
-            oldPrice: document.getElementById('prodOldPrice').value ? parseInt(document.getElementById('prodOldPrice').value) : null,
-            category: document.getElementById('prodCategory').value,
-            emoji: document.getElementById('prodEmoji').value.trim() || "📦"
-        });
-        saveData();
-        showProducts();
-        updateAdminLists();
-        alert("✅ Mahsulot qo'shildi!");
-    }
-
-    function addShop() {
-        let name = document.getElementById('shopName').value.trim();
-        let address = document.getElementById('shopAddress').value.trim();
-        let phone = document.getElementById('shopPhone').value.trim();
-        if (!name || !address || !phone) { alert("❌ Do'kon ma'lumotlarini to'ldiring!"); return; }
-        let newId = Math.max(...shops.map(s => s.id), 0) + 1;
-        shops.push({
-            id: newId,
-            name: name,
-            address: address,
-            phone: phone,
-            desc: document.getElementById('shopDesc').value.trim()
-        });
-        saveData();
-        showShops();
-        updateAdminLists();
-        alert("✅ Do'kon qo'shildi!");
-    }
-
-    function deleteProduct(id) {
-        if (confirm("O'chirilsinmi?")) {
-            products = products.filter(p => p.id !== id);
-            saveData();
-            showProducts();
-            updateAdminLists();
-        }
-    }
-
-    function deleteShop(id) {
-        if (confirm("Do'kon o'chirilsinmi?")) {
-            shops = shops.filter(s => s.id !== id);
-            saveData();
-            showShops();
-            updateAdminLists();
-        }
-    }
-
+    // ============ ADMIN PANEL ============
     function updateAdminLists() {
         let prodHtml = '';
         products.forEach(p => {
-            prodHtml += `<div style="display:flex;justify-content:space-between;margin:8px 0">
-                <span>${p.emoji} ${p.name} - ${formatPrice(p.price)} so'm</span>
-                <button onclick="deleteProduct(${p.id})" style="background:red;color:white;border:none;padding:5px 10px;border-radius:8px;">🗑</button>
+            prodHtml += `<div style="display:flex;justify-content:space-between;margin:8px 0;align-items:center;">
+                <span>${p.image ? '🖼️' : p.emoji} ${p.name} - ${formatPrice(p.price)} so'm</span>
+                <button onclick="deleteProduct(${p.id})" style="background:#dc3545;color:white;border:none;padding:5px 12px;border-radius:8px;cursor:pointer;">🗑</button>
             </div>`;
         });
         document.getElementById('productList').innerHTML = prodHtml || 'Yo\'q';
         
         let shopHtml = '';
         shops.forEach(s => {
-            shopHtml += `<div style="display:flex;justify-content:space-between;margin:8px 0">
+            shopHtml += `<div style="display:flex;justify-content:space-between;margin:8px 0;align-items:center;">
                 <span>🏪 ${s.name} - ${s.address}</span>
-                <button onclick="deleteShop(${s.id})" style="background:red;color:white;border:none;padding:5px 10px;border-radius:8px;">🗑</button>
+                <button onclick="deleteShop(${s.id})" style="background:#dc3545;color:white;border:none;padding:5px 12px;border-radius:8px;cursor:pointer;">🗑</button>
             </div>`;
         });
         document.getElementById('shopList').innerHTML = shopHtml || 'Yo\'q';
@@ -739,35 +953,4 @@
     }
 
     function showSection(section) {
-        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-        if (section === 'products') {
-            document.querySelector('.nav-btn:first-child').classList.add('active');
-            document.getElementById('productsSection').classList.remove('hidden');
-            document.getElementById('shopsSection').classList.add('hidden');
-            showProducts();
-        } else {
-            document.querySelector('.nav-btn:last-child').classList.add('active');
-            document.getElementById('productsSection').classList.add('hidden');
-            document.getElementById('shopsSection').classList.remove('hidden');
-            showShops();
-        }
-    }
-
-    function toggleAdmin() {
-        let panel = document.getElementById('adminPanel');
-        if (panel.style.display === 'none') {
-            let pwd = prompt("Admin paroli:");
-            if (pwd === "admin123") panel.style.display = 'block';
-            else alert("Noto'g'ri parol!");
-        } else {
-            panel.style.display = 'none';
-        }
-    }
-
-    // Boshlash
-    loadData();
-    updateCart();
-</script>
-
-</body>
-</html>
+        document.querySelectorAll('.nav-btn').forEach(btn =>
