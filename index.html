@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temurshox Mebel | Premium mebel</title>
     <style>
         * {
@@ -19,21 +19,13 @@
 
         header {
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease infinite;
             color: white;
-            padding: 35px 20px;
+            padding: 30px 20px;
             text-align: center;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
         }
 
         header h1 span {
@@ -46,45 +38,22 @@
             padding: 0 20px;
         }
 
-        .hero-section {
-            background: rgba(255,255,255,0.95);
-            border-radius: 30px;
-            padding: 30px;
-            margin-bottom: 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .hero-section h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
         .search-box {
+            background: white;
+            border-radius: 60px;
+            padding: 5px;
             max-width: 500px;
-            margin: 0 auto;
+            margin: 0 auto 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
         .search-box input {
             width: 100%;
             padding: 15px 25px;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
+            border: none;
+            border-radius: 60px;
             font-size: 1rem;
             outline: none;
-            transition: all 0.3s;
-        }
-
-        .search-box input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: white;
         }
 
         .categories {
@@ -107,9 +76,12 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .cat-btn:hover, .cat-btn.active {
+        .cat-btn.active {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+        }
+
+        .cat-btn:hover {
             transform: translateY(-2px);
         }
 
@@ -124,18 +96,17 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            transition: all 0.3s;
+            transition: 0.3s;
         }
 
         .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
         }
 
         .discount-badge {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 10px;
+            right: 10px;
             background: #ff4757;
             color: white;
             padding: 4px 12px;
@@ -147,11 +118,11 @@
         .product-img {
             width: 100%;
             height: 220px;
-            background: linear-gradient(135deg, #e8e8e8, #f5f5f5);
+            background: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            font-size: 3rem;
             position: relative;
         }
 
@@ -169,13 +140,11 @@
             font-size: 1.1rem;
             font-weight: bold;
             margin-bottom: 8px;
-            color: #333;
         }
 
         .rating {
             color: #ffc107;
             margin-bottom: 8px;
-            font-size: 0.8rem;
         }
 
         .product-price {
@@ -201,14 +170,13 @@
             border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: 0.3s;
         }
 
         .add-to-cart:hover {
-            transform: scale(1.02);
+            opacity: 0.9;
         }
 
-        /* Savat */
         .cart-toggle {
             position: fixed;
             bottom: 25px;
@@ -250,7 +218,6 @@
             max-width: 400px;
             height: 100%;
             background: white;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.15);
             transition: 0.3s;
             z-index: 1000;
             display: flex;
@@ -290,10 +257,6 @@
             align-items: center;
             padding: 12px 0;
             border-bottom: 1px solid #eee;
-        }
-
-        .cart-item-title {
-            font-weight: bold;
         }
 
         .cart-item-qty {
@@ -417,7 +380,6 @@
 
         @media (max-width: 768px) {
             header h1 { font-size: 1.5rem; }
-            .products { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
         }
     </style>
 </head>
@@ -429,22 +391,17 @@
 </header>
 
 <div class="container">
-    <div class="hero-section">
-        <h2>🏠 O'z uyingizni orzu qilganingizdek jihozlang</h2>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="🔍 Mahsulot qidirish..." onkeyup="displayProducts()">
-        </div>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 Mahsulot qidirish...">
     </div>
 
-    <h2 class="section-title">📂 Mahsulotlar katalogi</h2>
-
     <div class="categories">
-        <button class="cat-btn active" data-cat="all" onclick="filterProducts('all')">🏠 Barchasi</button>
-        <button class="cat-btn" data-cat="divan" onclick="filterProducts('divan')">🛋️ Divanlar</button>
-        <button class="cat-btn" data-cat="stol" onclick="filterProducts('stol')">💻 Stollar</button>
-        <button class="cat-btn" data-cat="shkaf" onclick="filterProducts('shkaf')">🚪 Shkaflar</button>
-        <button class="cat-btn" data-cat="kreslo" onclick="filterProducts('kreslo')">🪑 Kreslolar</button>
-        <button class="cat-btn" data-cat="discount" onclick="filterProducts('discount')">🔥 Chegirmali</button>
+        <button class="cat-btn active" data-cat="all">🏠 Barchasi</button>
+        <button class="cat-btn" data-cat="divan">🛋️ Divanlar</button>
+        <button class="cat-btn" data-cat="stol">💻 Stollar</button>
+        <button class="cat-btn" data-cat="shkaf">🚪 Shkaflar</button>
+        <button class="cat-btn" data-cat="kreslo">🪑 Kreslolar</button>
+        <button class="cat-btn" data-cat="discount">🔥 Chegirmali</button>
     </div>
 
     <div class="products" id="products"></div>
@@ -454,7 +411,7 @@
         <h3>🔧 Admin Panel - Mahsulot qo'shish</h3>
         <input type="text" id="productName" placeholder="Mahsulot nomi">
         <input type="number" id="productPrice" placeholder="Narxi (so'm)">
-        <input type="number" id="productOldPrice" placeholder="Eski narxi (chegirma uchun)">
+        <input type="number" id="productOldPrice" placeholder="Eski narxi (ixtiyoriy)">
         <select id="productCategory">
             <option value="divan">Divan</option>
             <option value="stol">Stol</option>
@@ -462,7 +419,7 @@
             <option value="kreslo">Kreslo</option>
         </select>
         <input type="number" id="productRating" placeholder="Reyting (1-5)" value="5">
-        <input type="text" id="productImage" placeholder="Rasm linki (ixtiyoriy)">
+        <input type="text" id="productEmoji" placeholder="Emoji (masalan: 🛋️)">
         <button onclick="addProduct()">➕ Mahsulot qo'shish</button>
         <div class="product-list-admin" id="productListAdmin"></div>
     </div>
@@ -490,7 +447,7 @@
         <input type="text" id="fullName" placeholder="Ism va Familiyangiz *">
         <textarea id="address" rows="2" placeholder="To'liq manzilingiz *"></textarea>
         <input type="tel" id="phone1" placeholder="Telefon raqam 1 *">
-        <input type="tel" id="phone2" placeholder="Telefon raqam 2">
+        <input type="tel" id="phone2" placeholder="Telefon raqam 2 (ixtiyoriy)">
         <textarea id="notes" rows="2" placeholder="Qo'shimcha ma'lumot"></textarea>
         <button class="submit-order" onclick="submitOrder()">✅ Buyurtma berish</button>
     </div>
@@ -499,60 +456,49 @@
 <button class="admin-toggle" onclick="toggleAdmin()">🔧</button>
 
 <script>
-    // Mahsulotlar massivi
+    // ============ MAHSULOTLAR ============
     let products = [
-        { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", rating: 5, image: "https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?w=300", sales: 15 },
-        { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", rating: 4, image: "https://images.pexels.com/photos/1248583/pexels-photo-1248583.jpeg?w=300", sales: 12 },
-        { id: 3, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", rating: 5, image: "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?w=300", sales: 25 },
-        { id: 4, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", rating: 4, image: "https://images.pexels.com/photos/2904026/pexels-photo-2904026.jpeg?w=300", sales: 8 },
-        { id: 5, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", rating: 5, image: "https://images.pexels.com/photos/1580242/pexels-photo-1580242.jpeg?w=300", sales: 30 },
-        { id: 6, name: "Burchak divan", price: 5800000, oldPrice: 6500000, category: "divan", rating: 5, image: "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?w=300", sales: 7 }
+        { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", rating: 5, emoji: "🛋️", sales: 15 },
+        { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", rating: 4, emoji: "🪑", sales: 12 },
+        { id: 3, name: "Burchak divan", price: 5800000, oldPrice: 6500000, category: "divan", rating: 5, emoji: "📐", sales: 8 },
+        { id: 4, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", rating: 5, emoji: "💻", sales: 25 },
+        { id: 5, name: "Ovqatlanish stoli", price: 1200000, oldPrice: 1500000, category: "stol", rating: 4, emoji: "🍽️", sales: 18 },
+        { id: 6, name: "Kofe stoli", price: 450000, oldPrice: null, category: "stol", rating: 4, emoji: "☕", sales: 30 },
+        { id: 7, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", rating: 4, emoji: "🚪", sales: 10 },
+        { id: 8, name: "Kitob shkafi", price: 1500000, oldPrice: null, category: "shkaf", rating: 5, emoji: "📚", sales: 7 },
+        { id: 9, name: "Oyoq kiyim shkafi", price: 650000, oldPrice: null, category: "shkaf", rating: 4, emoji: "👞", sales: 20 },
+        { id: 10, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🪑", sales: 35 },
+        { id: 11, name: "Tebranma kreslo", price: 950000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🌊", sales: 22 },
+        { id: 12, name: "Ziyofat kreslosi", price: 550000, oldPrice: null, category: "kreslo", rating: 4, emoji: "👑", sales: 28 }
     ];
 
-    // Savat
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
-    
-    // Filtr
     let currentCategory = "all";
     let searchTerm = "";
 
-    // Saqlash va yuklash
-    function saveProducts() {
-        localStorage.setItem('products', JSON.stringify(products));
-    }
-
-    function loadProductsFromStorage() {
-        const saved = localStorage.getItem('products');
-        if (saved) {
-            products = JSON.parse(saved);
-        } else {
-            saveProducts();
-        }
-    }
-
-    // Mahsulotlarni ko'rsatish
+    // ============ MAHSULOTLARNI KO'RSATISH ============
     function displayProducts() {
         searchTerm = document.getElementById('searchInput').value.toLowerCase();
         
         let filtered = products.filter(product => {
-            const matchCat = currentCategory === "all" || product.category === currentCategory;
-            const matchDiscount = currentCategory !== "discount" || (product.oldPrice && product.oldPrice > product.price);
-            const matchSearch = product.name.toLowerCase().includes(searchTerm);
+            let matchCat = currentCategory === "all" || product.category === currentCategory;
+            let matchDiscount = currentCategory !== "discount" || (product.oldPrice && product.oldPrice > product.price);
+            let matchSearch = product.name.toLowerCase().includes(searchTerm);
             return matchCat && matchDiscount && matchSearch;
         });
         
         const container = document.getElementById('products');
         
         if (filtered.length === 0) {
-            container.innerHTML = '<div style="text-align:center; grid-column:1/-1; padding:50px; background:white; border-radius:20px;">🔍 Hech qanday mahsulot topilmadi</div>';
+            container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:50px; background:white; border-radius:20px;">🔍 Hech qanday mahsulot topilmadi</div>';
             return;
         }
         
         container.innerHTML = filtered.map(product => `
             <div class="product-card">
-                ${product.oldPrice && product.oldPrice > product.price ? `<div class="discount-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
                 <div class="product-img">
-                    <img src="${product.image || 'https://placehold.co/300x200?text=' + encodeURIComponent(product.name)}" alt="${product.name}" onerror="this.src='https://placehold.co/300x200?text=🛋️'">
+                    ${product.oldPrice && product.oldPrice > product.price ? `<div class="discount-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
+                    <span style="font-size:3rem;">${product.emoji}</span>
                 </div>
                 <div class="product-info">
                     <div class="product-title">${product.name}</div>
@@ -567,7 +513,7 @@
         `).join('');
     }
 
-    // Filtrlash
+    // ============ FILTRLASH ============
     function filterProducts(category) {
         currentCategory = category;
         document.querySelectorAll('.cat-btn').forEach(btn => {
@@ -579,12 +525,19 @@
         displayProducts();
     }
 
-    // Qidiruv
+    // ============ QIDIRUV ============
     document.getElementById('searchInput').addEventListener('keyup', function() {
         displayProducts();
     });
 
-    // Savatga qo'shish
+    // Kategoriya tugmalariga event listener
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterProducts(this.getAttribute('data-cat'));
+        });
+    });
+
+    // ============ SAVAT ============
     function addToCart(productId) {
         cart[productId] = (cart[productId] || 0) + 1;
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -592,7 +545,6 @@
         showToast("✅ Savatga qo'shildi!");
     }
 
-    // Savat UI yangilash
     function updateCartUI() {
         const cartItems = document.getElementById('cartItems');
         let total = 0;
@@ -611,14 +563,14 @@
                     cartItems.innerHTML += `
                         <div class="cart-item">
                             <div>
-                                <div class="cart-item-title">${product.name}</div>
+                                <div style="font-weight:bold;">${product.name}</div>
                                 <div style="font-size:0.85rem; color:#667eea;">${formatPrice(product.price)} so'm</div>
                             </div>
                             <div class="cart-item-qty">
                                 <button onclick="changeQty(${id}, -1)">-</button>
                                 <span>${qty}</span>
                                 <button onclick="changeQty(${id}, 1)">+</button>
-                                <button onclick="removeFromCart(${id})" style="background:#dc3545; color:white; border:none; width:28px; height:28px; border-radius:50%;">🗑</button>
+                                <button onclick="removeFromCart(${id})" style="background:#dc3545; color:white; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer;">🗑</button>
                             </div>
                         </div>
                     `;
@@ -648,7 +600,7 @@
         showToast("🗑 Olib tashlandi");
     }
 
-    // Buyurtma berish
+    // ============ BUYURTMA ============
     function submitOrder() {
         const fullName = document.getElementById('fullName').value.trim();
         const address = document.getElementById('address').value.trim();
@@ -709,14 +661,14 @@ ${itemsList.join('\n')}
         setTimeout(() => toggleCart(), 2000);
     }
 
-    // Admin: Mahsulot qo'shish
+    // ============ ADMIN FUNKSIYALARI ============
     function addProduct() {
         const name = document.getElementById('productName').value.trim();
         const price = parseInt(document.getElementById('productPrice').value);
         const oldPrice = document.getElementById('productOldPrice').value ? parseInt(document.getElementById('productOldPrice').value) : null;
         const category = document.getElementById('productCategory').value;
         const rating = parseInt(document.getElementById('productRating').value) || 5;
-        const image = document.getElementById('productImage').value.trim() || null;
+        const emoji = document.getElementById('productEmoji').value.trim() || "📦";
         
         if (!name || !price) {
             showToast("❌ Nom va narxni to'ldiring!", true);
@@ -732,7 +684,7 @@ ${itemsList.join('\n')}
             oldPrice: oldPrice,
             category: category,
             rating: rating,
-            image: image,
+            emoji: emoji,
             sales: 0
         };
         
@@ -754,12 +706,27 @@ ${itemsList.join('\n')}
         }
     }
 
+    function saveProducts() {
+        localStorage.setItem('products', JSON.stringify(products));
+    }
+
+    function loadProducts() {
+        const saved = localStorage.getItem('products');
+        if (saved) {
+            products = JSON.parse(saved);
+        } else {
+            saveProducts();
+        }
+        displayProducts();
+        updateAdminList();
+    }
+
     function updateAdminList() {
         const container = document.getElementById('productListAdmin');
         container.innerHTML = products.map(p => `
             <div>
-                <span><strong>${p.name}</strong> - ${formatPrice(p.price)} so'm</span>
-                <button onclick="deleteProduct(${p.id})" style="background:#dc3545; color:white; border:none; padding:5px 12px; border-radius:8px;">🗑</button>
+                <span>${p.emoji} ${p.name} - ${formatPrice(p.price)} so'm</span>
+                <button onclick="deleteProduct(${p.id})" style="background:#dc3545; color:white; border:none; padding:5px 12px; border-radius:8px; cursor:pointer;">🗑</button>
             </div>
         `).join('');
     }
@@ -768,10 +735,11 @@ ${itemsList.join('\n')}
         document.getElementById('productName').value = '';
         document.getElementById('productPrice').value = '';
         document.getElementById('productOldPrice').value = '';
-        document.getElementById('productImage').value = '';
+        document.getElementById('productEmoji').value = '';
         document.getElementById('productRating').value = '5';
     }
 
+    // ============ YORDAMCHI FUNKSIYALAR ============
     function formatPrice(price) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
@@ -792,14 +760,13 @@ ${itemsList.join('\n')}
                 border-radius: 50px;
                 z-index: 2000;
                 font-weight: bold;
-                box-shadow: 0 3px 15px rgba(0,0,0,0.2);
             `;
             document.body.appendChild(toast);
         }
         toast.style.background = isError ? '#dc3545' : '#28a745';
         toast.innerHTML = message;
-        toast.style.opacity = '1';
-        setTimeout(() => toast.style.opacity = '0', 3000);
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 3000);
     }
 
     function toggleCart() {
@@ -822,9 +789,8 @@ ${itemsList.join('\n')}
         }
     }
 
-    // Boshlash
-    loadProductsFromStorage();
-    displayProducts();
+    // ============ BOSHLASH ============
+    loadProducts();
     updateCartUI();
 </script>
 
