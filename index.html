@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Temurshox Mebel | Premium mebel</title>
     <style>
         * {
@@ -124,6 +124,7 @@
             justify-content: center;
             font-size: 3rem;
             position: relative;
+            overflow: hidden;
         }
 
         .product-img img {
@@ -367,6 +368,18 @@
             cursor: pointer;
         }
 
+        .image-preview {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
         .product-list-admin {
             margin-top: 20px;
         }
@@ -374,6 +387,7 @@
         .product-list-admin div {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px;
             border-bottom: 1px solid #eee;
         }
@@ -420,6 +434,14 @@
         </select>
         <input type="number" id="productRating" placeholder="Reyting (1-5)" value="5">
         <input type="text" id="productEmoji" placeholder="Emoji (masalan: 🛋️)">
+        
+        <!-- RASM YUKLASH (Fayl tanlash) -->
+        <div style="margin: 10px 0;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold;">🖼️ Mahsulot rasmi:</label>
+            <input type="file" id="productImageFile" accept="image/*" onchange="previewImage(this)">
+            <div class="image-preview" id="imagePreview"></div>
+        </div>
+        
         <button onclick="addProduct()">➕ Mahsulot qo'shish</button>
         <div class="product-list-admin" id="productListAdmin"></div>
     </div>
@@ -458,23 +480,40 @@
 <script>
     // ============ MAHSULOTLAR ============
     let products = [
-        { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", rating: 5, emoji: "🛋️", sales: 15 },
-        { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", rating: 4, emoji: "🪑", sales: 12 },
-        { id: 3, name: "Burchak divan", price: 5800000, oldPrice: 6500000, category: "divan", rating: 5, emoji: "📐", sales: 8 },
-        { id: 4, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", rating: 5, emoji: "💻", sales: 25 },
-        { id: 5, name: "Ovqatlanish stoli", price: 1200000, oldPrice: 1500000, category: "stol", rating: 4, emoji: "🍽️", sales: 18 },
-        { id: 6, name: "Kofe stoli", price: 450000, oldPrice: null, category: "stol", rating: 4, emoji: "☕", sales: 30 },
-        { id: 7, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", rating: 4, emoji: "🚪", sales: 10 },
-        { id: 8, name: "Kitob shkafi", price: 1500000, oldPrice: null, category: "shkaf", rating: 5, emoji: "📚", sales: 7 },
-        { id: 9, name: "Oyoq kiyim shkafi", price: 650000, oldPrice: null, category: "shkaf", rating: 4, emoji: "👞", sales: 20 },
-        { id: 10, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🪑", sales: 35 },
-        { id: 11, name: "Tebranma kreslo", price: 950000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🌊", sales: 22 },
-        { id: 12, name: "Ziyofat kreslosi", price: 550000, oldPrice: null, category: "kreslo", rating: 4, emoji: "👑", sales: 28 }
+        { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", rating: 5, emoji: "🛋️", image: null, sales: 15 },
+        { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", rating: 4, emoji: "🪑", image: null, sales: 12 },
+        { id: 3, name: "Burchak divan", price: 5800000, oldPrice: 6500000, category: "divan", rating: 5, emoji: "📐", image: null, sales: 8 },
+        { id: 4, name: "Kompyuter stoli", price: 850000, oldPrice: null, category: "stol", rating: 5, emoji: "💻", image: null, sales: 25 },
+        { id: 5, name: "Ovqatlanish stoli", price: 1200000, oldPrice: 1500000, category: "stol", rating: 4, emoji: "🍽️", image: null, sales: 18 },
+        { id: 6, name: "Kofe stoli", price: 450000, oldPrice: null, category: "stol", rating: 4, emoji: "☕", image: null, sales: 30 },
+        { id: 7, name: "Garderob shkafi", price: 2800000, oldPrice: 3200000, category: "shkaf", rating: 4, emoji: "🚪", image: null, sales: 10 },
+        { id: 8, name: "Kitob shkafi", price: 1500000, oldPrice: null, category: "shkaf", rating: 5, emoji: "📚", image: null, sales: 7 },
+        { id: 9, name: "Oyoq kiyim shkafi", price: 650000, oldPrice: null, category: "shkaf", rating: 4, emoji: "👞", image: null, sales: 20 },
+        { id: 10, name: "Kompyuter kreslosi", price: 1100000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🪑", image: null, sales: 35 },
+        { id: 11, name: "Tebranma kreslo", price: 950000, oldPrice: null, category: "kreslo", rating: 5, emoji: "🌊", image: null, sales: 22 },
+        { id: 12, name: "Ziyofat kreslosi", price: 550000, oldPrice: null, category: "kreslo", rating: 4, emoji: "👑", image: null, sales: 28 }
     ];
 
     let cart = JSON.parse(localStorage.getItem('cart')) || {};
     let currentCategory = "all";
     let searchTerm = "";
+    let selectedImageData = null;
+
+    // ============ RASM PREVIEW ============
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                selectedImageData = e.target.result;
+                preview.innerHTML = `<img src="${selectedImageData}" alt="Rasm preview">`;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            selectedImageData = null;
+            preview.innerHTML = '';
+        }
+    }
 
     // ============ MAHSULOTLARNI KO'RSATISH ============
     function displayProducts() {
@@ -498,7 +537,7 @@
             <div class="product-card">
                 <div class="product-img">
                     ${product.oldPrice && product.oldPrice > product.price ? `<div class="discount-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</div>` : ''}
-                    <span style="font-size:3rem;">${product.emoji}</span>
+                    ${product.image ? `<img src="${product.image}" alt="${product.name}">` : `<span style="font-size:3rem;">${product.emoji}</span>`}
                 </div>
                 <div class="product-info">
                     <div class="product-title">${product.name}</div>
@@ -669,6 +708,7 @@ ${itemsList.join('\n')}
         const category = document.getElementById('productCategory').value;
         const rating = parseInt(document.getElementById('productRating').value) || 5;
         const emoji = document.getElementById('productEmoji').value.trim() || "📦";
+        const image = selectedImageData;
         
         if (!name || !price) {
             showToast("❌ Nom va narxni to'ldiring!", true);
@@ -685,6 +725,7 @@ ${itemsList.join('\n')}
             category: category,
             rating: rating,
             emoji: emoji,
+            image: image,
             sales: 0
         };
         
@@ -725,7 +766,7 @@ ${itemsList.join('\n')}
         const container = document.getElementById('productListAdmin');
         container.innerHTML = products.map(p => `
             <div>
-                <span>${p.emoji} ${p.name} - ${formatPrice(p.price)} so'm</span>
+                <span>${p.image ? '🖼️' : p.emoji} ${p.name} - ${formatPrice(p.price)} so'm</span>
                 <button onclick="deleteProduct(${p.id})" style="background:#dc3545; color:white; border:none; padding:5px 12px; border-radius:8px; cursor:pointer;">🗑</button>
             </div>
         `).join('');
@@ -737,6 +778,9 @@ ${itemsList.join('\n')}
         document.getElementById('productOldPrice').value = '';
         document.getElementById('productEmoji').value = '';
         document.getElementById('productRating').value = '5';
+        document.getElementById('productImageFile').value = '';
+        document.getElementById('imagePreview').innerHTML = '';
+        selectedImageData = null;
     }
 
     // ============ YORDAMCHI FUNKSIYALAR ============
