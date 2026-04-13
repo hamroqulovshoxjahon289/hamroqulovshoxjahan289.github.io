@@ -3,123 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temurshox Mebel • Premium</title>
+  <title>Temurshox Mebel • Sifat va Zamonaviylik</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     :root {
-      --primary: #0a1428;
+      --primary: #1e3c72;
       --accent: #ffd700;
-      --success: #00c853;
-      --danger: #ff1744;
-      --card: #1e2a44;
-      --text: #e0e7ff;
+      --success: #28a745;
+      --danger: #dc3545;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #0a1428 0%, #1a2a4a 100%);
-      color: var(--text);
-      min-height: 100vh;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);
+      color: #333;
     }
     header {
-      background: rgba(10,20,40,0.95);
-      backdrop-filter: blur(10px);
+      background: linear-gradient(135deg, var(--primary), #2a4a85);
+      color: white;
       padding: 1.2rem 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid rgba(255,215,0,0.2);
     }
     .header-content {
       max-width: 1300px;
       margin: 0 auto;
       padding: 0 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
     }
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, #ffd700, #fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    header h1 { font-size: 2.4rem; font-weight: 800; }
+    header h1 span { color: var(--accent); }
 
-    .nav-buttons button {
-      padding: 12px 28px;
-      margin: 5px;
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .nav-btn {
+      padding: 12px 30px;
       border: none;
       border-radius: 50px;
       font-weight: 700;
-      background: rgba(255,255,255,0.1);
-      color: white;
+      font-size: 1.1rem;
       cursor: pointer;
       transition: all 0.3s;
+      background: rgba(255,255,255,0.15);
+      color: white;
     }
-    .nav-btn.active, .cat-btn.active {
-      background: var(--accent);
-      color: #0a1428;
-      box-shadow: 0 0 20px rgba(255,215,0,0.6);
+    .nav-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     .container { max-width: 1300px; margin: 30px auto; padding: 0 20px; }
 
+    .search-box {
+      text-align: center;
+      margin-bottom: 30px;
+    }
     .search-box input {
-      width: 100%;
-      max-width: 600px;
-      padding: 18px 25px;
+      width: 100%; max-width: 550px;
+      padding: 16px 25px;
       border: none;
       border-radius: 50px;
-      background: rgba(255,255,255,0.1);
-      color: white;
-      font-size: 1.1rem;
-      margin: 0 auto;
-      display: block;
+      font-size: 1.15rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     }
-    .search-box input::placeholder { color: #aaa; }
 
     .categories {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       justify-content: center;
-      margin: 30px 0;
+      margin-bottom: 40px;
     }
     .cat-btn {
-      padding: 12px 26px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,215,0,0.3);
+      padding: 14px 26px;
+      background: white;
+      border: 2px solid #eee;
       border-radius: 50px;
-      color: white;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cat-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: scale(1.05);
     }
 
-    .products {
+    .products, .shops {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 25px;
     }
 
-    .product-card {
-      background: var(--card);
+    .product-card, .shop-card {
+      background: white;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       transition: all 0.4s;
-      position: relative;
     }
-    .product-card:hover {
-      transform: translateY(-15px) scale(1.03);
-      box-shadow: 0 25px 50px rgba(255,215,0,0.2);
+    .product-card:hover, .shop-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
 
     .product-img {
-      height: 240px;
-      background: #112233;
+      height: 230px;
+      background: #f8f9fa;
       position: relative;
     }
     .product-img img {
@@ -127,93 +130,64 @@
       height: 100%;
       object-fit: cover;
     }
-
-    .stock {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: rgba(0,200,83,0.9);
-      color: white;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
     .discount-badge {
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 15px; right: 15px;
       background: var(--danger);
-      padding: 6px 14px;
-      border-radius: 20px;
+      color: white;
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 0.85rem;
       font-weight: 700;
     }
 
-    .product-info {
-      padding: 20px;
-    }
-    .product-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      min-height: 65px;
-    }
-    .product-price {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--accent);
-    }
-    .old-price {
-      text-decoration: line-through;
-      color: #888;
-      font-size: 1.05rem;
-    }
+    .product-info { padding: 18px; }
+    .product-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; min-height: 55px; }
+    .product-price { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+    .old-price { text-decoration: line-through; color: #999; font-size: 1rem; margin-left: 10px; }
 
     .add-to-cart {
-      background: linear-gradient(90deg, #00c853, #64dd17);
+      background: var(--success);
       color: white;
       border: none;
-      padding: 16px;
+      padding: 14px;
       width: 100%;
       margin-top: 15px;
-      border-radius: 50px;
-      font-size: 1.15rem;
-      font-weight: 700;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s;
     }
-    .add-to-cart:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(0,200,83,0.6);
-    }
+
+    .shop-card .product-img { height: 180px; }
+    .shop-info { padding: 18px; }
+    .shop-name { font-size: 1.3rem; font-weight: 700; }
+    .shop-hours { font-size: 0.95rem; color: #28a745; font-weight: 600; margin: 8px 0; }
 
     .cart-toggle, .admin-toggle {
       position: fixed;
       bottom: 30px;
-      width: 75px;
-      height: 75px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      font-size: 1.9rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      cursor: pointer;
       z-index: 9999;
       transition: all 0.3s;
     }
-    .cart-toggle { right: 30px; background: var(--success); }
-    .admin-toggle { left: 30px; background: #ffd700; color: #0a1428; }
-
+    .cart-toggle { right: 30px; background: var(--success); color: white; }
+    .admin-toggle { left: 30px; background: var(--primary); color: white; }
     .cart-count {
       position: absolute;
-      top: -8px;
-      right: -8px;
+      top: -8px; right: -8px;
       background: var(--danger);
       color: white;
       font-size: 14px;
-      width: 30px;
-      height: 30px;
+      width: 28px; height: 28px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -221,150 +195,617 @@
       font-weight: bold;
     }
 
+    .cart-sidebar {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 360px;
+      height: 100%;
+      background: white;
+      transition: 0.4s;
+      z-index: 10000;
+      overflow-y: auto;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    }
+    .cart-sidebar.open { right: 0; }
+
     footer {
-      background: #0a1428;
+      background: var(--primary);
+      color: white;
       text-align: center;
       padding: 40px 20px;
       margin-top: 80px;
-      border-top: 1px solid rgba(255,215,0,0.2);
+    }
+    .call-btn {
+      background: #25D366;
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
     }
 
     .admin-panel {
-      background: var(--card);
+      background: white;
       border-radius: 20px;
       padding: 30px;
       margin-top: 40px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
     }
+    .image-preview img { max-width: 100%; max-height: 160px; border-radius: 12px; margin: 10px 0; }
+
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
 <header>
   <div class="header-content">
-    <h1>🛋️ Temurshox <span style="color:#ffd700;">Mebel</span></h1>
+    <div>
+      <h1>🛋️ Temurshox <span>Mebel</span></h1>
+      <p style="opacity:0.9; font-size:1.1rem;">20+ yangi model • Sifatli mebellar</p>
+    </div>
     <div class="nav-buttons">
-      <button class="nav-btn active" id="btnProducts">Mahsulotlar</button>
-      <button class="nav-btn" id="btnShops">Do'konlar</button>
+      <button class="nav-btn active" id="btnProducts">🛍️ Mahsulotlar</button>
+      <button class="nav-btn" id="btnShops">🏪 Do'konlar</button>
     </div>
   </div>
 </header>
 
 <div class="container">
+
+  <!-- MAHSULOTLAR BO'LIMI -->
   <div id="productsSection">
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Mahsulot nomini qidiring...">
+      <input type="text" id="searchInput" placeholder="Mahsulot qidirish...">
     </div>
     <div class="categories" id="categories"></div>
     <div class="products" id="products"></div>
   </div>
 
+  <!-- DO'KONLAR BO'LIMI -->
   <div id="shopsSection" class="hidden">
-    <!-- Do'konlar bo'limi (oldingi versiyadan qoldirilgan) -->
+    <div class="search-box">
+      <input type="text" id="shopSearchInput" placeholder="Do'kon yoki manzil qidirish...">
+    </div>
     <div class="shops" id="shops"></div>
   </div>
 
-  <!-- ADMIN PANEL -->
+  <!-- ADMIN PANEL (to'liq yangilangan) -->
   <div class="admin-panel" id="adminPanel" style="display:none;">
-    <h2 style="text-align:center; color:#ffd700; margin-bottom:25px;">🔧 Admin Panel</h2>
-    <!-- Mahsulot qo'shish va boshqa bo'limlar oldingi versiyadan saqlangan -->
-    <!-- Stok qo'shish maydoni quyida -->
-    <div style="margin:20px 0; padding:20px; background:#112233; border-radius:15px;">
-      <h4 style="margin-bottom:15px;">📦 Mahsulotga stok qo'shish / o'zgartirish</h4>
-      <select id="stockProductSelect" style="width:100%; padding:12px; margin-bottom:10px; background:#1e2a44; color:white; border:none; border-radius:10px;"></select>
-      <input type="number" id="newStock" placeholder="Yangi mavjud soni" style="width:100%; padding:12px; margin-bottom:10px; background:#1e2a44; color:white; border:none; border-radius:10px;">
-      <button onclick="updateStock()" style="width:100%; padding:14px; background:#00c853; color:white; border:none; border-radius:50px; font-weight:700;">Stokni yangilash</button>
+    <h3 style="text-align:center; color:var(--primary);">🔧 Admin Paneli</h3>
+
+    <!-- Kategoriya -->
+    <div style="margin:25px 0; padding:20px; border:2px solid #eee; border-radius:15px;">
+      <h4>Yangi kategoriya</h4>
+      <input type="text" id="catName" placeholder="Kategoriya nomi" style="width:100%; padding:12px; margin:8px 0;">
+      <input type="text" id="catEmoji" placeholder="Emoji" style="width:100%; padding:12px; margin:8px 0;">
+      <button onclick="addCategory()" style="width:100%; padding:12px; background:var(--success); color:white; border:none; border-radius:12px;">Kategoriya qo'shish</button>
     </div>
+
+    <!-- Mahsulot qo'shish (rasm bilan) -->
+    <div style="margin:25px 0; padding:20px; border:2px solid #eee; border-radius:15px;">
+      <h4>Yangi mahsulot (rasm bilan)</h4>
+      <input type="text" id="prodName" placeholder="Mahsulot nomi" style="width:100%; padding:12px; margin:8px 0;">
+      <input type="number" id="prodPrice" placeholder="Narxi (so'm)" style="width:100%; padding:12px; margin:8px 0;">
+      <input type="number" id="prodOldPrice" placeholder="Eski narxi (ixtiyoriy)" style="width:100%; padding:12px; margin:8px 0;">
+      <select id="prodCategory" style="width:100%; padding:12px; margin:8px 0;"></select>
+      <input type="text" id="prodEmoji" placeholder="Emoji (agar rasm bo'lmasa)" style="width:100%; padding:12px; margin:8px 0;">
+      <input type="file" id="prodImage" accept="image/*" onchange="previewProductImage(this)">
+      <div id="prodImagePreview" class="image-preview"></div>
+      <button onclick="addProduct()" style="width:100%; padding:14px; background:var(--success); color:white; border:none; border-radius:12px; margin-top:10px;">Mahsulot qo'shish</button>
+    </div>
+
+    <!-- Do'kon qo'shish (rasm + ish vaqti bilan) -->
+    <div style="margin:25px 0; padding:20px; border:2px solid #eee; border-radius:15px;">
+      <h4>Yangi do'kon (rasm + ish vaqti bilan)</h4>
+      <input type="text" id="shopName" placeholder="Do'kon nomi" style="width:100%; padding:12px; margin:8px 0;">
+      <input type="text" id="shopAddress" placeholder="Manzil" style="width:100%; padding:12px; margin:8px 0;">
+      <input type="text" id="shopPhone" placeholder="Telefon raqami" style="width:100%; padding:12px; margin:8px 0;">
+      <input type="text" id="shopWorkingHours" placeholder="Ish vaqti (masalan: 09:00-20:00)" style="width:100%; padding:12px; margin:8px 0;">
+      <input type="text" id="shopLocation" placeholder="Google Maps linki" style="width:100%; padding:12px; margin:8px 0;">
+      <textarea id="shopDesc" rows="2" placeholder="Qisqa tavsif" style="width:100%; padding:12px; margin:8px 0;"></textarea>
+      <input type="file" id="shopImage" accept="image/*" onchange="previewShopImage(this)">
+      <div id="shopImagePreview" class="image-preview"></div>
+      <button onclick="addShop()" style="width:100%; padding:14px; background:var(--success); color:white; border:none; border-radius:12px; margin-top:10px;">Do'kon qo'shish</button>
+    </div>
+
+    <!-- Ro'yxatlar -->
+    <div id="productList" style="margin-top:30px;"></div>
+    <div id="shopList" style="margin-top:30px;"></div>
   </div>
 </div>
 
 <footer>
-  <p>© 2026 Temurshox Mebel • Sifat va qulaylik uchrashgan joy</p>
-  <a href="tel:+998941281315" style="color:#ffd700; text-decoration:none;">📞 +998 94 128 13 15</a>
+  <p>© 2026 Temurshox Mebel — Barcha huquqlar himoyalangan</p>
+  <a href="tel:+998941281315" class="call-btn"><i class="fas fa-phone"></i> +998 94 128 13 15</a>
 </footer>
 
+<!-- Savat -->
 <div class="cart-toggle" id="cartToggle">
   <i class="fas fa-shopping-cart"></i>
   <span class="cart-count" id="cartCount">0</span>
 </div>
 
+<div class="cart-sidebar" id="cartSidebar">
+  <div style="background:var(--primary); color:white; padding:20px; display:flex; justify-content:space-between; align-items:center;">
+    <h3>Savatcha</h3>
+    <button onclick="toggleCart()" style="background:none; border:none; color:white; font-size:1.8rem; cursor:pointer;">✕</button>
+  </div>
+  <div id="cartItems" style="padding:20px;"></div>
+  <div id="cartTotal" style="padding:20px; font-size:1.3rem; font-weight:700; text-align:center; border-top:2px solid #eee;"></div>
+
+  <!-- Buyurtma formasi (yangilangan) -->
+  <div style="padding:20px;">
+    <input type="text" id="fullName" placeholder="Ism Familiya" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:10px;">
+    <input type="tel" id="phone1" placeholder="Telefon raqam 1" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:10px;">
+    <input type="tel" id="phone2" placeholder="Telefon raqam 2 (ixtiyoriy)" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:10px;">
+    <textarea id="address" rows="2" placeholder="To'liq manzil" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:10px;"></textarea>
+    <textarea id="notes" rows="2" placeholder="Qo'shimcha izoh" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:10px;"></textarea>
+    <button onclick="submitOrder()" style="width:100%; padding:16px; background:var(--success); color:white; border:none; border-radius:12px; font-size:1.2rem; font-weight:700;">🚀 Buyurtma berish</button>
+  </div>
+</div>
+
+<!-- Admin tugmasi -->
 <button class="admin-toggle" id="adminToggle">🔧</button>
 
 <script>
-// ====================== MA'LUMOTLAR ======================
+// ====================== MA'LUMOTLAR (20 ta yangi mahsulot + 2 ta yangi do'kon) ======================
+let categories = [
+  { id: "all", name: "Barchasi", emoji: "🏠" },
+  { id: "divan", name: "Divanlar", emoji: "🛋️" },
+  { id: "shkaf", name: "Shkaflar", emoji: "🚪" },
+  { id: "spalni", name: "Spalni garnituralar", emoji: "🛏️" }
+];
+
 let products = [
-  { id: 1, name: "Angliya divani", price: 3200000, oldPrice: 3800000, category: "divan", emoji: "🛋️", image: null, stock: 12 },
-  { id: 2, name: "Luks divan", price: 4500000, oldPrice: 5200000, category: "divan", emoji: "🛋️", image: null, stock: 8 },
-  // ... qolgan 18 ta mahsulotni ham stock bilan qo'shish mumkin (oldingi versiyadan)
-  // Men qisqalik uchun faqat 2 tasini ko'rsatdim, qolganlarini oldingi koddan nusxa ko'chirib qo'shing
+  // 1-7 Divanlar
+  { id: 1, name: "Milano Lux Divani (burchakli)", price: 5200000, oldPrice: 6200000, category: "divan", emoji: "🛋️", image: null },
+  { id: 2, name: "Oslo Modern Divan", price: 4800000, oldPrice: null, category: "divan", emoji: "🛋️", image: null },
+  { id: 3, name: "Classic Chester Divan", price: 6500000, oldPrice: 7200000, category: "divan", emoji: "🛋️", image: null },
+  { id: 4, name: "Velvet Premium Divan", price: 4100000, oldPrice: null, category: "divan", emoji: "🛋️", image: null },
+  { id: 5, name: "Scandinavian Sofa", price: 3700000, oldPrice: 4500000, category: "divan", emoji: "🛋️", image: null },
+  { id: 6, name: "Royal King Size Divan", price: 7800000, oldPrice: null, category: "divan", emoji: "🛋️", image: null },
+  { id: 7, name: "Eco Leather Divan", price: 2900000, oldPrice: 3500000, category: "divan", emoji: "🛋️", image: null },
+
+  // 8-13 Shkaflar
+  { id: 8, name: "Luna 4 eshikli Shkaf", price: 3200000, oldPrice: null, category: "shkaf", emoji: "🚪", image: null },
+  { id: 9, name: "Premium Garderob Shkafi", price: 4500000, oldPrice: 5200000, category: "shkaf", emoji: "🚪", image: null },
+  { id: 10, name: "Modulli Shkaf (oq)", price: 2800000, oldPrice: null, category: "shkaf", emoji: "🚪", image: null },
+  { id: 11, name: "Sliding Door Shkaf", price: 3900000, oldPrice: 4600000, category: "shkaf", emoji: "🚪", image: null },
+  { id: 12, name: "Mini Wardrobe Shkafi", price: 1800000, oldPrice: null, category: "shkaf", emoji: "🚪", image: null },
+  { id: 13, name: "Luxury 6 eshikli Shkaf", price: 6800000, oldPrice: 7500000, category: "shkaf", emoji: "🚪", image: null },
+
+  // 14-20 Spalni garnituralar
+  { id: 14, name: "Royal Spalni Garnituri (3 qism)", price: 9200000, oldPrice: null, category: "spalni", emoji: "🛏️", image: null },
+  { id: 15, name: "Modern Spalni To'plami", price: 6700000, oldPrice: 7800000, category: "spalni", emoji: "🛏️", image: null },
+  { id: 16, name: "Velvet King Spalni", price: 8500000, oldPrice: null, category: "spalni", emoji: "🛏️", image: null },
+  { id: 17, name: "Minimalist Spalni Garnituri", price: 5900000, oldPrice: 6700000, category: "spalni", emoji: "🛏️", image: null },
+  { id: 18, name: "Classic Wood Spalni", price: 7100000, oldPrice: null, category: "spalni", emoji: "🛏️", image: null },
+  { id: 19, name: "Luxury Bedroom Set", price: 12400000, oldPrice: 13800000, category: "spalni", emoji: "🛏️", image: null },
+  { id: 20, name: "Family Spalni Garnituri", price: 5300000, oldPrice: null, category: "spalni", emoji: "🛏️", image: null }
+];
+
+let shops = [
+  {
+    id: 1,
+    name: "Yunusobod Filiali",
+    address: "Yunusobod tumani, 12-kvartal, 45-uy",
+    phone: "+998 94 128 13 15",
+    workingHours: "09:00 - 20:00",
+    location: "https://maps.google.com/?q=41.366,69.289",
+    desc: "Markaziy va eng katta filial",
+    image: null
+  },
+  {
+    id: 2,
+    name: "Mirzo Ulug'bek Filiali",
+    address: "Mirzo Ulug'bek tumani, Buyuk Ipak Yo'li ko'chasi, 67-uy",
+    phone: "+998 93 555 77 88",
+    workingHours: "08:30 - 21:00",
+    location: "https://maps.google.com/?q=41.312,69.245",
+    desc: "Yangi ochilgan zamonaviy filial",
+    image: null
+  }
 ];
 
 let cart = JSON.parse(localStorage.getItem('cart')) || {};
+let currentCat = "all";
+let selectedProductImage = null;
+let selectedShopImage = null;
+let adminPassword = "admin123";
 
-// ====================== STOCK FUNKSIYALARI ======================
-function updateStock() {
-  const select = document.getElementById('stockProductSelect');
-  const newStock = parseInt(document.getElementById('newStock').value);
-  const productId = parseInt(select.value);
+// ====================== YORDAMCHI FUNKSIYALAR ======================
+function saveData() {
+  localStorage.setItem('products', JSON.stringify(products));
+  localStorage.setItem('shops', JSON.stringify(shops));
+  localStorage.setItem('categories', JSON.stringify(categories));
+}
 
-  const product = products.find(p => p.id === productId);
-  if (product && newStock >= 0) {
-    product.stock = newStock;
-    localStorage.setItem('products', JSON.stringify(products));
-    alert(`✅ ${product.name} uchun stok ${newStock} ga yangilandi!`);
-    showProducts();
-    updateStockSelect();
+function loadData() {
+  const p = localStorage.getItem('products');
+  const s = localStorage.getItem('shops');
+  const c = localStorage.getItem('categories');
+  if (p) products = JSON.parse(p);
+  if (s) shops = JSON.parse(s);
+  if (c) categories = JSON.parse(c);
+  updateCategorySelect();
+  showCategories();
+  showProducts();
+  showShops();
+  updateAdminLists();
+  updateCart();
+}
+
+function formatPrice(p) {
+  return p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
+// ====================== KATEGORIYALAR ======================
+function showCategories() {
+  let html = `<button class="cat-btn active" data-cat="all" onclick="filterProducts('all')">🏠 Barchasi</button>`;
+  categories.forEach(cat => {
+    if (cat.id !== "all") {
+      html += `<button class="cat-btn" data-cat="${cat.id}" onclick="filterProducts('${cat.id}')">${cat.emoji} ${cat.name}</button>`;
+    }
+  });
+  html += `<button class="cat-btn" data-cat="discount" onclick="filterProducts('discount')">🔥 Chegirmali</button>`;
+  document.getElementById('categories').innerHTML = html;
+}
+
+function updateCategorySelect() {
+  let html = '';
+  categories.forEach(cat => {
+    if (cat.id !== "all") html += `<option value="${cat.id}">${cat.emoji} ${cat.name}</option>`;
+  });
+  document.getElementById('prodCategory').innerHTML = html;
+}
+
+function addCategory() {
+  const name = document.getElementById('catName').value.trim();
+  const emoji = document.getElementById('catEmoji').value.trim() || "📦";
+  if (!name) return alert("Kategoriya nomini kiriting!");
+  const id = name.toLowerCase().replace(/ /g, '_');
+  categories.push({ id, name, emoji });
+  saveData();
+  showCategories();
+  updateCategorySelect();
+  alert("✅ Kategoriya qo'shildi!");
+}
+
+// ====================== MAHSULOTLAR ======================
+function previewProductImage(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      selectedProductImage = e.target.result;
+      document.getElementById('prodImagePreview').innerHTML = `<img src="${selectedProductImage}">`;
+    };
+    reader.readAsDataURL(input.files[0]);
   }
 }
 
-function updateStockSelect() {
-  let html = '';
-  products.forEach(p => {
-    html += `<option value="${p.id}">${p.name} (hozir: ${p.stock} ta)</option>`;
+function showProducts() {
+  let filtered = products.filter(p => {
+    if (currentCat === "all") return true;
+    if (currentCat === "discount") return p.oldPrice && p.oldPrice > p.price;
+    return p.category === currentCat;
   });
-  document.getElementById('stockProductSelect').innerHTML = html;
+
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+  if (search) {
+    filtered = filtered.filter(p => p.name.toLowerCase().includes(search));
+  }
+
+  let html = '';
+  filtered.forEach(p => {
+    const discount = p.oldPrice && p.oldPrice > p.price ?
+      `<div class="discount-badge">-${Math.round((1 - p.price / p.oldPrice) * 100)}%</div>` : '';
+
+    html += `
+      <div class="product-card" style="position:relative;">
+        <div class="product-img">
+          ${p.image ? `<img src="${p.image}">` : `<span style="font-size:4rem; display:flex; align-items:center; justify-content:center; height:100%;">${p.emoji}</span>`}
+          ${discount}
+        </div>
+        <div class="product-info">
+          <div class="product-title">${p.name}</div>
+          <div class="product-price">${formatPrice(p.price)} so'm ${p.oldPrice ? `<span class="old-price">${formatPrice(p.oldPrice)} so'm</span>` : ''}</div>
+          <button class="add-to-cart" onclick="addToCart(${p.id})">🛒 Savatga qo'shish</button>
+        </div>
+      </div>`;
+  });
+
+  document.getElementById('products').innerHTML = html || '<p style="text-align:center; padding:40px; font-size:1.2rem;">Hech narsa topilmadi 😔</p>';
 }
 
-// ====================== BUYURTMA BERISHDA STOK AYIRISH ======================
-function submitOrder() {
-  // ... oldingi buyurtma kodi ...
+function filterProducts(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.cat-btn[data-cat="${cat}"]`).classList.add('active');
+  showProducts();
+}
 
-  // Har bir mahsulotdan stokni ayirish
+// ====================== DO'KONLAR ======================
+function previewShopImage(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      selectedShopImage = e.target.result;
+      document.getElementById('shopImagePreview').innerHTML = `<img src="${selectedShopImage}">`;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function showShops() {
+  let filtered = shops;
+  const search = document.getElementById('shopSearchInput').value.toLowerCase().trim();
+  if (search) {
+    filtered = filtered.filter(s => 
+      s.name.toLowerCase().includes(search) || 
+      s.address.toLowerCase().includes(search)
+    );
+  }
+
+  let html = '';
+  filtered.forEach(s => {
+    html += `
+      <div class="shop-card">
+        <div class="product-img">
+          ${s.image ? `<img src="${s.image}">` : `<span style="font-size:4rem; display:flex; align-items:center; justify-content:center; height:100%;">🏪</span>`}
+        </div>
+        <div class="shop-info">
+          <div class="shop-name">${s.name}</div>
+          <div>📍 ${s.address}</div>
+          <div>📞 ${s.phone}</div>
+          <div class="shop-hours">🕒 ${s.workingHours}</div>
+          <div onclick="openLocation('${s.location}')" style="color:var(--primary); cursor:pointer; text-decoration:underline; margin-top:8px;">🗺️ Xaritada ko'rish</div>
+          <button onclick="viewShop(${s.id})" style="margin-top:15px; width:100%; padding:12px; background:#007bff; color:white; border:none; border-radius:12px;">🔍 Batafsil</button>
+        </div>
+      </div>`;
+  });
+  document.getElementById('shops').innerHTML = html || '<p style="text-align:center; padding:40px;">Do\'kon topilmadi</p>';
+}
+
+function viewShop(id) {
+  const shop = shops.find(s => s.id === id);
+  if (shop) {
+    alert(`🏪 ${shop.name}\n\n📍 ${shop.address}\n📞 ${shop.phone}\n🕒 ${shop.workingHours}\n\n${shop.desc || ''}`);
+    if (shop.location) openLocation(shop.location);
+  }
+}
+
+function openLocation(url) {
+  window.open(url, '_blank');
+}
+
+// ====================== SAVAT ======================
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCart();
+  alert("✅ Savatga qo'shildi!");
+}
+
+function updateCart() {
+  let total = 0;
+  let count = 0;
+  let html = '';
+
   for (let id in cart) {
     const product = products.find(p => p.id == id);
     if (product) {
-      product.stock -= cart[id];
-      if (product.stock < 0) product.stock = 0;
+      const subtotal = product.price * cart[id];
+      total += subtotal;
+      count += cart[id];
+      html += `
+        <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid #eee;">
+          <div><strong>${product.name}</strong> × ${cart[id]}</div>
+          <div>${formatPrice(subtotal)} so'm</div>
+        </div>`;
     }
   }
 
-  localStorage.setItem('products', JSON.stringify(products));
-  // ... qolgan buyurtma yuborish kodi (Telegram) ...
+  document.getElementById('cartItems').innerHTML = html || '<p style="text-align:center; padding:30px; color:#999;">Savat bo\'sh</p>';
+  document.getElementById('cartTotal').innerHTML = `Jami: <span style="color:var(--primary);">${formatPrice(total)} so'm</span>`;
+  document.getElementById('cartCount').innerHTML = count;
 }
 
-// ====================== Mahsulotlarni ko'rsatish (stok bilan) ======================
-function showProducts() {
-  // ... oldingi kod ...
-  // Har bir kartochkaga stok qo'shish:
-  // <div class="stock">🟢 ${p.stock} ta mavjud</div>
+function toggleCart() {
+  document.getElementById('cartSidebar').classList.toggle('open');
 }
 
-// Admin ochish
+// ====================== BUYURTMA (Telegram bilan) ======================
+function submitOrder() {
+  const name = document.getElementById('fullName').value.trim();
+  const phone1 = document.getElementById('phone1').value.trim();
+  const phone2 = document.getElementById('phone2').value.trim();
+  const address = document.getElementById('address').value.trim();
+
+  if (!name || !phone1 || !address) {
+    return alert("❌ Ism, kamida bitta telefon va manzilni to'ldiring!");
+  }
+
+  let itemsText = '';
+  let total = 0;
+
+  for (let id in cart) {
+    const product = products.find(p => p.id == id);
+    if (product) {
+      const subtotal = product.price * cart[id];
+      total += subtotal;
+      itemsText += `• ${product.name} × ${cart[id]} = ${formatPrice(subtotal)} so'm\n`;
+    }
+  }
+
+  if (!itemsText) return alert("Savat bo'sh!");
+
+  const notes = document.getElementById('notes').value.trim();
+
+  let msg = `🆕 YANGI BUYURTMA!\n\n`;
+  msg += `👤 Mijoz: ${name}\n`;
+  msg += `📱 Telefon 1: ${phone1}\n`;
+  if (phone2) msg += `📱 Telefon 2: ${phone2}\n`;
+  msg += `📍 Manzil: ${address}\n\n`;
+  msg += `📦 Mahsulotlar:\n${itemsText}\n`;
+  msg += `💰 Jami: ${formatPrice(total)} so'm\n`;
+  if (notes) msg += `\n📝 Izoh: ${notes}`;
+
+  // Sizning Telegram akkauntingiz
+  window.open(`https://t.me/shoxi0020?text=${encodeURIComponent(msg)}`, '_blank');
+
+  alert("✅ Buyurtma Telegramga yuborildi! Tez orada siz bilan bog'lanamiz.");
+
+  // Savatni tozalash
+  cart = {};
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCart();
+  toggleCart();
+
+  // Formani tozalash
+  document.getElementById('fullName').value = '';
+  document.getElementById('phone1').value = '';
+  document.getElementById('phone2').value = '';
+  document.getElementById('address').value = '';
+  document.getElementById('notes').value = '';
+}
+
+// ====================== ADMIN ======================
+function updateAdminLists() {
+  // Mahsulotlar ro'yxati
+  let prodHtml = '<h4>Mahsulotlar ro\'yxati</h4>';
+  products.forEach(p => {
+    prodHtml += `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin:12px 0; padding:12px; background:#f9f9f9; border-radius:10px;">
+        <span>${p.image ? '🖼️' : p.emoji} ${p.name} — ${formatPrice(p.price)} so'm</span>
+        <button onclick="deleteProduct(${p.id})" style="background:var(--danger); color:white; border:none; padding:8px 14px; border-radius:8px;">🗑</button>
+      </div>`;
+  });
+  document.getElementById('productList').innerHTML = prodHtml;
+
+  // Do'konlar ro'yxati
+  let shopHtml = '<h4>Do\'konlar ro\'yxati</h4>';
+  shops.forEach(s => {
+    shopHtml += `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin:12px 0; padding:12px; background:#f9f9f9; border-radius:10px;">
+        <span>🏪 ${s.name} — ${s.address} (${s.workingHours})</span>
+        <button onclick="deleteShop(${s.id})" style="background:var(--danger); color:white; border:none; padding:8px 14px; border-radius:8px;">🗑</button>
+      </div>`;
+  });
+  document.getElementById('shopList').innerHTML = shopHtml;
+}
+
+function addProduct() {
+  const name = document.getElementById('prodName').value.trim();
+  const price = parseInt(document.getElementById('prodPrice').value);
+  if (!name || !price) return alert("Nom va narxni kiriting!");
+
+  const newId = Math.max(...products.map(p => p.id), 0) + 1;
+
+  products.push({
+    id: newId,
+    name: name,
+    price: price,
+    oldPrice: parseInt(document.getElementById('prodOldPrice').value) || null,
+    category: document.getElementById('prodCategory').value,
+    emoji: document.getElementById('prodEmoji').value.trim() || "📦",
+    image: selectedProductImage
+  });
+
+  saveData();
+  showProducts();
+  updateAdminLists();
+  alert("✅ Mahsulot qo'shildi!");
+  // Formani tozalash
+  selectedProductImage = null;
+  document.getElementById('prodImagePreview').innerHTML = '';
+}
+
+function deleteProduct(id) {
+  if (confirm("O'chirilsinmi?")) {
+    products = products.filter(p => p.id !== id);
+    saveData();
+    showProducts();
+    updateAdminLists();
+  }
+}
+
+function addShop() {
+  const name = document.getElementById('shopName').value.trim();
+  const address = document.getElementById('shopAddress').value.trim();
+  const phone = document.getElementById('shopPhone').value.trim();
+  const hours = document.getElementById('shopWorkingHours').value.trim();
+
+  if (!name || !address || !phone || !hours) {
+    return alert("Do'kon nomi, manzil, telefon va ish vaqtini to'ldiring!");
+  }
+
+  const newId = Math.max(...shops.map(s => s.id), 0) + 1;
+
+  shops.push({
+    id: newId,
+    name: name,
+    address: address,
+    phone: phone,
+    workingHours: hours,
+    location: document.getElementById('shopLocation').value.trim(),
+    desc: document.getElementById('shopDesc').value.trim(),
+    image: selectedShopImage
+  });
+
+  saveData();
+  showShops();
+  updateAdminLists();
+  alert("✅ Do'kon qo'shildi!");
+  selectedShopImage = null;
+  document.getElementById('shopImagePreview').innerHTML = '';
+}
+
+function deleteShop(id) {
+  if (confirm("Do'kon o'chirilsinmi?")) {
+    shops = shops.filter(s => s.id !== id);
+    saveData();
+    showShops();
+    updateAdminLists();
+  }
+}
+
+// ====================== TUGMALAR ======================
+document.getElementById('btnProducts').onclick = () => {
+  document.getElementById('productsSection').classList.remove('hidden');
+  document.getElementById('shopsSection').classList.add('hidden');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btnProducts').classList.add('active');
+};
+
+document.getElementById('btnShops').onclick = () => {
+  document.getElementById('productsSection').classList.add('hidden');
+  document.getElementById('shopsSection').classList.remove('hidden');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btnShops').classList.add('active');
+};
+
+document.getElementById('cartToggle').onclick = toggleCart;
 document.getElementById('adminToggle').onclick = () => {
   const panel = document.getElementById('adminPanel');
-  const pwd = prompt("Admin parolini kiriting:");
-  if (pwd === "admin123") {
-    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-    updateStockSelect();
+  if (panel.style.display === 'none') {
+    const pwd = prompt("Admin parolini kiriting:");
+    if (pwd === adminPassword) panel.style.display = 'block';
+    else alert("Noto'g'ri parol!");
+  } else {
+    panel.style.display = 'none';
   }
 };
 
-// Boshlash
-window.onload = () => {
-  // loadData() va boshqa funksiyalaringizni chaqiring
-  showProducts();
-  updateStockSelect();
-};
+document.getElementById('searchInput').onkeyup = () => showProducts();
+document.getElementById('shopSearchInput').onkeyup = () => showShops();
+
+// ====================== BOSHLASH ======================
+window.onload = loadData;
 </script>
 </body>
 </html>
