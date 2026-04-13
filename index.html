@@ -13,19 +13,20 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
-            color: #333;
+            background: #0a0a0a;
+            color: #e0e0e0;
         }
 
-        /* Header */
+        /* Header - Qora va Tilla */
         .header {
-            background: linear-gradient(135deg, #1a252f, #2c3e50);
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            border-bottom: 2px solid #ffd700;
             color: white;
             padding: 15px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
         }
 
         .header-content {
@@ -40,13 +41,15 @@
 
         .logo h1 {
             font-size: 1.5rem;
+            color: #ffd700;
         }
 
         .logo p {
             font-size: 0.8rem;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
+        /* Search */
         .search-bar {
             flex: 1;
             max-width: 400px;
@@ -57,25 +60,35 @@
         .search-bar input {
             flex: 1;
             padding: 10px 15px;
-            border: none;
+            border: 1px solid #ffd700;
             border-radius: 25px;
             font-size: 0.9rem;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #ffaa00;
         }
 
         .search-bar button {
             padding: 10px 20px;
-            background: #e67e22;
-            color: white;
+            background: #ffd700;
+            color: #000;
             border: none;
             border-radius: 25px;
             cursor: pointer;
             transition: 0.3s;
+            font-weight: bold;
         }
 
         .search-bar button:hover {
-            background: #d35400;
+            background: #ffaa00;
+            transform: scale(1.02);
         }
 
+        /* User info */
         .user-info {
             display: flex;
             align-items: center;
@@ -85,13 +98,14 @@
         .user-info span {
             cursor: pointer;
             padding: 8px 15px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,215,0,0.2);
+            border: 1px solid #ffd700;
             border-radius: 25px;
             transition: 0.3s;
         }
 
         .user-info span:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,215,0,0.4);
         }
 
         /* Container */
@@ -107,31 +121,32 @@
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 30px;
-            background: white;
+            background: #111;
             padding: 10px;
             border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #ffd70033;
         }
 
         .tab-btn {
             flex: 1;
             padding: 12px 20px;
             border: none;
-            background: #f0f0f0;
+            background: #1a1a1a;
             cursor: pointer;
             font-size: 1rem;
             font-weight: 600;
             border-radius: 10px;
             transition: all 0.3s ease;
+            color: #e0e0e0;
         }
 
         .tab-btn.active {
-            background: #2c3e50;
-            color: white;
+            background: #ffd700;
+            color: #000;
         }
 
         .tab-btn:hover:not(.active) {
-            background: #e0e0e0;
+            background: #2a2a2a;
         }
 
         /* Tab content */
@@ -156,8 +171,9 @@
             gap: 15px;
             margin-bottom: 25px;
             padding: 15px;
-            background: white;
+            background: #111;
             border-radius: 15px;
+            border: 1px solid #ffd70033;
         }
 
         .filter-group {
@@ -168,12 +184,15 @@
 
         .filter-group label {
             font-weight: 600;
+            color: #ffd700;
         }
 
         .filter-group select, .filter-group input {
             padding: 8px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid #ffd700;
             border-radius: 8px;
+            background: #1a1a1a;
+            color: #fff;
         }
 
         /* Products grid */
@@ -184,24 +203,26 @@
         }
 
         .product-card {
-            background: white;
+            background: #111;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ffd70033;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(255,215,0,0.2);
+            border-color: #ffd700;
         }
 
         .product-emoji {
             font-size: 4rem;
             text-align: center;
             padding: 30px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-bottom: 1px solid #ffd70033;
         }
 
         .product-info {
@@ -212,17 +233,18 @@
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 10px;
+            color: #ffd700;
         }
 
         .product-price {
             font-size: 1.3rem;
-            color: #2c3e50;
+            color: #ffd700;
             font-weight: bold;
         }
 
         .product-oldprice {
             font-size: 0.9rem;
-            color: #999;
+            color: #888;
             text-decoration: line-through;
             margin-left: 10px;
         }
@@ -236,18 +258,21 @@
         }
 
         .stock-available {
-            background: #d4edda;
-            color: #155724;
+            background: #1a3a1a;
+            color: #00ff00;
+            border: 1px solid #00ff00;
         }
 
         .stock-low {
-            background: #fff3cd;
-            color: #856404;
+            background: #3a2a1a;
+            color: #ffd700;
+            border: 1px solid #ffd700;
         }
 
         .stock-out {
-            background: #f8d7da;
-            color: #721c24;
+            background: #3a1a1a;
+            color: #ff4444;
+            border: 1px solid #ff4444;
         }
 
         .btn {
@@ -264,32 +289,34 @@
         }
 
         .btn-primary {
-            background: #2c3e50;
-            color: white;
+            background: #ffd700;
+            color: #000;
         }
 
         .btn-primary:hover {
-            background: #1a252f;
+            background: #ffaa00;
+            transform: scale(1.02);
         }
 
         .btn-primary:disabled {
-            background: #ccc;
+            background: #444;
+            color: #888;
             cursor: not-allowed;
         }
 
         .btn-success {
-            background: #28a745;
+            background: #00aa44;
             color: white;
         }
 
         .btn-danger {
-            background: #dc3545;
+            background: #cc3333;
             color: white;
         }
 
         .btn-warning {
-            background: #ffc107;
-            color: #333;
+            background: #ffd700;
+            color: #000;
         }
 
         /* Modal */
@@ -300,7 +327,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -311,7 +338,8 @@
         }
 
         .modal-content {
-            background: white;
+            background: #111;
+            border: 1px solid #ffd700;
             border-radius: 20px;
             padding: 25px;
             max-width: 500px;
@@ -325,19 +353,22 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            color: #ffd700;
         }
 
         .close-modal {
             font-size: 1.5rem;
             cursor: pointer;
+            color: #ffd700;
         }
 
         /* Cart */
-        .cart-items {
-            background: white;
+        .cart-items, .delivery-form, .review-card, .store-card, .admin-section {
+            background: #111;
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
+            border: 1px solid #ffd70033;
         }
 
         .cart-item {
@@ -345,7 +376,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #ffd70033;
         }
 
         .cart-item:last-child {
@@ -358,71 +389,78 @@
 
         .cart-item-title {
             font-weight: bold;
-        }
-
-        .cart-item-price {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: #ffd700;
         }
 
         .quantity-btn {
             width: 30px;
             height: 30px;
-            border: none;
+            border: 1px solid #ffd700;
             border-radius: 50%;
-            background: #f0f0f0;
+            background: #1a1a1a;
             cursor: pointer;
             font-size: 1.2rem;
             font-weight: bold;
+            color: #ffd700;
+        }
+
+        .quantity-btn:hover {
+            background: #ffd700;
+            color: #000;
         }
 
         .cart-total {
-            background: white;
+            background: #111;
             border-radius: 15px;
             padding: 20px;
             text-align: right;
             font-size: 1.3rem;
             font-weight: bold;
+            border: 1px solid #ffd70033;
         }
 
-        /* Delivery form */
-        .delivery-form {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .delivery-form input, .delivery-form textarea {
+        /* Forms */
+        input, select, textarea {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 1px solid #ddd;
+            border: 1px solid #ffd700;
             border-radius: 10px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ffaa00;
+        }
+
+        label {
+            color: #ffd700;
         }
 
         /* Reviews */
-        .review-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-
         .review-user {
             font-weight: bold;
             margin-bottom: 5px;
+            color: #ffd700;
         }
 
         .review-rating {
-            color: #ffc107;
+            color: #ffd700;
             margin-bottom: 10px;
+        }
+
+        /* Stars */
+        .star {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #444;
+            transition: color 0.2s;
+        }
+
+        .star.active, .star:hover {
+            color: #ffd700;
         }
 
         /* Messages */
@@ -432,21 +470,22 @@
             right: 20px;
             padding: 15px 25px;
             border-radius: 10px;
-            color: white;
+            color: #000;
             z-index: 1000;
             animation: slideIn 0.3s ease;
         }
 
         .message-success {
-            background: #28a745;
+            background: #00ff44;
         }
 
         .message-error {
-            background: #dc3545;
+            background: #ff4444;
+            color: white;
         }
 
         .message-info {
-            background: #17a2b8;
+            background: #ffd700;
         }
 
         @keyframes slideIn {
@@ -472,6 +511,20 @@
             .search-bar {
                 max-width: 100%;
             }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ffd700;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -540,7 +593,7 @@
             <div class="cart-items" id="cartItems"></div>
             <div class="cart-total" id="cartTotal"></div>
             <div class="delivery-form" id="deliveryForm" style="display:none;">
-                <h3>🚚 Yetkazib berish ma'lumotlari</h3>
+                <h3 style="color:#ffd700;">🚚 Yetkazib berish ma'lumotlari</h3>
                 <input type="text" id="deliveryName" placeholder="Ismingiz">
                 <input type="text" id="deliveryPhone" placeholder="Telefon raqam">
                 <textarea id="deliveryAddress" rows="3" placeholder="To'liq manzil (tuman, ko'cha, uy)"></textarea>
@@ -558,16 +611,16 @@
         <div id="reviewsTab" class="tab-content">
             <div id="reviewsList"></div>
             <div class="delivery-form">
-                <h3>✍️ Sharh qoldirish</h3>
-                <select id="reviewProductSelect" style="width:100%; padding:12px; margin:10px 0; border-radius:10px;">
+                <h3 style="color:#ffd700;">✍️ Sharh qoldirish</h3>
+                <select id="reviewProductSelect">
                     <option value="">Mahsulot tanlang</option>
                 </select>
                 <div class="rating-input" id="ratingStars" style="display:flex; gap:10px; margin:15px 0;">
-                    <span class="star" data-rating="1" style="font-size:2rem; cursor:pointer;">☆</span>
-                    <span class="star" data-rating="2" style="font-size:2rem; cursor:pointer;">☆</span>
-                    <span class="star" data-rating="3" style="font-size:2rem; cursor:pointer;">☆</span>
-                    <span class="star" data-rating="4" style="font-size:2rem; cursor:pointer;">☆</span>
-                    <span class="star" data-rating="5" style="font-size:2rem; cursor:pointer;">☆</span>
+                    <span class="star" data-rating="1">☆</span>
+                    <span class="star" data-rating="2">☆</span>
+                    <span class="star" data-rating="3">☆</span>
+                    <span class="star" data-rating="4">☆</span>
+                    <span class="star" data-rating="5">☆</span>
                 </div>
                 <textarea id="reviewText" rows="3" placeholder="Sharhingizni yozing..."></textarea>
                 <button class="btn btn-primary" onclick="addReview()">Sharh qoldirish</button>
@@ -581,12 +634,12 @@
 
         <!-- Admin -->
         <div id="adminTab" class="tab-content">
-            <div class="delivery-form">
-                <h3>👑 Admin panel</h3>
+            <div class="admin-section">
+                <h3 style="color:#ffd700;">👑 Admin panel</h3>
                 <input type="password" id="adminCode" placeholder="Admin kodini kiriting">
                 <button class="btn btn-primary" onclick="verifyAdmin()">Kirish</button>
                 <div id="adminPanel" style="display:none; margin-top:20px;">
-                    <h4>🏪 Yangi do'kon qo'shish</h4>
+                    <h4 style="color:#ffd700;">🏪 Yangi do'kon qo'shish</h4>
                     <input type="text" id="storeName" placeholder="Do'kon nomi">
                     <input type="text" id="storeAddress" placeholder="Manzil">
                     <input type="tel" id="storePhone" placeholder="Telefon">
@@ -595,14 +648,14 @@
                     <input type="text" id="storeHours" placeholder="Ish vaqti">
                     <button class="btn btn-success" onclick="addStore()">Do'kon qo'shish</button>
                     
-                    <h4 style="margin-top:30px;">📦 Mahsulot sonini o'zgartirish</h4>
-                    <select id="stockProductSelect" style="width:100%; padding:12px;">
+                    <h4 style="color:#ffd700; margin-top:30px;">📦 Mahsulot sonini o'zgartirish</h4>
+                    <select id="stockProductSelect">
                         <option value="">Mahsulot tanlang</option>
                     </select>
                     <input type="number" id="newStock" placeholder="Yangi son">
                     <button class="btn btn-primary" onclick="updateStock()">Yangilash</button>
                     
-                    <h4 style="margin-top:30px;">🎟️ Chegirma kodi qo'shish</h4>
+                    <h4 style="color:#ffd700; margin-top:30px;">🎟️ Chegirma kodi qo'shish</h4>
                     <input type="text" id="couponName" placeholder="Kod nomi">
                     <input type="number" id="couponPercent" placeholder="Chegirma foizi">
                     <button class="btn btn-warning" onclick="addCoupon()">Kod qo'shish</button>
@@ -618,8 +671,8 @@
                 <h3>🔐 Kirish / Ro'yxatdan o'tish</h3>
                 <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
             </div>
-            <input type="text" id="loginName" placeholder="Ismingiz" style="width:100%; padding:12px; margin:10px 0;">
-            <input type="text" id="loginPhone" placeholder="Telefon raqam" style="width:100%; padding:12px; margin:10px 0;">
+            <input type="text" id="loginName" placeholder="Ismingiz">
+            <input type="text" id="loginPhone" placeholder="Telefon raqam">
             <button class="btn btn-primary" onclick="login()">Kirish</button>
         </div>
     </div>
@@ -693,14 +746,14 @@
             loadUserOrders();
         }
 
-        function logout() {
-            currentUser = null;
-            localStorage.removeItem('currentUser');
-            document.getElementById('userNameDisplay').innerHTML = '👤 Kirish';
-            cart = {};
-            updateCartUI();
-            updateCartCount();
-            showMessage("🚪 Chiqib ketdingiz!", "info");
+        function loadUserOrders() {
+            if (currentUser) {
+                let savedOrders = localStorage.getItem(`orders_${currentUser.phone}`);
+                if (savedOrders) {
+                    orders = JSON.parse(savedOrders);
+                }
+            }
+            renderOrders();
         }
 
         // ============ QIDIRUV VA FILTER ============
@@ -723,38 +776,25 @@
             if (!container) return;
             
             let filtered = Object.entries(products).filter(([id, p]) => {
-                // Qidiruv
                 if (currentSearch && !p.name.toLowerCase().includes(currentSearch)) return false;
-                // Narx oralig'i
                 let min = currentFilters.minPrice ? parseInt(currentFilters.minPrice) : 0;
                 let max = currentFilters.maxPrice ? parseInt(currentFilters.maxPrice) : Infinity;
                 if (p.price < min || p.price > max) return false;
-                // Stock holati
                 if (currentFilters.stock === "instock" && p.stock <= 0) return false;
-                if (currentFilters.stock === "lowstock" && p.stock > 5) return false;
-                if (currentFilters.stock === "lowstock" && p.stock === 0) return false;
+                if (currentFilters.stock === "lowstock" && (p.stock > 5 || p.stock === 0)) return false;
                 if (currentFilters.stock === "outofstock" && p.stock > 0) return false;
                 return true;
             });
             
-            // Saralash
             switch(currentFilters.sort) {
-                case "price_asc":
-                    filtered.sort((a,b) => a[1].price - b[1].price);
-                    break;
-                case "price_desc":
-                    filtered.sort((a,b) => b[1].price - a[1].price);
-                    break;
-                case "popular":
-                    filtered.sort((a,b) => b[1].sales - a[1].sales);
-                    break;
-                case "discount":
-                    filtered.sort((a,b) => {
-                        let discA = a[1].oldPrice ? (1 - a[1].price/a[1].oldPrice) : 0;
-                        let discB = b[1].oldPrice ? (1 - b[1].price/b[1].oldPrice) : 0;
-                        return discB - discA;
-                    });
-                    break;
+                case "price_asc": filtered.sort((a,b) => a[1].price - b[1].price); break;
+                case "price_desc": filtered.sort((a,b) => b[1].price - a[1].price); break;
+                case "popular": filtered.sort((a,b) => b[1].sales - a[1].sales); break;
+                case "discount": filtered.sort((a,b) => {
+                    let discA = a[1].oldPrice ? (1 - a[1].price/a[1].oldPrice) : 0;
+                    let discB = b[1].oldPrice ? (1 - b[1].price/b[1].oldPrice) : 0;
+                    return discB - discA;
+                }); break;
             }
             
             let html = '';
@@ -772,7 +812,7 @@
                             <div>
                                 <span class="product-price">${p.price.toLocaleString()} so'm</span>
                                 ${discountHtml}
-                                ${discountPercent ? `<span style="color:red; margin-left:10px;">-${discountPercent}%</span>` : ''}
+                                ${discountPercent ? `<span style="color:#ffd700; margin-left:10px;">-${discountPercent}%</span>` : ''}
                             </div>
                             <div class="product-stock ${stockClass}">📦 ${stockText}</div>
                             <div class="product-sales">📊 Sotilgan: ${p.sales} ta</div>
@@ -793,7 +833,7 @@
         function showProductModal(productId) {
             let p = products[productId];
             let stockStatus = p.stock > 0 ? `✅ ${p.stock} ta mavjud` : '❌ Tugagan';
-            let discountHtml = p.oldPrice ? `<p>Eski narx: <del>${p.oldPrice.toLocaleString()} so'm</del> <span style="color:red;">-${Math.round((1-p.price/p.oldPrice)*100)}%</span></p>` : '';
+            let discountHtml = p.oldPrice ? `<p>Eski narx: <del>${p.oldPrice.toLocaleString()} so'm</del> <span style="color:#ffd700;">-${Math.round((1-p.price/p.oldPrice)*100)}%</span></p>` : '';
             
             let modalHtml = `
                 <div class="modal active" id="productModal" onclick="if(event.target===this) closeModal('productModal')">
@@ -802,7 +842,7 @@
                             <h3>${p.emoji} ${p.name}</h3>
                             <span class="close-modal" onclick="closeModal('productModal')">&times;</span>
                         </div>
-                        <p>💰 Narxi: <strong>${p.price.toLocaleString()} so'm</strong></p>
+                        <p>💰 Narxi: <strong style="color:#ffd700;">${p.price.toLocaleString()} so'm</strong></p>
                         ${discountHtml}
                         <p>📦 Holati: ${stockStatus}</p>
                         <p>📊 Sotilgan: ${p.sales} ta</p>
@@ -810,15 +850,13 @@
                         <button class="btn btn-primary" onclick="addToCart('${productId}'); closeModal('productModal')" ${p.stock <= 0 ? 'disabled' : ''}>
                             🛒 Savatga qo'shish
                         </button>
-                        <button class="btn btn-warning" onclick="closeModal('productModal')">Yopish</button>
+                        <button class="btn btn-warning" onclick="closeModal('productModal')" style="margin-top:10px;">Yopish</button>
                     </div>
                 </div>
             `;
             
-            // Remove old modal if exists
             let oldModal = document.getElementById('productModal');
             if (oldModal) oldModal.remove();
-            
             document.body.insertAdjacentHTML('beforeend', modalHtml);
         }
 
@@ -928,13 +966,6 @@
             }
             
             let discountAmount = 0;
+            let finalTotal = total;
             if (appliedCoupon) {
-                discountAmount = total * appliedCoupon.percent / 100;
-                total = total - discountAmount;
-            }
-            
-            container.innerHTML = html;
-            totalContainer.innerHTML = `
-                <div>💰 Umumiy: ${(total + discountAmount).toLocaleString()} so'm</div>
-                ${appliedCoupon ? `<div>🎁 Chegirma (-${appliedCoupon.percent}%): -${discountAmount.toLocaleString()} so'm</div>` : ''}
-                <div style="font-size:1.5rem; margin-top:10px;">💰 Jami to'lov
+                discountAmount = total * appliedCoupon
