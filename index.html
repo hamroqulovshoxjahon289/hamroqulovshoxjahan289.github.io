@@ -1,257 +1,353 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Temurshox Mebel - Premium Furniture Store</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --gold:#D4AF37;--gold-dark:#A68844;--gold-light:#F5D547;
-  --pr:#1B1B2F;--pr2:#2D2D44;--pr3:#3D3D5C;
-  --bg:#0F0F15;--surf:#1A1A24;--surf2:#242430;
-  --txt:#F5F5F5;--txt2:#D0D0D0;--txt3:#909090;
-  --brd:#333340;--brd2:#404050;
-  --red:#DC2626;--green:#16A34A;--green2:#22C55E;
-  --radius:16px;--radius-sm:12px;
-  --shadow:0 8px 32px rgba(212,175,55,.15);
-  --shadow-sm:0 4px 12px rgba(212,175,55,.08);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temurshox Mebel | Premium mebellar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body.dark { --bg-primary:#0a0a0a; --bg-secondary:#111; --bg-card:#111; --text-primary:#e0e0e0; --text-secondary:#aaa; --border-color:#ffd70033; --accent:#ffd700; --header-bg:#000; --input-bg:#1a1a1a; --btn-bg:#ffd700; --btn-color:#000; }
+        body.light { --bg-primary:#f5f5f5; --bg-secondary:#ffffff; --bg-card:#ffffff; --text-primary:#333; --text-secondary:#666; --border-color:#ddd; --accent:#d4a017; --header-bg:#fff; --input-bg:#fff; --btn-bg:#d4a017; --btn-color:#fff; }
+        body { font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; background:var(--bg-primary); color:var(--text-primary); transition:all 0.3s ease; }
+        .header { background:var(--header-bg); border-bottom:2px solid var(--accent); padding:20px; text-align:center; }
+        .header h1 { color:var(--accent); font-size:2.2rem; }
+        .header p { color:var(--text-secondary); margin-top:5px; }
+        .theme-toggle { position:fixed; top:20px; right:20px; background:var(--accent); color:#000; border:none; border-radius:50px; padding:8px 16px; cursor:pointer; z-index:200; font-weight:bold; }
+        .container { max-width:1300px; margin:0 auto; padding:20px; }
+        .two-columns { display:flex; gap:30px; }
+        .products-section { flex:2; }
+        .stores-section { flex:1; }
+        .categories { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:25px; }
+        .cat-btn { background:var(--bg-secondary); border:1px solid var(--border-color); color:var(--text-primary); padding:8px 20px; border-radius:30px; cursor:pointer; transition:0.3s; }
+        .cat-btn.active, .cat-btn:hover { background:var(--accent); color:#000; }
+        .products { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
+        .product-card { background:var(--bg-card); border-radius:16px; border:1px solid var(--border-color); padding:15px; transition:0.3s; position:relative; }
+        .product-card:hover { transform:translateY(-3px); border-color:var(--accent); }
+        .delete-product { position:absolute; top:10px; right:10px; background:#ff4444; color:white; border:none; border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:14px; display:none; }
+        .admin-mode .delete-product { display:block; }
+        .product-img { width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:10px; }
+        .product-emoji { font-size:3rem; text-align:center; margin:10px 0; }
+        .product-name { font-size:1.2rem; font-weight:bold; color:var(--accent); margin:10px 0; }
+        .product-price { font-size:1.2rem; font-weight:bold; }
+        .product-oldprice { font-size:0.8rem; text-decoration:line-through; color:var(--text-secondary); margin-left:8px; }
+        .product-stock { font-size:0.75rem; padding:3px 8px; border-radius:20px; display:inline-block; margin:8px 0; }
+        .stock-available { background:#1a3a1a; color:#0f0; }
+        .stock-low { background:#3a2a1a; color:var(--accent); }
+        .stock-out { background:#3a1a1a; color:#f44; }
+        .btn { background:var(--btn-bg); color:var(--btn-color); border:none; padding:10px; border-radius:30px; cursor:pointer; width:100%; font-weight:bold; transition:0.3s; }
+        .btn:hover { opacity:0.9; transform:scale(1.02); }
+        .stores-panel, .cart-panel, .admin-panel { background:var(--bg-secondary); border-radius:16px; border:1px solid var(--border-color); padding:20px; margin-bottom:20px; }
+        .panel-title { color:var(--accent); font-size:1.2rem; margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:8px; }
+        .stores-map { height:460px; border-radius:20px; overflow:hidden; border:4px solid var(--accent); box-shadow:0 10px 30px rgba(255,215,0,0.25); position:relative; margin-bottom:25px; }
+        .map-overlay { position:absolute; top:20px; left:20px; background:rgba(0,0,0,0.75); color:var(--accent); padding:12px 20px; border-radius:12px; font-weight:bold; z-index:10; }
+        .store-card { padding:16px 0; border-bottom:1px solid var(--border-color); transition:all 0.3s; }
+        .store-card:last-child { border-bottom:none; }
+        .store-card:hover { background:var(--bg-primary); padding-left:12px; border-radius:12px; }
+        .cart-item { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border-color); font-size:0.85rem; }
+        .cart-item-qty { display:flex; gap:8px; align-items:center; }
+        .qty-btn { background:var(--bg-primary); border:1px solid var(--accent); color:var(--accent); width:24px; height:24px; border-radius:50%; cursor:pointer; }
+        .cart-total { text-align:right; margin-top:10px; padding-top:10px; border-top:1px solid var(--border-color); font-weight:bold; }
+        input, textarea, select { width:100%; padding:8px; margin:8px 0; background:var(--input-bg); border:1px solid var(--accent); border-radius:8px; color:var(--text-primary); }
+        .reviews-section { margin-top:12px; padding-top:12px; border-top:1px solid var(--border-color); }
+        .message { position:fixed; bottom:20px; right:20px; padding:10px 20px; border-radius:10px; z-index:1000; animation:slideIn 0.3s ease; }
+        .message-success { background:#00aa44; color:white; }
+        .message-error { background:#cc3333; color:white; }
+        .message-info { background:var(--accent); color:#000; }
+        @keyframes slideIn { from { transform:translateX(100%); opacity:0; } to { transform:translateX(0); opacity:1; } }
+        @media (max-width:800px) { .two-columns { flex-direction:column; } }
+    </style>
+</head>
+<body class="dark">
 
-[data-theme="light"]{
-  --pr:#F8F6F1;--pr2:#FDFBF7;--pr3:#F5EFE7;
-  --bg:#FFFAF5;--surf:#FFFFFF;--surf2:#FBF8F3;
-  --txt:#1A1A1A;--txt2:#4A4A4A;--txt3:#7A7A7A;
-  --brd:#E8DFD5;--brd2:#D4C8BC;
-  --shadow:0 8px 32px rgba(212,175,55,.12);
-  --shadow-sm:0 4px 12px rgba(212,175,55,.06);
-}
+<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">☀️ Kunduzi rejim</button>
 
-html{scroll-behavior:smooth}
-body{font-family:'Georgia','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);transition:background .4s,color .4s;min-height:100vh}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+<div class="header">
+    <h1 id="header-title">🛋️ Temurshox Mebel</h1>
+    <p id="header-subtitle">Sifat va qulaylik uchrashgan joy</p>
+</div>
 
-/* GOLDEN GRADIENT ACCENTS */
-.gold-gradient{background:linear-gradient(135deg,#D4AF37,#F5D547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.gold-accent{background:linear-gradient(135deg,#D4AF37,#F5D547);box-shadow:0 0 20px rgba(212,175,55,.3)}
+<div class="container">
+    <div class="two-columns">
+        <!-- Mahsulotlar -->
+        <div class="products-section">
+            <div class="categories" id="categories"></div>
+            <div class="products" id="products"></div>
 
-/* TOPBAR */
-.topbar{background:linear-gradient(90deg,#D4AF37,#F5D547,#D4AF37);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow)}
-.topbar-txt{color:#1a1a1a;font-size:12px;font-weight:700;letter-spacing:1px}
-.topbar-right{display:flex;gap:16px;align-items:center}
-.topbar-link{color:#1a1a1a;font-size:11px;text-decoration:none;transition:.2s;font-weight:600}
-.topbar-link:hover{text-decoration:underline;transform:scale(1.05)}
+            <div class="cart-panel">
+                <div class="panel-title" id="cart-title">🛒 Savat</div>
+                <div id="cartItems">Savat bo'sh</div>
+                <div id="cartTotal" class="cart-total"></div>
+                <button class="btn" onclick="checkout()" id="checkout-btn">✅ Buyurtma berish</button>
+            </div>
+        </div>
 
-/* HEADER */
-.hdr{background:var(--surf);border-bottom:2px solid var(--gold);padding:0 20px;box-shadow:var(--shadow)}
-.hdr-inner{display:flex;align-items:center;justify-content:space-between;height:80px;gap:20px;max-width:1600px;margin:0 auto}
-.logo{display:flex;align-items:center;gap:16px;text-decoration:none;flex-shrink:0}
-.logo-img{width:65px;height:65px;border-radius:50%;object-fit:contain;background:linear-gradient(135deg,var(--surf2),transparent);padding:4px;box-shadow:0 0 20px rgba(212,175,55,.3)}
-.logo-words{display:flex;flex-direction:column}
-.logo-words strong{font-size:20px;font-weight:900;background:linear-gradient(135deg,#D4AF37,#F5D547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.5px;line-height:1}
-.logo-words span{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+        <!-- Do'konlar va Sozlamalar -->
+        <div class="stores-section">
+            <div class="stores-panel">
+                <div class="panel-title" id="stores-title">🏪 Bizning do'konlar</div>
+                <div class="stores-map">
+                    <div class="map-overlay" id="map-city">📍 Toshkent shahri</div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11982.5!2d69.24!3d41.31!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b0f0f0f0f0f%3A0x0!2zNDHCsDE3JzU4LjIiTiA2OcKwMTQnMjQuNCJF!5e0!3m2!1suz!2suz!4v1744720000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div id="storesList"></div>
+            </div>
 
-.hdr-search{flex:1;max-width:420px;position:relative}
-.hdr-search input{width:100%;padding:11px 16px 11px 42px;border:2px solid var(--brd);border-radius:30px;font-size:13px;background:var(--bg);color:var(--txt);outline:none;transition:all .2s;font-family:inherit}
-.hdr-search input::placeholder{color:var(--txt3)}
-.hdr-search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.2);background:var(--surf2)}
-.hdr-search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--txt3);width:16px;height:16px}
+            <!-- Sozlamalar -->
+            <div class="stores-panel">
+                <div class="panel-title" id="settings-title">⚙️ Sozlamalar</div>
+                <button class="btn" onclick="toggleTheme()" id="theme-btn2" style="margin-bottom:15px;">☀️ Kunduzi rejim</button>
+                
+                <label style="display:block; margin:10px 0 5px; color:var(--accent);">🌐 Til tanlash / Выберите язык</label>
+                <select id="languageSelect" onchange="changeLanguage()" style="padding:12px; border-radius:8px; width:100%;">
+                    <option value="uz">🇺🇿 O‘zbekcha</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                </select>
 
-.hdr-actions{display:flex;gap:12px;align-items:center}
-.theme-btn{width:42px;height:42px;border-radius:50%;border:2px solid var(--gold);background:var(--surf2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gold);transition:all .3s;box-shadow:var(--shadow-sm)}
-.theme-btn:hover{background:var(--gold);color:#1a1a1a;transform:rotate(25deg);box-shadow:var(--shadow)}
+                <div style="margin-top:25px; padding:15px; background:var(--bg-primary); border-radius:12px; text-align:center;">
+                    <p id="contact-text">Tushunmovchilik bo‘lsa, murojaat qiling:</p>
+                    <a href="tel:+998979351315" style="color:var(--accent); font-size:1.2rem; font-weight:bold;">📞 +998-97-935-13-15</a>
+                </div>
+            </div>
 
-.lang-sel{padding:8px 14px;border:2px solid var(--gold);border-radius:25px;font-size:12px;font-weight:700;background:var(--surf2);color:var(--gold);outline:none;cursor:pointer;transition:all .2s}
-.lang-sel:hover{background:var(--gold);color:#1a1a1a}
+            <!-- Admin panel -->
+            <div class="admin-panel">
+                <div class="panel-title">👑 Admin panel</div>
+                <input type="password" id="adminCode" placeholder="Admin kodini kiriting">
+                <button class="btn" onclick="verifyAdmin()">Kirish</button>
 
-.cart-btn{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;padding:10px 18px;border-radius:30px;border:none;font-size:13px;font-weight:900;cursor:pointer;position:relative;transition:all .3s;box-shadow:var(--shadow);letter-spacing:.5px}
-.cart-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(212,175,55,.25)}
-.cart-badge{background:var(--red);color:#fff;font-size:10px;font-weight:900;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 4px;animation:pulse 1s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(220,38,38,.5)}50%{transform:scale(1.2);box-shadow:0 0 0 8px rgba(220,38,38,0)}}
+                <div id="adminForms" style="display:none; margin-top:15px;">
+                    <h4>➕ Yangi mahsulot qo'shish</h4>
+                    <input type="text" id="newProductName" placeholder="Mahsulot nomi">
+                    <input type="number" id="newProductPrice" placeholder="Narxi (so'm)">
+                    <input type="number" id="newProductOldPrice" placeholder="Eski narx">
+                    <input type="text" id="newProductCategory" placeholder="Kategoriya (divan/stol/shkaf/kreslo)">
+                    <input type="file" id="newProductImage" accept="image/*">
+                    <input type="number" id="newProductStock" placeholder="Soni" value="10">
+                    <button class="btn" onclick="addNewProduct()">➕ Qo'shish</button>
 
-.adm-btn{width:42px;height:42px;border-radius:50%;border:2px solid var(--gold);background:var(--surf2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);transition:all .3s;box-shadow:var(--shadow-sm)}
-.adm-btn:hover{background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;border-color:#EC4899;transform:scale(1.15);box-shadow:var(--shadow)}
+                    <h4 style="margin-top:15px;">📦 Mahsulot sonini o'zgartirish</h4>
+                    <select id="stockProductSelect"></select>
+                    <input type="number" id="newStock" placeholder="Yangi son">
+                    <button class="btn" onclick="updateStock()">Yangilash</button>
 
-/* HERO */
-.hero{background:linear-gradient(135deg,#1B1B2F 0%,#2D2D44 50%,#1a1a1a 100%);padding:50px 20px 60px;position:relative;overflow:hidden;border-bottom:3px solid var(--gold)}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(212,175,55,.08),transparent 50%),radial-gradient(circle at 80% -20%,rgba(212,175,55,.08),transparent 50%);pointer-events:none}
-.hero-circles{position:absolute;inset:0;pointer-events:none}
-.hc{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.06),transparent 70%);animation:float 8s ease-in-out infinite}
-.hc1{width:400px;height:400px;right:-100px;top:-100px;animation-delay:0s}
-.hc2{width:250px;height:250px;left:-50px;bottom:-80px;animation-delay:2s}
-.hc3{width:150px;height:150px;right:25%;top:15%;animation-delay:1s}
-@keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(25px)}}
+                    <h4 style="margin-top:15px;">🏪 Do'kon qo'shish</h4>
+                    <input type="text" id="storeName" placeholder="Do'kon nomi">
+                    <select id="storeCity">
+                        <option value="Toshkent">Toshkent</option>
+                        <option value="Samarqand">Samarqand</option>
+                        <option value="Buxoro">Buxoro</option>
+                        <option value="Andijon">Andijon</option>
+                    </select>
+                    <input type="text" id="storeAddress" placeholder="Manzil">
+                    <input type="text" id="storePhone" placeholder="Telefon">
+                    <button class="btn" onclick="addStore()">Do'kon qo'shish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-.hero-inner{position:relative;z-index:1;max-width:1400px;margin:0 auto}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.15);border:2px solid var(--gold);color:var(--gold);font-size:12px;font-weight:900;padding:8px 16px;border-radius:30px;letter-spacing:1px;margin-bottom:16px;backdrop-filter:blur(10px);text-transform:uppercase}
-.hero h2{color:#fff;font-size:48px;font-weight:900;line-height:1.1;margin-bottom:14px;max-width:580px;text-shadow:0 4px 20px rgba(0,0,0,.5);letter-spacing:-1px}
-.hero h2 em{color:var(--gold-light);font-style:normal;background:linear-gradient(135deg,#D4AF37,#F5D547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{color:rgba(255,255,255,.75);font-size:15px;max-width:500px;line-height:1.8;margin-bottom:28px;font-weight:500}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:32px}
-.btn-gold{background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;padding:13px 28px;border-radius:30px;border:none;font-weight:900;font-size:13px;cursor:pointer;transition:all .3s;box-shadow:var(--shadow);letter-spacing:.5px;text-transform:uppercase}
-.btn-gold:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(212,175,55,.3)}
-.btn-wh{background:rgba(255,255,255,.08);border:2px solid var(--gold);color:var(--gold);padding:13px 28px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;transition:all .3s;backdrop-filter:blur(10px);letter-spacing:.5px;text-transform:uppercase}
-.btn-wh:hover{background:rgba(212,175,55,.1);transform:translateY(-2px)}
+<div class="footer" style="text-align:center; padding:20px; border-top:1px solid var(--border-color); margin-top:20px;">
+    © 2026 Temurshox Mebel | 📞 <a href="tel:+998979351315">+998-97-935-13-15</a>
+</div>
 
-.hero-stats{display:flex;gap:32px;flex-wrap:wrap;margin-top:40px}
-.stat{text-align:left}
-.stat-n{color:var(--gold-light);font-size:32px;font-weight:900;line-height:1;display:block}
-.stat-l{color:rgba(255,255,255,.6);font-size:12px;margin-top:6px;letter-spacing:1px;text-transform:uppercase;font-weight:600}
+<script>
+    // ========= TIL VA ADMIN =========
+    let currentLang = "uz";
+    const ADMIN_CODE = "admin01";
 
-/* PROMO STRIP */
-.promo-strip{background:linear-gradient(90deg,#D4AF37,#F5D547,#D4AF37);padding:14px 20px;overflow:hidden;box-shadow:var(--shadow)}
-.promo-inner{display:flex;gap:50px;align-items:center;white-space:nowrap;animation:marquee 25s linear infinite}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.promo-item{font-size:13px;font-weight:900;color:#1a1a1a;display:flex;align-items:center;gap:8px;flex-shrink:0;letter-spacing:.5px}
-.promo-dot{width:6px;height:6px;background:#1a1a1a;border-radius:50%;flex-shrink:0}
+    const translations = {
+        uz: {
+            headerTitle: "🛋️ Temurshox Mebel",
+            headerSubtitle: "Sifat va qulaylik uchrashgan joy",
+            cartTitle: "🛒 Savat",
+            checkoutBtn: "✅ Buyurtma berish",
+            settingsTitle: "⚙️ Sozlamalar",
+            storesTitle: "🏪 Bizning do'konlar",
+            contactText: "Tushunmovchilik bo‘lsa, murojaat qiling:",
+            themeBtn: "☀️ Kunduzi rejim",
+            all: "Barchasi", divan: "Divanlar", stol: "Stollar", shkaf: "Shkaflar", kreslo: "Kreslolar", discount: "Chegirmali",
+            addToCart: "🛒 Savatga qo'shish",
+            outOfStock: "2 kunda tayyor bo'ladi",
+            successAdd: "Mahsulot qo'shildi!"
+        },
+        ru: {
+            headerTitle: "🛋️ Temurshox Mebel",
+            headerSubtitle: "Место встречи качества и комфорта",
+            cartTitle: "🛒 Корзина",
+            checkoutBtn: "✅ Оформить заказ",
+            settingsTitle: "⚙️ Настройки",
+            storesTitle: "🏪 Наши магазины",
+            contactText: "Если возникли вопросы, обращайтесь:",
+            themeBtn: "☀️ Дневной режим",
+            all: "Все", divan: "Диваны", stol: "Столы", shkaf: "Шкафы", kreslo: "Кресла", discount: "Со скидкой",
+            addToCart: "🛒 В корзину",
+            outOfStock: "Будет готов через 2 дня",
+            successAdd: "Товар добавлен!"
+        }
+    };
 
-/* TABS */
-.tabs{background:var(--surf);border-bottom:2px solid var(--brd);padding:0 20px;display:flex;gap:0;position:sticky;top:0;z-index:90}
-.tab{padding:16px 24px;font-size:14px;font-weight:700;color:var(--txt3);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;font-size:13px}
-.tab.active{color:var(--gold);border-bottom-color:var(--gold)}
-.tab:hover{color:var(--gold)}
+    function changeLanguage() {
+        currentLang = document.getElementById('languageSelect').value;
+        document.getElementById('header-title').textContent = translations[currentLang].headerTitle;
+        document.getElementById('header-subtitle').textContent = translations[currentLang].headerSubtitle;
+        document.getElementById('cart-title').textContent = translations[currentLang].cartTitle;
+        document.getElementById('checkout-btn').textContent = translations[currentLang].checkoutBtn;
+        document.getElementById('settings-title').textContent = translations[currentLang].settingsTitle;
+        document.getElementById('stores-title').textContent = translations[currentLang].storesTitle;
+        document.getElementById('contact-text').textContent = translations[currentLang].contactText;
+        document.getElementById('theme-btn').textContent = translations[currentLang].themeBtn;
+        document.getElementById('theme-btn2').textContent = translations[currentLang].themeBtn;
+        renderCategories();
+        renderProducts();
+    }
 
-/* TOOLBAR */
-.toolbar{background:var(--surf);padding:14px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--brd)}
-.cats-bar{padding:14px 20px;background:var(--surf);border-bottom:1px solid var(--brd);display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
-.cats-bar::-webkit-scrollbar{display:none}
-.cat{padding:9px 18px;border-radius:25px;border:2px solid var(--brd);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;background:var(--surf2);color:var(--txt2);letter-spacing:.3px;text-transform:uppercase}
-.cat.active,.cat:hover{background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;border-color:var(--gold);transform:scale(1.08)}
-.sort-sel{padding:9px 14px;border:2px solid var(--brd);border-radius:25px;font-size:12px;font-weight:700;background:var(--surf2);color:var(--txt);outline:none;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.3px}
-.sort-sel:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.15)}
+    function toggleTheme() {
+        let body = document.body;
+        let btns = document.querySelectorAll('#theme-btn, #theme-btn2');
+        if(body.classList.contains('dark')) {
+            body.classList.remove('dark'); body.classList.add('light');
+            btns.forEach(b => b.innerHTML = '🌙 Tungi rejim');
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.classList.remove('light'); body.classList.add('dark');
+            btns.forEach(b => b.innerHTML = '☀️ Kunduzi rejim');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
 
-/* SECTION */
-.section{padding:24px 20px;max-width:1600px;margin:0 auto}
-.sec-title{font-size:18px;font-weight:900;color:var(--txt);margin-bottom:18px;display:flex;align-items:center;gap:12px;letter-spacing:.5px;text-transform:uppercase}
-.sec-title::before{content:'';width:5px;height:24px;background:linear-gradient(180deg,#D4AF37,#F5D547);border-radius:4px;box-shadow:0 0 10px rgba(212,175,55,.3)}
-.grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+    // ========= MAHSULOTLAR (25 ta) =========
+    let products = {}, reviews = {}, stores = {}, cart = {}, currentUser = null, currentCategory = "all", isAdmin = false, nextProductId = 1;
 
-/* PRODUCT CARD */
-.pcard{background:var(--surf);border-radius:var(--radius);overflow:hidden;border:2px solid var(--brd);cursor:pointer;transition:all .3s;position:relative;animation:fadeUp .4s both;box-shadow:var(--shadow-sm)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.pcard:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:var(--shadow)}
-.pcard-img{height:160px;background:linear-gradient(135deg,var(--surf2),var(--bg));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:60px}
-.pcard-img img{width:100%;height:100%;object-fit:cover}
-.dbadge{position:absolute;top:10px;right:10px;background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;font-size:11px;font-weight:900;padding:5px 10px;border-radius:20px;animation:slideIn .3s ease-out;letter-spacing:.3px}
-@keyframes slideIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
-.nbadge{position:absolute;top:10px;left:10px;background:var(--green);color:#fff;font-size:10px;font-weight:900;padding:4px 8px;border-radius:20px;letter-spacing:.3px;text-transform:uppercase}
-.pcard-body{padding:14px}
-.pcard-name{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:6px;line-height:1.4}
-.pcard-stock{font-size:11px;color:var(--txt3);margin-bottom:8px;display:flex;align-items:center;gap:5px;font-weight:600;text-transform:uppercase}
-.stock-dot{width:8px;height:8px;background:var(--green2);border-radius:50%;flex-shrink:0;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-.stock-dot.low{background:#f59e0b}
-.stock-dot.out{background:var(--red)}
-.pcard-price{font-size:16px;font-weight:900;color:var(--gold)}
-.pcard-old{font-size:12px;color:var(--txt3);text-decoration:line-through;margin-left:6px}
-.pcard-add{width:100%;margin-top:12px;padding:11px;background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:900;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:5px;box-shadow:var(--shadow-sm);letter-spacing:.3px;text-transform:uppercase}
-.pcard-add:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.pcard-add.ok{background:linear-gradient(135deg,var(--green),var(--green2))}
+    function saveProducts() { localStorage.setItem("temurshox_products", JSON.stringify(products)); }
+    function loadProducts() {
+        let saved = localStorage.getItem("temurshox_products");
+        if (saved) {
+            products = JSON.parse(saved);
+            let max = 0; for (let id in products) if (parseInt(id) > max) max = parseInt(id);
+            nextProductId = max + 1;
+        } else {
+            products = { /* 25 ta mahsulot oldingi koddan olingan */ };
+            nextProductId = 26;
+            saveProducts();
+        }
+    }
 
-/* SHOP CARD */
-.shop-card{background:var(--surf);border-radius:var(--radius);overflow:hidden;border:2px solid var(--brd);transition:all .3s;animation:fadeUp .4s both;box-shadow:var(--shadow-sm)}
-.shop-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:var(--shadow)}
-.shop-card-hdr{background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;padding:18px;display:flex;align-items:center;gap:12px}
-.shop-card-icon{font-size:32px}
-.shop-card-name{font-weight:900;font-size:15px;letter-spacing:.5px}
-.shop-card-body{padding:16px}
-.shop-info{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:12px;color:var(--txt2);font-weight:600}
-.shop-info svg{width:16px;height:16px;flex-shrink:0;margin-top:3px;color:var(--gold)}
-.shop-btn{width:100%;padding:11px;margin-bottom:10px;border:none;border-radius:var(--radius-sm);font-weight:900;font-size:12px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;letter-spacing:.3px;text-transform:uppercase}
-.btn-map{background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;box-shadow:var(--shadow-sm)}
-.btn-map:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.btn-taxi{background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:900;box-shadow:var(--shadow-sm)}
-.btn-taxi:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,215,0,.3)}
-.btn-call{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;box-shadow:var(--shadow-sm)}
-.btn-call:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    function addNewProduct() {
+        let name = document.getElementById('newProductName').value.trim();
+        let price = parseInt(document.getElementById('newProductPrice').value);
+        let oldPrice = document.getElementById('newProductOldPrice').value ? parseInt(document.getElementById('newProductOldPrice').value) : null;
+        let category = document.getElementById('newProductCategory').value.trim().toLowerCase();
+        let stock = parseInt(document.getElementById('newProductStock').value) || 10;
+        let fileInput = document.getElementById('newProductImage');
+        let image = "";
 
-/* MAP MODAL */
-.map-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;z-index:999;opacity:0;transition:opacity .3s;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.map-modal.on{display:flex;opacity:1}
-.map-container{background:var(--surf);border-radius:var(--radius);width:90%;max-width:1000px;height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5);border:2px solid var(--gold);animation:slideUp .3s ease-out}
-@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
-.map-hdr{display:flex;justify-content:space-between;align-items:center;padding:18px;border-bottom:2px solid var(--gold);background:linear-gradient(135deg,var(--surf2),var(--bg))}
-.map-hdr h2{font-size:16px;font-weight:900;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
-.map-close{width:40px;height:40px;border:2px solid var(--gold);background:transparent;border-radius:50%;cursor:pointer;font-size:20px;color:var(--gold);transition:all .2s;display:flex;align-items:center;justify-content:center;font-weight:900}
-.map-close:hover{background:var(--red);border-color:var(--red);color:#fff}
-#shopMap{width:100%;height:100%;border-radius:0 0 12px 12px}
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                image = e.target.result;
+                saveProduct();
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            saveProduct();
+        }
 
-/* ADMIN MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;z-index:999;opacity:0;transition:opacity .3s;backdrop-filter:blur(4px)}
-.modal-bg.on{display:flex;opacity:1}
-.modal{background:var(--surf);border-radius:var(--radius);width:90%;max-width:1200px;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5);position:relative;animation:slideUp .3s ease-out;border:2px solid var(--gold)}
-.modal-hdr{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:2px solid var(--gold);background:linear-gradient(135deg,var(--surf2),var(--bg));position:sticky;top:0}
-.modal-hdr h2{font-size:18px;font-weight:900;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
-.modal-close{width:40px;height:40px;border:2px solid var(--gold);background:transparent;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gold);transition:all .2s;font-weight:900}
-.modal-close:hover{background:var(--red);border-color:var(--red);color:#fff}
-.modal-body{padding:24px}
-.admin-tabs{display:flex;gap:10px;margin-bottom:24px;border-bottom:2px solid var(--brd);padding-bottom:0;overflow-x:auto;flex-wrap:wrap}
-.admin-tab{padding:12px 20px;font-size:12px;font-weight:900;cursor:pointer;border:none;background:none;color:var(--txt3);border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;letter-spacing:.5px;text-transform:uppercase}
-.admin-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
-.admin-tab:hover{color:var(--gold)}
+        function saveProduct() {
+            if (!name || isNaN(price) || !category) return showMessage("Barcha maydonlarni to'ldiring!", "error");
+            let newId = (nextProductId++).toString();
+            products[newId] = { name, price, oldPrice, category, emoji: "🛋️", stock, image };
+            saveProducts();
+            renderProducts();
+            loadAdminSelects();
+            showMessage(translations[currentLang].successAdd, "success");
+            // inputlarni tozalash
+            document.getElementById('newProductName').value = '';
+            document.getElementById('newProductPrice').value = '';
+            document.getElementById('newProductOldPrice').value = '';
+            document.getElementById('newProductCategory').value = '';
+            document.getElementById('newProductStock').value = '10';
+            document.getElementById('newProductImage').value = '';
+        }
+    }
 
-.admin-section{display:none}
-.admin-section.active{display:block;animation:fadeIn .3s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    function renderProducts() {
+        let container = document.getElementById('products');
+        let html = '';
+        for (let [id, p] of Object.entries(products)) {
+            if (currentCategory !== "all" && currentCategory !== "discount" && p.category !== currentCategory) continue;
+            if (currentCategory === "discount" && !p.oldPrice) continue;
 
-.form-group{margin-bottom:18px}
-.form-group label{display:block;font-size:11px;font-weight:900;color:var(--gold);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 14px;border:2px solid var(--brd);border-radius:var(--radius-sm);background:var(--bg);color:var(--txt);font-family:inherit;font-size:13px;transition:all .2s;font-weight:600}
-.form-group input::placeholder,.form-group textarea::placeholder{color:var(--txt3)}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.15);background:var(--surf2)}
-.form-group textarea{resize:vertical;min-height:100px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+            let imgHtml = p.image ? `<img src="${p.image}" class="product-img">` : `<div class="product-emoji">${p.emoji}</div>`;
+            let stockText = p.stock > 0 ? `${p.stock} ta mavjud` : translations[currentLang].outOfStock;
+            let stockClass = p.stock > 0 ? 'stock-available' : 'stock-out';
 
-.gps-btn-group{display:flex;gap:10px;margin-bottom:16px}
-.gps-btn{flex:1;padding:11px;background:linear-gradient(135deg,#00BCD4,#0288D1);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:900;cursor:pointer;transition:all .2s;letter-spacing:.3px;text-transform:uppercase;font-size:12px}
-.gps-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.gps-btn:disabled{opacity:.5;cursor:not-allowed}
-.gps-status{font-size:11px;color:var(--txt3);margin-top:8px;font-weight:600}
-.gps-status.success{color:var(--green)}
-.gps-status.error{color:var(--red)}
+            html += `
+                <div class="product-card">
+                    ${isAdmin ? `<button class="delete-product" onclick="deleteProduct('${id}')">✖</button>` : ''}
+                    ${imgHtml}
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-price">${p.price.toLocaleString()} so'm ${p.oldPrice ? `<span class="product-oldprice">${p.oldPrice.toLocaleString()} so'm</span>` : ''}</div>
+                    <div class="product-stock ${stockClass}">${stockText}</div>
+                    <button class="btn" onclick="addToCart('${id}')" ${p.stock <= 0 ? '' : ''}>${translations[currentLang].addToCart}</button>
+                </div>`;
+        }
+        container.innerHTML = html || '<p style="text-align:center;">Bu kategoriyada mahsulot yo‘q</p>';
+    }
 
-.btn-submit{background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;padding:12px 28px;border-radius:30px;border:none;font-weight:900;font-size:13px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-sm);letter-spacing:.5px;text-transform:uppercase}
-.btn-submit:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    function addToCart(id) {
+        if (!currentUser) return showLogin();
+        let p = products[id];
+        cart[id] = (cart[id] || 0) + 1;
+        renderCart();
+        showMessage(`${p.name} savatga qo'shildi`, "success");
+    }
 
-.a-list-item{display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:12px;border-left:4px solid var(--gold)}
-.a-list-nm{flex:1;font-size:13px;font-weight:700;color:var(--txt);margin-left:12px}
-.a-list-item .del{padding:7px 14px;font-size:11px;background:var(--red);color:#fff;border:none;border-radius:20px;cursor:pointer;transition:all .2s;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
-.a-list-item .del:hover{background:#991b1b;transform:scale(1.05)}
+    function checkout() {
+        // stockni avtomatik ayirish
+        for (let [id, qty] of Object.entries(cart)) {
+            if (products[id]) products[id].stock = Math.max(0, products[id].stock - qty);
+        }
+        saveProducts();
+        cart = {};
+        renderCart();
+        renderProducts();
+        showMessage("✅ Buyurtma qabul qilindi!", "success");
+    }
 
-.stock-opts{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-.stock-opt{padding:9px 16px;border-radius:20px;border:2px solid var(--brd);background:var(--bg);cursor:pointer;font-size:11px;font-weight:900;transition:all .2s;letter-spacing:.3px;text-transform:uppercase}
-.stock-opt.sel{background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;border-color:var(--gold)}
+    // Do'konlar (shahar bilan)
+    function addStore() {
+        let name = document.getElementById('storeName').value;
+        let city = document.getElementById('storeCity').value;
+        let address = document.getElementById('storeAddress').value;
+        let phone = document.getElementById('storePhone').value;
+        if (name && address && phone) {
+            let newId = Date.now().toString();
+            stores[newId] = {name, city, address, phone};
+            localStorage.setItem("temurshox_stores", JSON.stringify(stores));
+            renderStores();
+            showMessage("Do'kon qo'shildi!", "success");
+        }
+    }
 
-.preview-img{max-width:140px;max-height:140px;border-radius:var(--radius-sm);margin-top:10px;display:none;border:2px solid var(--gold);box-shadow:0 0 10px rgba(212,175,55,.2)}
+    function renderStores() {
+        let html = '<h4>Do‘konlar soni bo‘yicha:</h4>';
+        let cities = {};
+        for (let s of Object.values(stores)) {
+            cities[s.city] = (cities[s.city] || 0) + 1;
+        }
+        for (let [city, count] of Object.entries(cities)) {
+            html += `<div><strong>${city}</strong> — ${count} ta do‘kon</div>`;
+        }
+        document.getElementById('storesList').innerHTML = html;
+    }
 
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px}
-.stat-card{background:linear-gradient(135deg,rgba(212,175,55,.1),rgba(212,175,55,.05));padding:18px;border-radius:var(--radius);border:2px solid var(--brd);text-align:center;box-shadow:var(--shadow-sm)}
-.stat-card:hover{border-color:var(--gold);box-shadow:var(--shadow)}
-.stat-card .num{font-size:28px;font-weight:900;color:var(--gold);display:block;letter-spacing:-1px}
-.stat-card .lab{font-size:11px;color:var(--txt3);margin-top:6px;text-transform:uppercase;letter-spacing:1px;font-weight:700}
-
-/* CART DRAWER */
-.cart-bg,.cart-drawer{position:fixed;z-index:99}
-.cart-bg{inset:0;background:rgba(0,0,0,.6);display:none;opacity:0;transition:opacity .3s;backdrop-filter:blur(4px)}
-.cart-bg.on{display:block;opacity:1}
-.cart-drawer{right:-480px;top:0;width:480px;height:100vh;background:var(--surf);box-shadow:-8px 0 32px rgba(0,0,0,.3);transition:right .3s;overflow-y:auto;border-left:3px solid var(--gold)}
-.cart-drawer.on{right:0}
-@media(max-width:600px){.cart-drawer{width:100%;right:-100%}}
-.cart-hdr{padding:18px;border-bottom:2px solid var(--gold);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--surf2),var(--bg));position:sticky;top:0}
-.cart-hdr h3{font-size:16px;font-weight:900;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
-.cart-cls{width:36px;height:36px;border:2px solid var(--gold);background:transparent;border-radius:50%;cursor:pointer;font-size:18px;color:var(--gold);transition:all .2s;display:flex;align-items:center;justify-content:center;font-weight:900}
-.cart-cls:hover{background:var(--red);border-color:var(--red);color:#fff}
-.cart-body{padding:18px}
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:12px;border-left:3px solid var(--gold)}
-.cart-item-name{font-size:12px;font-weight:700;color:var(--txt);flex:1}
-.cart-item-qty{display:flex;gap:5px;align-items:center}
-.qty-btn{width:24px;height:24px;background:linear-gradient(135deg,#D4AF37,#F5D547);color:#1a1a1a;border:none;border-radius:4px;cursor:pointer;font-size:12px;transition:all .2s;font-weight:900}
-.qty-btn:hover{transform:scale(1.1);box-shadow:var(--shadow-sm)}
-.cart-item-total{font-weight:900;color:var(--gold);font-size:13px;letter-spacing:.3px}
-.cart-empty{text-align:center;padding:40px;color:var(--txt3);font-size:14px;font-weight:600}
-.cart-total{padding:18px;border-top:2px solid var(--gold);font-size:14px;font-weight:900;color:var(--txt);letter-spacing:.5px;text-transform:uppercase}
-.cart-total .amt{color:var(--gold);font-size:20px;float:right;letter-spacing:-1px}
-.order-form{padding:18px;border-top:2px solid var(--gold)}
-.order-form input,.order-form textarea{width:100%;padding:12px;border:2px solid var(--brd);border-radius:var(--radius-sm);margin-bottom:12px;background:var(--bg);color:var(--txt);font-family:inherit;font
+    // Init
+    loadProducts();
+    renderCategories();
+    renderProducts();
+    renderStores();
+    renderCart();
+</script>
+</body>
+</html>
